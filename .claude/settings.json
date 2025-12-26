@@ -28,6 +28,10 @@
           {
             "type": "command",
             "command": "echo \"[$(date '+%Y-%m-%d %H:%M:%S')] ✅ POST: File modification completed\" >> .kira/logs/current-session.log"
+          },
+          {
+            "type": "command",
+            "command": "FILE_PATH=$(echo '$TOOL_INPUT' | jq -r '.TargetFile // .path // empty'); if [[ \"$FILE_PATH\" == *\"architecture.md\" ]]; then COMPLEXITY=$(grep -oP '\\*\\*Complexity\\*\\*: \\K.*' \"$FILE_PATH\" 2>/dev/null || echo \"Unknown\"); if [[ \"$COMPLEXITY\" != *\"Simple\"* ]]; then echo \"\\n\\n🔔🔔🔔 TRIGGER NOTIFICATION 🔔🔔🔔\\n⚠️  USER ACTION REQUIRED: Plan complexity is $COMPLEXITY.\\n⚠️  Please REVIEW the architecture plan at $FILE_PATH before proceeding.\\n\" >> .kira/logs/current-session.log; echo \"\\n=================================================================\"; echo \" ⚠️  NOTIFICATION: High Complexity Plan Detected ($COMPLEXITY)\"; echo \" 🛑  Please REVIEW: $FILE_PATH\"; echo \"=================================================================\\n\"; fi; fi"
           }
         ]
       },
