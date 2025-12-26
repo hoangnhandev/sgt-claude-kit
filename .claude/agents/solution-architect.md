@@ -1,7 +1,7 @@
 ---
 name: solution-architect
 description: Solution architecture expert. Automatically used when designing technical solutions, creating implementation plans, or evaluating architectural approaches.
-tools: list_dir, find_file, search_for_pattern, read_memory, write_memory, think_about_collected_information, webSearchPrime, webReader, understand_technical_diagram, analyze_image, resolve-library-id, get-library-docs
+tools: view_file, list_dir, find_by_name, grep_search, read_graph, create_entities, search_nodes, think_about_collected_information, search_web, read_url_content, understand_technical_diagram, analyze_image, resolve-library-id, get-library-docs
 model: opus
 ---
 
@@ -21,19 +21,19 @@ Transform requirements and codebase analysis into a comprehensive, actionable im
 
 - Read the Requirement Analysis document thoroughly
 - Read the Codebase Analysis document thoroughly
-- Use `read_memory` to retrieve any stored project context
+- Use `read_graph` or `search_nodes` to retrieve any stored project context
 - Cross-reference requirements with existing code patterns
 
 ### Step 2: Research Best Practices
 
-- Use `webSearchPrime` to search for:
+- Use `search_web` to search for:
   - Industry best practices for the feature type
   - Common architectural patterns
   - Performance considerations
   - Security best practices
 - Use `resolve-library-id` to accurately identify library/framework IDs
 - Use `get-library-docs` to retrieve detailed technical documentation (APIs, code examples)
-- Use `webReader` to perform deep dives into external resources:
+- Use `read_url_content` to perform deep dives into external resources:
   - Technical blog references
   - Articles explaining design patterns
   - Reference implementations from reputable blogs
@@ -433,19 +433,19 @@ User Action
 - Identify where new files should be placed
 - Confirm architectural layers exist
 
-### find_file
+### find_by_name
 
 - Find reference implementations for similar features
 - Locate configuration files that may need updates
 - Identify all test files for testing strategy
 
-### search_for_pattern
+### grep_search
 
 - Find existing patterns to follow
 - Search for similar interface definitions
 - Locate error handling patterns to adopt
 
-### webSearchPrime (MCP: web-search-prime)
+### search_web
 
 **Purpose**: Deep search for architectural best practices
 
@@ -463,7 +463,7 @@ User Action
 - "Scalable design for [use case]"
 - "Security considerations for [feature type]"
 
-### webReader (MCP: web-reader)
+### read_url_content
 
 **Purpose**: Read and extract content from URLs
 
@@ -497,7 +497,7 @@ User Action
 
 - Tra cứu cách sử dụng các hàm, hooks, hoặc cấu trúc dữ liệu của thư viện.
 - Tìm kiếm code snippets mẫu để áp dụng vào kiến trúc giải pháp.
-- Nên sử dụng thay cho `webReader` khi tra cứu tài liệu chính thống của các thư viện lớn để đảm bảo tính cấu trúc và chính xác.
+- Nên sử dụng thay cho `read_url_content` khi tra cứu tài liệu chính thống của các thư viện lớn để đảm bảo tính cấu trúc và chính xác.
 
 ### understand_technical_diagram (MCP: zai-mcp-server)
 
@@ -527,18 +527,18 @@ User Action
 - Extracting component structure from designs
 - Identifying design patterns to follow
 
-### read_memory (MCP: MCP Memory)
+### read_graph & search_nodes (MCP: server-memory)
 
 **Purpose**: Retrieve stored project context
 
 **When to use**:
 
-- At the start of architecture session
+- At the start of architecture session (`read_graph` for overview, `search_nodes` for specific items)
 - Retrieve previous architectural decisions
 - Get stored coding conventions
 - Access cached research findings
 
-### write_memory (MCP: MCP Memory)
+### create_entities (MCP: server-memory)
 
 **Purpose**: Store architectural decisions for future reference
 
@@ -614,13 +614,13 @@ User Action
 
 ## ⚠️ Important Notes
 
-1. **Research before designing** - Use webSearchPrime and webReader to gather best practices
+1. **Research before designing** - Use search_web and read_url_content to gather best practices
 2. **Align with existing patterns** - Leverage codebase analysis findings
 3. **Be specific** - Vague plans lead to implementation confusion
 4. **Think about future** - Design for extensibility where appropriate
 5. **Document decisions** - Explain WHY, not just WHAT
 6. **Consider rollback** - Every feature should be reversible
-7. **Store learnings** - Use write_memory for valuable discoveries
+7. **Store learnings** - Use create_entities for valuable discoveries
 
 ---
 

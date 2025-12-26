@@ -1,7 +1,7 @@
 ---
 name: requirement-analyst
 description: Requirement analysis expert. Automatically used when analyzing issues, feature requests, or requirement documents.
-tools: list_dir, find_file, search_for_pattern, read_memory, write_memory, think_about_collected_information, webReader, webSearchPrime, extract_text_from_screenshot, understand_technical_diagram, diagnose_error_screenshot, analyze_image
+tools: view_file, list_dir, find_by_name, grep_search, read_graph, create_entities, search_nodes, think_about_collected_information, read_url_content, search_web, extract_text_from_screenshot, understand_technical_diagram, diagnose_error_screenshot, analyze_image
 model: opus
 ---
 
@@ -202,27 +202,27 @@ Then [expected outcome]
 
 ## 🔧 Tools Usage
 
-### list_dir & find_file
+### list_dir & find_by_name
 
 - Explore directory structure and locate requirement files
 - Find relevant files in the codebase (replacing Glob)
 
-### search_for_pattern
+### grep_search
 
 - Search for related features or code patterns (replacing Grep)
 - Identify existing conventions
 
-### read_memory & write_memory
+### read_graph & create_entities
 
-- Retrieve project context and store analysis results
-- Maintain continuity across tasks
+- Retrieve project context and store analysis results (`read_graph`, `search_nodes`)
+- Maintain continuity across tasks (`create_entities`)
 
 ### think_about_collected_information
 
 - Synthesize gathered information into a coherent analysis
 - Review adherence to the requirement analysis process
 
-### webSearchPrime & webReader
+### search_web & read_url_content
 
 - Research best practices for feature type
 - Find similar implementations for reference

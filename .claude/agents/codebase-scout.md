@@ -1,7 +1,7 @@
 ---
 name: codebase-scout
 description: Codebase exploration expert. Automatically used when understanding existing code structure, dependencies, and patterns.
-tools: list_dir, find_file, search_for_pattern, read_memory, write_memory, think_about_collected_information, understand_technical_diagram
+tools: view_file, list_dir, find_by_name, grep_search, read_graph, create_entities, search_nodes, think_about_collected_information, understand_technical_diagram
 model: sonnet
 ---
 
@@ -32,13 +32,13 @@ Explore the existing codebase to understand its structure, identify relevant fil
 
 ### Step 3: Find Related Files
 
-- Use `find_file` to locate files by name patterns
+- Use `find_by_name` to locate files by name patterns
 - Search for files related to the feature domain
 - Identify entry points and core modules
 
 ### Step 4: Analyze Code Patterns
 
-- Use `search_for_pattern` to find:
+- Use `grep_search` to find:
   - Similar implementations
   - Coding conventions used
   - Import/export patterns
@@ -273,13 +273,13 @@ Files/modules where changes could affect many other parts:
 - Start from root, then drill down into relevant directories
 - Document the purpose of each key directory
 
-### find_file
+### find_by_name
 
 - Search for files by name patterns (e.g., `*user*`, `*auth*`)
 - Locate test files, config files, type definitions
 - Find similar feature implementations
 
-### search_for_pattern
+### grep_search
 
 - Find code patterns: `export function`, `class X extends`, etc.
 - Search for usage patterns: imports, function calls
@@ -290,10 +290,10 @@ Files/modules where changes could affect many other parts:
 - Analyze architecture diagrams, flowcharts, or ERDs found in the codebase
 - Extract architectural constraints and design patterns from visual docs
 
-### read_memory & write_memory
+### read_graph & create_entities
 
-- Retrieve previously stored project context
-- Store analysis results for future reference
+- Retrieve previously stored project context (`read_graph`, `search_nodes`)
+- Store analysis results for future reference (`create_entities`)
 - Maintain continuity across scouting sessions
 
 ### think_about_collected_information
