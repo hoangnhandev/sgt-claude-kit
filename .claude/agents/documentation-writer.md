@@ -378,6 +378,292 @@ create_entities({
 
 ---
 
+### Phase 5: Git Operations
+
+#### Step 5.1: Stage Changes
+
+Review and stage all changes:
+
+```bash
+# Review what has changed
+run_command("git status")
+run_command("git diff --stat")
+
+# Stage all changes (or selectively)
+run_command("git add -A")
+
+# Or stage specific files
+run_command("git add src/services/UserService.ts README.md CHANGELOG.md")
+```
+
+#### Step 5.2: Create Commit with Conventional Message
+
+Follow [Conventional Commits](https://www.conventionalcommits.org/) format:
+
+```bash
+# Format: <type>(<scope>): <description>
+#
+# Types:
+# - feat: New feature
+# - fix: Bug fix
+# - docs: Documentation only
+# - style: Formatting, no code change
+# - refactor: Code change that neither fixes bug nor adds feature
+# - test: Adding tests
+# - chore: Maintenance tasks
+
+# Examples:
+run_command("git commit -m 'feat(auth): add OAuth2 authentication system'")
+run_command("git commit -m 'fix(api): resolve race condition in user updates'")
+run_command("git commit -m 'docs(readme): add usage examples for new API'")
+```
+
+##### Commit Message Template
+
+```
+<type>(<scope>): <short description>
+
+<body - optional, explains what and why>
+
+<footer - optional>
+Closes #123
+Co-authored-by: Name <email>
+```
+
+#### Step 5.3: Create PR (GitHub Mode Only)
+
+If in GitHub Mode, create a Pull Request:
+
+```bash
+# Using GitHub CLI (if available)
+run_command("gh pr create --title 'feat(auth): add OAuth2 authentication' --body-file .kira/plans/{feature}-pr-description.md")
+
+# Or prepare PR description for manual creation
+```
+
+##### PR Description Template
+
+Create `.kira/plans/{feature}-pr-description.md`:
+
+```markdown
+## Summary
+
+[Brief description of changes]
+
+## Changes
+
+- [Change 1]
+- [Change 2]
+- [Change 3]
+
+## Testing
+
+- [x] Unit tests added/updated
+- [x] Integration tests pass
+- [x] Manual testing completed
+
+## Documentation
+
+- [x] README updated
+- [x] CHANGELOG updated
+- [x] Code comments added
+
+## Related Issues
+
+Closes #[issue-number]
+
+## Screenshots (if applicable)
+
+[Add screenshots here]
+
+## Checklist
+
+- [x] Code follows project style guidelines
+- [x] Self-review completed
+- [x] Tests pass locally
+- [x] Documentation updated
+```
+
+---
+
+### Phase 6: Output Summary (Local Mode)
+
+#### Step 6.1: Generate Plan Summary
+
+Ensure `.kira/plans/plan-{feature}.md` exists with complete plan:
+
+```markdown
+# Feature Plan: [Feature Name]
+
+**Created**: YYYY-MM-DD HH:MM
+**Status**: ✅ Completed
+
+## Overview
+
+[Feature description]
+
+## Implementation Details
+
+### Files Created
+
+| File              | Purpose     |
+| ----------------- | ----------- |
+| `path/to/file.ts` | Description |
+
+### Files Modified
+
+| File              | Changes     |
+| ----------------- | ----------- |
+| `path/to/file.ts` | Description |
+
+## Architecture Decisions
+
+1. [Decision 1 and rationale]
+2. [Decision 2 and rationale]
+
+## Dependencies Added
+
+- `package-name`: Purpose
+
+## Testing Summary
+
+- Unit tests: X added
+- Coverage: X%
+
+## Documentation Updates
+
+- README: Updated
+- CHANGELOG: Entry added
+```
+
+#### Step 6.2: Generate Review Summary
+
+Ensure `.kira/reviews/review-{feature}.md` contains final review status:
+
+```markdown
+# Code Review Summary: [Feature Name]
+
+**Reviewed**: YYYY-MM-DD HH:MM
+**Verdict**: ✅ APPROVED
+
+## Review Statistics
+
+| Metric         | Value |
+| -------------- | ----- |
+| Files Reviewed | X     |
+| Issues Found   | X     |
+| Issues Fixed   | X     |
+
+## Final Status
+
+All issues have been addressed. Code is ready for merge.
+```
+
+#### Step 6.3: Generate Session Log
+
+Create comprehensive session log in `.kira/logs/session-{timestamp}.md`:
+
+```markdown
+# Development Session: [Feature Name]
+
+**Date**: YYYY-MM-DD
+**Duration**: X hours
+**Status**: ✅ Completed
+
+---
+
+## Workflow Summary
+
+| Phase          | Agent                | Status | Duration |
+| -------------- | -------------------- | ------ | -------- |
+| Analysis       | Requirement Analyst  | ✅     | Xm       |
+| Analysis       | Codebase Scout       | ✅     | Xm       |
+| Planning       | Solution Architect   | ✅     | Xm       |
+| Implementation | Senior Developer     | ✅     | Xm       |
+| Testing        | Test Engineer        | ✅     | Xm       |
+| Review         | Code Reviewer        | ✅     | Xm       |
+| Documentation  | Documentation Writer | ✅     | Xm       |
+
+---
+
+## Artifacts Generated
+
+### Plans
+
+- `.kira/plans/{feature}-requirements.md`
+- `.kira/plans/{feature}-architecture.md`
+- `.kira/plans/{feature}-implementation-report.md`
+- `.kira/plans/{feature}-test-report.md`
+
+### Reviews
+
+- `.kira/reviews/{feature}-review.md`
+
+### Code Changes
+
+| Type           | Count |
+| -------------- | ----- |
+| Files Created  | X     |
+| Files Modified | X     |
+| Lines Added    | +XXX  |
+| Lines Removed  | -XXX  |
+
+---
+
+## Git Summary
+
+### Commits
+
+- `abc1234` - feat(scope): description
+
+### Branch
+
+- Feature branch: `feature/{feature-name}`
+- Target branch: `main`
+
+---
+
+## Quality Metrics
+
+| Metric          | Value    | Target   | Status |
+| --------------- | -------- | -------- | ------ |
+| Test Coverage   | X%       | 80%      | ✅     |
+| Critical Issues | 0        | 0        | ✅     |
+| Documentation   | Complete | Complete | ✅     |
+
+---
+
+## Lessons Learned
+
+1. [Lesson 1]
+2. [Lesson 2]
+
+## Recommendations for Future
+
+1. [Recommendation 1]
+2. [Recommendation 2]
+
+---
+
+_Session completed at YYYY-MM-DD HH:MM_
+```
+
+#### Step 6.4: Verify All Outputs
+
+Final checklist for Local Mode:
+
+```bash
+# Verify all output files exist
+find_by_name(Pattern="*{feature}*", SearchDirectory=".kira/")
+
+# Check file contents
+view_file(.kira/plans/plan-{feature}.md)
+view_file(.kira/reviews/review-{feature}.md)
+view_file(.kira/logs/session-{timestamp}.md)
+```
+
+---
+
 ## 🔧 Tools Usage Guide
 
 ### Core Tools
