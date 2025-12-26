@@ -36,6 +36,10 @@
           {
             "type": "command",
             "command": "FILE_PATH=$(echo '$TOOL_INPUT' | jq -r '.TargetFile // .path // empty'); if [ -n \"$FILE_PATH\" ] && [ -f \"$FILE_PATH\" ]; then echo \"[$(date '+%Y-%m-%d %H:%M:%S')] 💅 POST: Running Prettier on $FILE_PATH\" >> .kira/logs/current-session.log; npx -y prettier --write \"$FILE_PATH\" >> .kira/logs/current-session.log 2>&1 || true; fi"
+          },
+          {
+            "type": "command",
+            "command": "FILE_PATH=$(echo '$TOOL_INPUT' | jq -r '.TargetFile // .path // empty'); if [ -n \"$FILE_PATH\" ] && [ -f \"$FILE_PATH\" ]; then echo \"[$(date '+%Y-%m-%d %H:%M:%S')] 🔍 POST: Running Linter on $FILE_PATH\" >> .kira/logs/current-session.log; npx -y eslint \"$FILE_PATH\" >> .kira/logs/current-session.log 2>&1 || true; fi"
           }
         ]
       },
