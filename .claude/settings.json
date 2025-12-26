@@ -44,6 +44,15 @@
         ]
       },
       {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "FILE_PATH=$(echo '$TOOL_INPUT' | jq -r '.TargetFile // .path // empty'); if [[ \"$FILE_PATH\" == *\"-review.md\" ]] || [[ \"$FILE_PATH\" == *\"review-report.md\" ]]; then echo \"[$(date '+%Y-%m-%d %H:%M:%S')] 🔎 REVIEW: Code review report detected\" >> .kira/logs/current-session.log; if grep -q 'CRITICAL\\|🔴\\|CHANGES REQUESTED' \"$FILE_PATH\" 2>/dev/null; then CRITICAL_COUNT=$(grep -c '🔴\\|CRITICAL' \"$FILE_PATH\" 2>/dev/null || echo 0); echo \"\n\n🚨🚨🚨 CODE REVIEW BLOCKED 🚨🚨🚨\" >> .kira/logs/current-session.log; echo \"❌ Found $CRITICAL_COUNT CRITICAL issues\" >> .kira/logs/current-session.log; echo \"⛔ QUALITY GATE BLOCKED - Fix critical issues before continuing!\" >> .kira/logs/current-session.log; echo \"\n=================================================================\" >&2; echo \" 🚫 QUALITY GATE BLOCKED: CRITICAL Issues in Code Review\" >&2; echo \" 📋 Found $CRITICAL_COUNT critical issues requiring fixes\" >&2; echo \" 📄 Review: $FILE_PATH\" >&2; echo \"=================================================================\n\" >&2; else echo \"[$(date '+%Y-%m-%d %H:%M:%S')] ✅ REVIEW: Code review APPROVED - No critical issues\" >> .kira/logs/current-session.log; fi; fi"
+          }
+        ]
+      },
+      {
         "matcher": "Bash",
         "hooks": [
           {

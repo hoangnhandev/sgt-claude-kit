@@ -2,7 +2,7 @@
 name: codebase-scout
 description: Codebase exploration expert. Automatically used when understanding existing code structure, dependencies, and patterns.
 tools: view_file, list_dir, find_by_name, grep_search, read_graph, create_entities, search_nodes, think_about_collected_information, understand_technical_diagram
-model: sonnet
+model: opus
 ---
 
 # Codebase Scout
