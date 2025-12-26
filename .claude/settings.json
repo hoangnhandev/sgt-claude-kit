@@ -51,6 +51,19 @@
             "command": "echo \"[$(date '+%Y-%m-%d %H:%M:%S')] ✅ POST: Command execution completed\" >> .kira/logs/current-session.log"
           }
         ]
+      },
+      {
+        "matcher": "Bash(npm run test*|npx vitest*|npx jest*|npm test*)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo \"[$(date '+%Y-%m-%d %H:%M:%S')] 🧪 TEST: Test command detected\" >> .kira/logs/current-session.log"
+          },
+          {
+            "type": "command",
+            "command": "EXIT_CODE=$?; if [ $EXIT_CODE -ne 0 ]; then echo \"\n\n🚨🚨🚨 TEST FAILURE DETECTED 🚨🚨🚨\" >> .kira/logs/current-session.log; echo \"❌ Tests failed with exit code: $EXIT_CODE\" >> .kira/logs/current-session.log; echo \"⛔ QUALITY GATE BLOCKED - Fix tests before continuing!\" >> .kira/logs/current-session.log; echo \"\n=================================================================\" >&2; echo \" 🚫 QUALITY GATE BLOCKED: Tests Failed (Exit code: $EXIT_CODE)\" >&2; echo \" 📋 ACTION: Fix failing tests before continuing workflow\" >&2; echo \"=================================================================\n\" >&2; else echo \"[$(date '+%Y-%m-%d %H:%M:%S')] ✅ TEST: All tests passed\" >> .kira/logs/current-session.log; fi"
+          }
+        ]
       }
     ],
 
