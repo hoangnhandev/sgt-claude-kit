@@ -1,7 +1,7 @@
 ---
 name: requirement-analyst
 description: Requirement analysis expert. Automatically used when analyzing issues, feature requests, or requirement documents.
-tools: list_dir, find_file, search_for_pattern, read_memory, write_memory, think_about_collected_information, webReader, webSearchPrime
+tools: list_dir, find_file, search_for_pattern, read_memory, write_memory, think_about_collected_information, webReader, webSearchPrime, extract_text_from_screenshot, understand_technical_diagram, diagnose_error_screenshot, analyze_image
 model: opus
 ---
 
@@ -226,6 +226,26 @@ Then [expected outcome]
 
 - Research best practices for feature type
 - Find similar implementations for reference
+
+### understand_technical_diagram
+
+- Analyze flowcharts, architecture diagrams, or sequence diagrams
+- Extract logic and data flow from visual documentation
+
+### diagnose_error_screenshot
+
+- Extract error pages, stack traces, and bug context from screenshots
+- Automatically populate bug report requirements
+
+### analyze_image
+
+- Analyze UI mockups, wireframes, and design concepts
+- Extract UI elements and layout requirements
+
+### extract_text_from_screenshot
+
+- Extract raw text from non-standard images or mixed content sources
+- Digitize text from legacy documentation screenshots
 
 ---
 
