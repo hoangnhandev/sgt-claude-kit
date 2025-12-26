@@ -950,15 +950,15 @@ cat .kira/logs/session-*.md
 ---
 
 ## 🔧 MCP Servers (Optional Enhancement)
-
-| Server     | Purpose           | Usage                   |
-| ---------- | ----------------- | ----------------------- |
-| Context7   | Memory management | Lưu patterns, decisions |
-| Playwright | E2E testing       | Browser testing         |
-| Web Search | Research          | Tìm solutions, docs     |
-| GitHub MCP | GitHub API        | Issues, PRs             |
-
----
+| Server           | Purpose           | Usage                   |
+| ---------------- | ----------------- | ----------------------- |
+| Context7         | Memory management | Lưu patterns, decisions |
+| Playwright       | E2E testing       | Browser testing         |
+| Web Search       | Research          | Tìm solutions, docs     |
+| GitHub MCP       | GitHub API        | Issues, PRs             |
+| web-reader       | Content parsing   | Đọc nội dung URL        |
+| web-search-prime | Deep search       | Tra cứu chuyên sâu      |
+| zai-mcp-server   | Custom logic      | Tác vụ nội bộ           |
 
 ## ✅ Checklist Triển Khai
 
