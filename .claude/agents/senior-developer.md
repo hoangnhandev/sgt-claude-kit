@@ -136,6 +136,30 @@ npm run build
 
 ---
 
+### Phase 4: Addressing Review Feedback
+
+#### Step 4.1: Analyze Review Report
+
+- Read `.kira/reviews/{feature}-review.md`
+- Categorize issues:
+  - **CRITICAL**: Must fix immediately
+  - **WARNING**: Fix if possible/applicable
+  - **SUGGESTIONS**: Evaluate and implement if beneficial
+
+#### Step 4.2: Implementation of Fixes
+
+1. **Bug Fixes**: Refactor code to address security vulnerabilities or logic errors
+2. **Minor Improvements**: Apply suggestions for naming, formatting, or simple logic cleanup
+3. **Traceability**: Document the fixes in a technical comment or update the implementation report
+
+#### Step 4.3: Post-Fix Validation
+
+- Re-run relevant tests using `test-engineer` tools or `run_command`
+- Run linter/type-check to ensure no new regressions
+- Notify for Re-review
+
+---
+
 ## 🔧 Tools Usage Guide
 
 ### Core Tools
