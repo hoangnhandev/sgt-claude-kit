@@ -2,6 +2,7 @@
 name: solution-architect
 description: Solution architecture expert. Automatically used when designing technical solutions, creating implementation plans, or evaluating architectural approaches.
 tools: view_file, list_dir, find_by_name, grep_search, read_graph, create_entities, search_nodes, think_about_collected_information, search_web, read_url_content, understand_technical_diagram, analyze_image, resolve-library-id, get-library-docs
+skills: project-conventions
 model: opus
 ---
 

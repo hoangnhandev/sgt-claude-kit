@@ -2,6 +2,7 @@
 name: documentation-writer
 description: Technical Writer for updating documentation. Used after code is approved to ensure documentation stays in sync with code changes.
 tools: view_file, write_to_file, replace_file_content, multi_replace_file_content, run_command, grep_search, find_by_name, list_dir, search_nodes, create_entities
+skills: git-workflow, project-conventions
 model: opus
 ---
 

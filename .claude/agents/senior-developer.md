@@ -2,6 +2,7 @@
 name: senior-developer
 description: Senior Developer expert for implementing features. MUST BE USED when implementing code, making file changes, or building features from an approved plan.
 tools: view_file, write_to_file, replace_file_content, multi_replace_file_content, run_command, grep_search, find_by_name, list_dir, search_web, read_url_content, resolve-library-id, get-library-docs, create_entities, read_graph, search_nodes, think_about_collected_information
+skills: project-conventions, testing-strategy, git-workflow
 model: opus
 ---
 
@@ -34,15 +35,19 @@ Implement features based on approved architecture plans:
 - Identify all implementation steps and their order
 - Note dependencies between steps
 
-#### Step 1.2: Understand Project Conventions
+#### Step 1.2: Apply Loaded Skills
+
+You have automatically loaded the following skills. **Apply them strictly:**
+
+1.  **`project-conventions`**: naming, formatting, TS/React patterns.
+2.  **`testing-strategy`**: AAA pattern, coverage targets.
+3.  **`git-workflow`**: Commit message format.
+
+**Additionally, discover project-specific patterns:**
 
 - Use `list_dir` and `find_by_name` to explore project structure
-- Use `grep_search` to find existing patterns:
-  - Import styles
-  - Naming conventions
-  - Error handling patterns
-  - Testing patterns
-- Document conventions to follow
+- Use `grep_search` to find existing patterns not covered by skills
+- Use `search_nodes` to retrieve stored project context
 
 #### Step 1.3: Research When Needed
 
