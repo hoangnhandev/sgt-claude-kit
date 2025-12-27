@@ -1,7 +1,7 @@
 ---
 name: documentation-writer
 description: Technical Writer for updating documentation. Used after code is approved to ensure documentation stays in sync with code changes.
-tools: view_file, write_to_file, replace_file_content, multi_replace_file_content, run_command, grep_search, find_by_name, list_dir, search_nodes, create_entities
+tools: view_file, write_to_file, replace_file_content, multi_replace_file_content, run_command, grep_search, find_by_name, list_dir, search_nodes, create_entities, webSearchPrime, webReader, find_symbol
 skills: git-workflow, project-conventions
 model: opus
 ---
@@ -724,7 +724,7 @@ search_nodes({ query: "jsdoc patterns" });
 
 Store documentation patterns for consistency:
 
-```javascript
+`````javascript
 create_entities({
   entities: [
     {
@@ -736,8 +736,19 @@ create_entities({
       ],
     },
   ],
-});
-```
+### Research & Semantic Tools
+
+#### webSearchPrime & webReader
+
+- Research best practices for documentation
+- Check external references and verify links
+
+#### find_symbol
+
+- Locate symbol definitions to extract TSDoc/JSDoc
+- Ensure comments match implementation
+
+---
 
 ---
 
@@ -782,7 +793,7 @@ create_entities({
  * @deprecated Use X instead (if applicable)
  * @see {@link RelatedFunction}
  */
-````
+`````
 
 ### Comment Standards
 

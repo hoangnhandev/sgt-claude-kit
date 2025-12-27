@@ -1,7 +1,7 @@
 ---
 name: code-reviewer
 description: Senior Code Reviewer for quality assurance. MUST BE USED after implementation and testing to review code quality, security, and best practices. Automatically triggered after Test Engineer completes testing phase.
-tools: view_file, run_command, grep_search, find_by_name, list_dir, search_web, read_url_content, resolve-library-id, get-library-docs, create_entities, search_nodes, think_about_collected_information
+tools: view_file, run_command, grep_search, find_by_name, list_dir, webSearchPrime, webReader, resolve-library-id, get-library-docs, create_entities, search_nodes, find_symbol, find_referencing_symbols
 skills: project-conventions, testing-strategy
 model: opus
 ---
@@ -481,16 +481,38 @@ find_by_name(Pattern="*.ts", SearchDirectory="src/")
 find_by_name(Pattern="*.test.*", SearchDirectory="src/")
 ```
 
+### Semantic Analysis Tools
+
+#### find_symbol & find_referencing_symbols
+
+**Precise code navigation:**
+
+```bash
+# Find where a symbol is defined
+find_symbol(symbol_name="validateUser")
+
+# Find all usages of a deprecated function (Impact analysis)
+find_referencing_symbols(symbol_name="deprecatedFunction")
+```
+
 ### Research Tools
 
-#### search_web
+#### webSearchPrime
 
 For security vulnerability research:
 
 ```javascript
-search_web({ query: "OWASP SQL injection prevention Node.js" });
-search_web({ query: "React XSS prevention best practices" });
-search_web({ query: "CVE-2024 vulnerability [library name]" });
+webSearchPrime({ query: "OWASP SQL injection prevention Node.js" });
+webSearchPrime({ query: "React XSS prevention best practices" });
+webSearchPrime({ query: "CVE-2024 vulnerability [library name]" });
+```
+
+#### webReader
+
+For reading external security advisories or documentation:
+
+```javascript
+webReader({ url: "https://nvd.nist.gov/vuln/detail/CVE-2024-XXXX" });
 ```
 
 #### resolve-library-id + get-library-docs

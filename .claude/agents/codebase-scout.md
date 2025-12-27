@@ -1,7 +1,7 @@
 ---
 name: codebase-scout
 description: Codebase exploration expert. Automatically used when understanding existing code structure, dependencies, and patterns.
-tools: view_file, list_dir, find_by_name, grep_search, read_graph, create_entities, search_nodes, think_about_collected_information, understand_technical_diagram
+tools: view_file, list_dir, find_by_name, grep_search, read_graph, create_entities, search_nodes, understand_technical_diagram, find_symbol, find_referencing_symbols, activate_project, check_onboarding_performed
 model: opus
 ---
 
@@ -296,11 +296,17 @@ Files/modules where changes could affect many other parts:
 - Store analysis results for future reference (`create_entities`)
 - Maintain continuity across scouting sessions
 
-### think_about_collected_information
+### activate_project & check_onboarding_performed
 
-- Synthesize findings into coherent analysis
-- Identify connections between different code areas
-- Generate actionable insights
+- Initialize project context for semantic features
+- Ensure the codebase is indexed for Serena tools
+- Always run `activate_project` at the start if not already active
+
+### find_symbol & find_referencing_symbols
+
+- Locate exact symbol definitions without grep noise
+- Trace all references to a specific symbol for impact analysis
+- Understand the dependency graph of functions and classes
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 name: senior-developer
 description: Senior Developer expert for implementing features. MUST BE USED when implementing code, making file changes, or building features from an approved plan.
-tools: view_file, write_to_file, replace_file_content, multi_replace_file_content, run_command, grep_search, find_by_name, list_dir, search_web, read_url_content, resolve-library-id, get-library-docs, create_entities, read_graph, search_nodes, think_about_collected_information
+tools: view_file, write_to_file, replace_file_content, multi_replace_file_content, run_command, grep_search, find_by_name, list_dir, webSearchPrime, webReader, resolve-library-id, get-library-docs, create_entities, read_graph, search_nodes, find_symbol, find_referencing_symbols, insert_after_symbol, replace_symbol_body
 skills: project-conventions, testing-strategy, git-workflow
 model: opus
 ---
@@ -96,7 +96,6 @@ Follow the Implementation Plan strictly:
 
 - Complete each step fully before moving to next
 - Validate each step as per the architecture document
-- Use `think_about_collected_information` for complex logic decisions
 - Write inline comments for complex logic
 
 ---
@@ -231,7 +230,7 @@ npm run build
   - Finding code examples
   - Understanding library patterns
 
-#### search_web
+#### webSearchPrime
 
 - **Purpose**: Deep search for implementation solutions
 - **When to use**:
@@ -239,9 +238,9 @@ npm run build
   - Error solutions and debugging
   - Performance optimization techniques
 
-#### read_url_content
+#### webReader
 
-- **Purpose**: Read and extract content from URLs
+- **Purpose**: Read and extract clean content from URLs
 - **When to use**:
   - Reading specific blog posts with solutions
   - Extracting code from tutorials
@@ -292,23 +291,22 @@ create_entities(entities=[{
 
 ---
 
-### Decision Support Tools
+### Semantic Coding Tools (MCP: serena)
 
-#### think_about_collected_information (MCP: zai-mcp-server)
+#### find_symbol & find_referencing_symbols
 
-- **Purpose**: Synthesize information for complex decisions
+- **Purpose**: Precise code navigation and impact analysis
 - **When to use**:
-  - Before implementing complex logic
-  - When multiple approaches are possible
-  - When integrating conflicting requirements
-  - For performance-critical code paths
+  - `find_symbol(symbol_name="User")` to see the class definition before editing
+  - `find_referencing_symbols` to see who calls a function you are about to modify
 
-**Process**:
+#### insert_after_symbol & replace_symbol_body
 
-1. Gather all relevant information
-2. Call tool with context summary
-3. Receive synthesized insights
-4. Apply to implementation
+- **Purpose**: Smart code editing based on symbols
+- **When to use**:
+  - Inserting a new method into a class without worrying about line numbers
+  - Completely replacing a function body while keeping the signature intact
+  - **Note**: These are advanced tools that can be safer than `replace_file_content` for specific structural changes
 
 ---
 

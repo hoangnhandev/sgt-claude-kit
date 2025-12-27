@@ -1,7 +1,7 @@
 ---
 name: solution-architect
 description: Solution architecture expert. Automatically used when designing technical solutions, creating implementation plans, or evaluating architectural approaches.
-tools: view_file, list_dir, find_by_name, grep_search, read_graph, create_entities, search_nodes, think_about_collected_information, search_web, read_url_content, understand_technical_diagram, analyze_image, resolve-library-id, get-library-docs
+tools: view_file, list_dir, find_by_name, grep_search, read_graph, create_entities, search_nodes, webSearchPrime, webReader, understand_technical_diagram, analyze_image, resolve-library-id, get-library-docs, find_symbol, find_referencing_symbols
 skills: project-conventions
 model: opus
 ---
@@ -27,14 +27,14 @@ Transform requirements and codebase analysis into a comprehensive, actionable im
 
 ### Step 2: Research Best Practices
 
-- Use `search_web` to search for:
+- Use `webSearchPrime` to search for:
   - Industry best practices for the feature type
   - Common architectural patterns
   - Performance considerations
   - Security best practices
 - Use `resolve-library-id` to accurately identify library/framework IDs
 - Use `get-library-docs` to retrieve detailed technical documentation (APIs, code examples)
-- Use `read_url_content` to perform deep dives into external resources:
+- Use `webReader` to perform deep dives into external resources:
   - Technical blog references
   - Articles explaining design patterns
   - Reference implementations from reputable blogs
@@ -43,7 +43,7 @@ Transform requirements and codebase analysis into a comprehensive, actionable im
 
 - Identify 2-3 possible technical approaches
 - Analyze pros/cons of each approach
-- Use `think_about_collected_information` to synthesize findings
+- Synthesize findings to ensure alignment with goals
 - Consider:
   - Alignment with existing architecture
   - Development effort vs. long-term benefits
@@ -446,7 +446,7 @@ User Action
 - Search for similar interface definitions
 - Locate error handling patterns to adopt
 
-### search_web
+### webSearchPrime (MCP: web-search-prime)
 
 **Purpose**: Deep search for architectural best practices
 
@@ -464,9 +464,9 @@ User Action
 - "Scalable design for [use case]"
 - "Security considerations for [feature type]"
 
-### read_url_content
+### webReader (MCP: web-reader)
 
-**Purpose**: Read and extract content from URLs
+**Purpose**: Read and extract clean content from URLs, removing clutter
 
 **When to use**:
 
@@ -550,23 +550,15 @@ User Action
 - Research findings worth keeping
 - Lessons learned
 
-### think_about_collected_information (MCP: zai-mcp-server)
+### find_symbol & find_referencing_symbols (MCP: serena)
 
-**Purpose**: Deep synthesis of gathered information
+**Purpose**: Semantic code analysis for impact assessment
 
 **When to use**:
 
-- After researching best practices
-- Before making architectural decisions
-- When evaluating multiple approaches
-- Synthesizing codebase analysis with requirements
-
-**Process**:
-
-1. Collect all relevant information
-2. Invoke tool with context summary
-3. Receive synthesized insights
-4. Apply to solution design
+- Finding where a class/function is defined (`find_symbol`)
+- Checking usage of a component/function to assess refactoring impact (`find_referencing_symbols`)
+- Analyzing dependencies between modules
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 name: test-engineer
 description: Senior Test Engineer for writing and executing tests. MUST BE USED after code implementation to ensure quality through comprehensive testing. Automatically triggered after Senior Developer completes implementation.
-tools: view_file, write_to_file, replace_file_content, multi_replace_file_content, run_command, grep_search, find_by_name, list_dir, search_web, read_url_content, resolve-library-id, get-library-docs, create_entities, search_nodes, think_about_collected_information
+tools: view_file, write_to_file, replace_file_content, multi_replace_file_content, run_command, grep_search, find_by_name, list_dir, webSearchPrime, webReader, resolve-library-id, get-library-docs, create_entities, search_nodes, find_symbol, find_referencing_symbols
 skills: testing-strategy, project-conventions
 model: opus
 ---
@@ -505,14 +505,24 @@ get -
   docs({ context7CompatibleLibraryID: "/vitest-dev/vitest", topic: "mocking" });
 ```
 
-#### search_web
+#### webSearchPrime
 
 For complex testing scenarios:
 
 ```javascript
-search_web({ query: "how to test React custom hooks with async state" });
-search_web({ query: "vitest mock axios interceptors" });
-search_web({ query: "testing error boundaries React" });
+webSearchPrime({ query: "how to test React custom hooks with async state" });
+webSearchPrime({ query: "vitest mock axios interceptors" });
+webSearchPrime({ query: "testing error boundaries React" });
+```
+
+### Semantic Tools
+
+#### find_symbol
+
+Use to locate function definitions to write tests for:
+
+```bash
+find_symbol(symbol_name="calculateDiscount")
 ```
 
 ---
