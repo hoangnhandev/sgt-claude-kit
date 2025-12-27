@@ -1,7 +1,7 @@
 ---
 name: test-engineer
 description: Senior Test Engineer for writing and executing tests. MUST BE USED after code implementation to ensure quality through comprehensive testing. Automatically triggered after Senior Developer completes implementation.
-tools: view_file, write_to_file, replace_file_content, multi_replace_file_content, run_command, grep_search, find_by_name, list_dir, webSearchPrime, webReader, resolve-library-id, get-library-docs, create_entities, search_nodes, find_symbol, find_referencing_symbols
+tools: view_file, write_to_file, replace_file_content, multi_replace_file_content, run_command, grep_search, find_by_name, list_dir, webSearchPrime, webReader, resolve-library-id, get-library-docs, create_entities, search_nodes, find_symbol, find_referencing_symbols, navigate, click, type, screenshot, playwright_expect_response, start_codegen_session, playwright_resize
 skills: testing-strategy, project-conventions
 model: opus
 ---
@@ -526,6 +526,122 @@ find_symbol(symbol_name="calculateDiscount")
 ```
 
 ---
+
+### Browser Automation Tools (MCP: playwright)
+
+#### navigate
+
+- **Purpose**: Navigate browser to a URL for E2E testing
+- **When to use**:
+  - Start E2E test scenarios
+  - Navigate between pages during test flow
+
+**Example**:
+
+```
+navigate({ url: "http://localhost:3000/login" })
+```
+
+#### click
+
+- **Purpose**: Click elements on the page
+- **When to use**:
+  - Simulate user interactions
+  - Test button clicks, links, form submissions
+
+**Example**:
+
+```
+click({ selector: "button[type='submit']" })
+click({ selector: "#login-button" })
+```
+
+#### type
+
+- **Purpose**: Type text into input fields
+- **When to use**:
+  - Fill out forms in E2E tests
+  - Test input validation
+
+**Example**:
+
+```
+type({ selector: "input[name='email']", text: "test@example.com" })
+type({ selector: "#password", text: "securePassword123" })
+```
+
+#### screenshot
+
+- **Purpose**: Capture screenshot of current page state
+- **When to use**:
+  - Visual regression testing
+  - Document test results
+  - Debug failed tests
+
+**Example**:
+
+```
+screenshot({ name: "login-page" })
+screenshot({ name: "after-form-submit" })
+```
+
+#### playwright_expect_response
+
+- **Purpose**: Wait for specific HTTP response
+- **When to use**:
+  - Verify API calls during E2E tests
+  - Wait for async operations to complete
+
+**Example**:
+
+```
+playwright_expect_response({ urlPattern: "**/api/login", status: 200 })
+```
+
+#### start_codegen_session
+
+- **Purpose**: Record user actions to generate test code
+- **When to use**:
+  - Create new E2E tests quickly
+  - Learn selectors for complex UIs
+  - Generate test boilerplate
+
+#### playwright_resize
+
+- **Purpose**: Resize browser viewport
+- **When to use**:
+  - Test responsive design
+  - Verify mobile/tablet layouts
+
+**Example**:
+
+```
+playwright_resize({ width: 375, height: 667 })  // iPhone SE
+playwright_resize({ width: 1920, height: 1080 }) // Desktop
+```
+
+---
+
+### E2E Testing Workflow with Playwright
+
+```typescript
+// Example E2E test flow using Playwright MCP
+describe("Login Flow E2E", () => {
+  it("should login successfully with valid credentials", async () => {
+    // 1. Navigate to login page
+    // navigate({ url: "http://localhost:3000/login" })
+    // 2. Fill in form
+    // type({ selector: "input[name='email']", text: "user@example.com" })
+    // type({ selector: "input[name='password']", text: "password123" })
+    // 3. Submit form
+    // click({ selector: "button[type='submit']" })
+    // 4. Wait for API response
+    // playwright_expect_response({ urlPattern: "**/api/auth/login", status: 200 })
+    // 5. Take screenshot for verification
+    // screenshot({ name: "dashboard-after-login" })
+  });
+});
+```
 
 ## 📝 Test File Naming & Structure
 

@@ -1,7 +1,7 @@
 ---
 name: solution-architect
 description: Solution architecture expert. Automatically used when designing technical solutions, creating implementation plans, or evaluating architectural approaches.
-tools: view_file, list_dir, find_by_name, grep_search, read_graph, create_entities, search_nodes, webSearchPrime, webReader, understand_technical_diagram, analyze_image, resolve-library-id, get-library-docs, find_symbol, find_referencing_symbols
+tools: view_file, list_dir, find_by_name, grep_search, read_graph, create_entities, search_nodes, webSearchPrime, webReader, understand_technical_diagram, analyze_image, resolve-library-id, get-library-docs, find_symbol, find_referencing_symbols, list-components, get-component-docs, list-blocks, get-block-docs
 skills: project-conventions
 model: opus
 ---
@@ -559,6 +559,52 @@ User Action
 - Finding where a class/function is defined (`find_symbol`)
 - Checking usage of a component/function to assess refactoring impact (`find_referencing_symbols`)
 - Analyzing dependencies between modules
+
+### UI Component Discovery (MCP: shadcn)
+
+#### list-components
+
+**Purpose**: Discover available shadcn/ui components for UI architecture
+
+**When to use**:
+
+- Designing UI component architecture
+- Finding reusable components instead of custom building
+- Understanding available UI primitives
+
+#### get-component-docs
+
+**Purpose**: Get detailed docs, props, and usage examples for components
+
+**When to use**:
+
+- Understanding component capabilities before recommending
+- Defining component props in interface designs
+- Getting code examples for implementation guidance
+
+**Example**:
+
+```
+get-component-docs({ component: "dialog" })
+get-component-docs({ component: "data-table" })
+```
+
+#### list-blocks / get-block-docs
+
+**Purpose**: Discover pre-built UI sections (auth forms, dashboards, etc.)
+
+**When to use**:
+
+- Rapid UI architecture with production-ready layouts
+- Finding complete solutions instead of building from scratch
+- Understanding available page layouts and sections
+
+**Example**:
+
+```
+list-blocks({ registry: "default" })
+get-block-docs({ block: "login-01" })
+```
 
 ---
 

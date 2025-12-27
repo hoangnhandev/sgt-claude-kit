@@ -65,3 +65,14 @@ Chuyên về xử lý hình ảnh, video và phân tích UI.
 ## 7. web-reader (`https://api.z.ai/api/mcp/web_reader/mcp`)
 
 - **`webReader`**: Tool đọc nội dung chi tiết từ một URL cụ thể, trích xuất nội dung chính và bỏ qua các thành phần không cần thiết (quảng cáo, navigation).
+
+## 8. shadcn (`npx shadcn@latest mcp`)
+
+Server này kết nối AI với hệ sinh thái shadcn/ui, cho phép quản lý và cài đặt components một cách thông minh.
+
+- **`list-components`**: Liệt kê tất cả shadcn/ui components có sẵn từ các registry.
+- **`get-component-docs`**: Lấy documentation chi tiết, usage examples, TypeScript source code, và metadata của component.
+- **`install-component`**: Cài đặt một hoặc nhiều shadcn/ui components vào dự án (hỗ trợ npm, pnpm, yarn, bun).
+- **`list-blocks`**: Liệt kê tất cả blocks (pre-built UI sections) có sẵn.
+- **`get-block-docs`**: Lấy documentation và code cho một block cụ thể.
+- **`install-blocks`**: Cài đặt blocks vào dự án.

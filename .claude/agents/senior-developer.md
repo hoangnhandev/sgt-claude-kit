@@ -1,7 +1,7 @@
 ---
 name: senior-developer
 description: Senior Developer expert for implementing features. MUST BE USED when implementing code, making file changes, or building features from an approved plan.
-tools: view_file, write_to_file, replace_file_content, multi_replace_file_content, run_command, grep_search, find_by_name, list_dir, webSearchPrime, webReader, resolve-library-id, get-library-docs, create_entities, read_graph, search_nodes, find_symbol, find_referencing_symbols, insert_after_symbol, replace_symbol_body
+tools: view_file, write_to_file, replace_file_content, multi_replace_file_content, run_command, grep_search, find_by_name, list_dir, webSearchPrime, webReader, resolve-library-id, get-library-docs, create_entities, read_graph, search_nodes, find_symbol, find_referencing_symbols, insert_after_symbol, replace_symbol_body, navigate, click, screenshot, list-components, get-component-docs, install-component, list-blocks, get-block-docs, install-blocks
 skills: project-conventions, testing-strategy, git-workflow
 model: opus
 ---
@@ -307,6 +307,74 @@ create_entities(entities=[{
   - Inserting a new method into a class without worrying about line numbers
   - Completely replacing a function body while keeping the signature intact
   - **Note**: These are advanced tools that can be safer than `replace_file_content` for specific structural changes
+
+---
+
+### Browser Automation Tools (MCP: playwright)
+
+#### navigate
+
+- **Purpose**: Navigate browser to a URL
+- **When to use**:
+  - Verify UI implementation visually
+  - Debug rendering issues
+  - Check responsive design
+
+#### click
+
+- **Purpose**: Click elements on a page
+- **When to use**:
+  - Test interactive elements
+  - Verify button behaviors
+  - Debug click handlers
+
+#### screenshot
+
+- **Purpose**: Capture screenshot of current page
+- **When to use**:
+  - Document UI implementation
+  - Debug visual issues
+  - Verify responsive layouts
+
+---
+
+### UI Component Tools (MCP: shadcn)
+
+#### list-components
+
+- **Purpose**: List all available shadcn/ui components
+- **When to use**:
+  - Discover available UI components before implementation
+  - Find suitable components for design requirements
+
+#### get-component-docs
+
+- **Purpose**: Get detailed docs, usage examples, and TypeScript source
+- **When to use**:
+  - Learn how to use a specific component
+  - Understand component props and variants
+  - Get code examples for implementation
+
+#### install-component
+
+- **Purpose**: Install shadcn/ui components into project
+- **When to use**:
+  - Adding new UI components to the project
+  - Setting up component dependencies
+
+**Example**:
+
+```
+install-component({ component: "button" })
+install-component({ component: "dialog" })
+```
+
+#### list-blocks / get-block-docs / install-blocks
+
+- **Purpose**: Manage pre-built UI sections (blocks)
+- **When to use**:
+  - Need complete UI sections (login forms, dashboards, etc.)
+  - Rapid prototyping with production-ready layouts
 
 ---
 
