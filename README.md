@@ -149,7 +149,9 @@ project/
 │   │   ├── project-conventions/        # Coding standards
 │   │   ├── testing-strategy/           # Testing practices
 │   │   ├── git-workflow/               # Git conventions
-│   │   └── feature-development/        # Development workflow
+│   │   ├── feature-development/        # Development workflow
+│   │   ├── frameworks-and-cloud/       # Tech stack best practices
+│   │   └── security-guidelines/        # Security standards
 │   │
 │   └── commands/                  # Custom Slash Commands
 │       ├── feature.md                  # /feature - Full workflow
@@ -221,13 +223,15 @@ project/
 
 Skills là các file markdown chứa kiến thức domain-specific cho project:
 
-| Skill                   | Mô Tả                                           |
-| ----------------------- | ----------------------------------------------- |
-| **project-conventions** | Coding style, naming conventions, import order  |
-| **testing-strategy**    | Testing practices, coverage requirements        |
-| **git-workflow**        | Branch naming, commit message format            |
-| **feature-development** | Complete development workflow guide             |
-| **e2e-testing**         | Playwright MCP patterns for browser E2E testing |
+| Skill                    | Mô Tả                                           |
+| ------------------------ | ----------------------------------------------- |
+| **project-conventions**  | Coding style, naming conventions, import order  |
+| **testing-strategy**     | Testing practices, coverage requirements        |
+| **git-workflow**         | Branch naming, commit message format            |
+| **feature-development**  | Complete development workflow guide             |
+| **e2e-testing**          | Playwright MCP patterns for browser E2E testing |
+| **frameworks-and-cloud** | Best practices for Laravel, Java, Next.js, etc. |
+| **security-guidelines**  | Security patterns and checklists                |
 
 ### Tùy Chỉnh Skills
 
