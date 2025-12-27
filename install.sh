@@ -117,7 +117,44 @@ if [ ! -f "$TARGET_DIR/.kira/.gitignore" ]; then
     echo -e "${GREEN}✓ .kira structure created${NC}"
 fi
 
-# 7. Final Checks
+# 7. Update .gitignore
+echo -e "${BLUE}🙈 Updating .gitignore...${NC}"
+GITIGNORE_FILE="$TARGET_DIR/.gitignore"
+
+if [ ! -f "$GITIGNORE_FILE" ]; then
+    touch "$GITIGNORE_FILE"
+    echo -e "${GREEN}Created .gitignore${NC}"
+fi
+
+# Helper to safely append to gitignore
+IGNORES=(".claude/" ".kira/" ".mcp.json")
+HEADER_ADDED=false
+
+# Check if we need to add a header first (only if we are going to add items)
+# But simple approach: just check each item
+for ignore in "${IGNORES[@]}"; do
+    if ! grep -qsF "$ignore" "$GITIGNORE_FILE"; then
+        # Check if file has content and doesn't end with newline
+        if [ -s "$GITIGNORE_FILE" ] && [ "$(tail -c1 "$GITIGNORE_FILE" | wc -l)" -eq 0 ]; then
+            echo "" >> "$GITIGNORE_FILE"
+        fi
+        
+        # Add header only once
+        if [ "$HEADER_ADDED" = false ]; then
+             if ! grep -qsF "# Kira Agent" "$GITIGNORE_FILE"; then
+                 echo -e "\n# Kira Agent" >> "$GITIGNORE_FILE"
+             fi
+             HEADER_ADDED=true
+        fi
+        
+        echo "$ignore" >> "$GITIGNORE_FILE"
+        echo -e "Added ${GREEN}$ignore${NC} to .gitignore"
+    else
+        echo -e "${YELLOW}$ignore${NC} already in .gitignore"
+    fi
+done
+
+# 8. Final Checks
 echo ""
 echo -e "${GREEN}✨ Kira Agent has been successfully installed into $TARGET_DIR!${NC}"
 echo ""
