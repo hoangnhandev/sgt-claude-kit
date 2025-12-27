@@ -1,19 +1,14 @@
 #!/bin/bash
 
 # Kira Agent Installer
-# Installs Kira Agent configuration into the current project directory.
-# Usage: 
-#   Online: ./install.sh
-#   Offline: ./install.sh path/to/kira-agent.zip
+# Installs Kira Agent configuration from the current directory into a target project directory.
+# Usage: ./install.sh <path_to_target_project>
 
 set -e
 
 # --- Configuration ---
-REPO_URL="git@github.com:hnhan03112000/kira-agent.git"
-BRANCH="main"
-TEMP_DIR="/tmp/kira-agent-installer-$(date +%s)"
-TARGET_DIR=$(pwd)
-SOURCE_ZIP="$1"
+SOURCE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+TARGET_DIR="$1"
 
 # Colors
 GREEN='\033[0;32m'
@@ -23,13 +18,29 @@ RED='\033[0;31m'
 NC='\033[0m' # No Color
 
 echo -e "${BLUE}🤖 Kira Agent Installer${NC}"
+
+# 1. Validation
+if [ -z "$TARGET_DIR" ]; then
+    echo -e "${RED}❌ Error: Missing target directory.${NC}"
+    echo -e "Usage: ./install.sh <path_to_your_project>"
+    exit 1
+fi
+
+# Resolve absolute path for target
+TARGET_DIR=$(realpath "$TARGET_DIR")
+echo -e "Source Directory: ${BLUE}$SOURCE_DIR${NC}"
 echo -e "Target Directory: ${GREEN}$TARGET_DIR${NC}"
 echo ""
 
-# 1. Pre-flight Checks
-if [ ! -f "package.json" ] && [ ! -f "composer.json" ] && [ ! -f "go.mod" ] && [ ! -f "pom.xml" ] && [ ! -f "requirements.txt" ]; then
-    echo -e "${YELLOW}⚠️  Warning: No project definition file (package.json, composer.json, etc.) found.${NC}"
-    echo -e "Are you sure you are in the root of your project?"
+if [ ! -d "$TARGET_DIR" ]; then
+    echo -e "${RED}❌ Error: Target directory does not exist: $TARGET_DIR${NC}"
+    exit 1
+fi
+
+# 2. Pre-flight Checks on Target
+if [ ! -f "$TARGET_DIR/package.json" ] && [ ! -f "$TARGET_DIR/composer.json" ] && [ ! -f "$TARGET_DIR/go.mod" ] && [ ! -f "$TARGET_DIR/pom.xml" ] && [ ! -f "$TARGET_DIR/requirements.txt" ]; then
+    echo -e "${YELLOW}⚠️  Warning: No project definition file (package.json, composer.json, etc.) found in target directory.${NC}"
+    echo -e "Are you sure '$TARGET_DIR' is a project root?"
     read -p "Continue? (y/n) " -n 1 -r
     echo ""
     if [[ ! $REPLY =~ ^[Yy]$ ]]; then
@@ -37,65 +48,28 @@ if [ ! -f "package.json" ] && [ ! -f "composer.json" ] && [ ! -f "go.mod" ] && [
     fi
 fi
 
-# 2. Prepare Source
-mkdir -p "$TEMP_DIR"
-
-if [ -n "$SOURCE_ZIP" ]; then
-    # --- Install from ZIP ---
-    echo -e "${BLUE}📦 Extracting source from zip: $SOURCE_ZIP...${NC}"
-    
-    if [ ! -f "$SOURCE_ZIP" ]; then
-        echo -e "${RED}❌ Error: Zip file not found at $SOURCE_ZIP${NC}"
-        exit 1
-    fi
-
-    # Check for unzip command
-    if ! command -v unzip &> /dev/null; then
-        echo -e "${RED}❌ Error: 'unzip' command is required but not installed.${NC}"
-        exit 1
-    fi
-
-    unzip -q "$SOURCE_ZIP" -d "$TEMP_DIR"
-    
-    # Detect root directory inside zip (handle github-style zip structure usually folder-name-branch/)
-    # We look for the .claude directory
-    DETECTED_ROOT=$(find "$TEMP_DIR" -type d -name ".claude" | head -n 1 | xargs dirname)
-    
-    if [ -z "$DETECTED_ROOT" ]; then
-        echo -e "${RED}❌ Error: Invalid structure. Could not find '.claude' directory in zip archive.${NC}"
-        rm -rf "$TEMP_DIR"
-        exit 1
-    fi
-    
-    SOURCE_DIR="$DETECTED_ROOT"
-    echo -e "${GREEN}✓ Source extracted from zip${NC}"
-
-else
-    # --- Install from GIT ---
-    echo -e "${BLUE}📦 Downloading source from Git...${NC}"
-    git clone --depth 1 --branch $BRANCH $REPO_URL "$TEMP_DIR" > /dev/null 2>&1 || {
-        echo -e "${RED}❌ Failed to clone repository. Please check REPO_URL in the script.${NC}"
-        echo -e "Current URL: $REPO_URL"
-        exit 1
-    }
-    SOURCE_DIR="$TEMP_DIR"
-    echo -e "${GREEN}✓ Source downloaded from git${NC}"
+# 3. Check Source Integrity
+if [ ! -d "$SOURCE_DIR/.claude" ]; then
+    echo -e "${RED}❌ Error: Source .claude directory not found in $SOURCE_DIR.${NC}"
+    echo -e "Please ensure you are running this script from the Kira Agent repository root."
+    exit 1
 fi
 
-# 3. Install .claude configuration
+# 4. Install .claude configuration
 echo -e "${BLUE}📂 Configure .claude agents and skills...${NC}"
-if [ -d ".claude" ]; then
-    echo -e "${YELLOW}⚠️  .claude directory already exists.${NC}"
-    echo -e "Backing up existing .claude to .claude.bak.$(date +%s)..."
-    mv .claude ".claude.bak.$(date +%s)"
+if [ -d "$TARGET_DIR/.claude" ]; then
+    echo -e "${YELLOW}⚠️  .claude directory already exists in target.${NC}"
+    BACKUP_DIR="$TARGET_DIR/.claude.bak.$(date +%s)"
+    echo -e "Backing up existing .claude to $(basename "$BACKUP_DIR")..."
+    mv "$TARGET_DIR/.claude" "$BACKUP_DIR"
 fi
 
 cp -r "$SOURCE_DIR/.claude" "$TARGET_DIR/"
 echo -e "${GREEN}✓ .claude directory installed${NC}"
 
-# 4. Install .mcp.json
-if [ -f ".mcp.json" ]; then
-    echo -e "${YELLOW}⚠️  .mcp.json already exists.${NC}"
+# 5. Install .mcp.json
+if [ -f "$TARGET_DIR/.mcp.json" ]; then
+    echo -e "${YELLOW}⚠️  .mcp.json already exists in target.${NC}"
     echo -e "Skipping overwrite. Please manually merge keys from source .mcp.json if needed."
 else
     if [ -f "$SOURCE_DIR/.mcp.json" ]; then
@@ -106,34 +80,27 @@ else
     fi
 fi
 
-# 5. Initialize .kira workspace
+# 6. Initialize .kira workspace in Target
 echo -e "${BLUE}🛠️  Initializing .kira workspace...${NC}"
-mkdir -p .kira/inputs
-mkdir -p .kira/plans
-mkdir -p .kira/reviews
-mkdir -p .kira/logs
+mkdir -p "$TARGET_DIR/.kira/inputs"
+mkdir -p "$TARGET_DIR/.kira/plans"
+mkdir -p "$TARGET_DIR/.kira/reviews"
+mkdir -p "$TARGET_DIR/.kira/logs"
 
 # Add .gitignore for .kira/logs if not exists
-if [ ! -f ".kira/.gitignore" ]; then
-    echo "logs/" > .kira/.gitignore
-    echo "plans/" >> .kira/.gitignore
-    echo "reviews/" >> .kira/.gitignore
-    echo "!inputs/" >> .kira/.gitignore
+if [ ! -f "$TARGET_DIR/.kira/.gitignore" ]; then
+    echo "logs/" > "$TARGET_DIR/.kira/.gitignore"
+    echo "plans/" >> "$TARGET_DIR/.kira/.gitignore"
+    echo "reviews/" >> "$TARGET_DIR/.kira/.gitignore"
+    echo "!inputs/" >> "$TARGET_DIR/.kira/.gitignore"
     echo -e "${GREEN}✓ .kira structure created${NC}"
 fi
 
-# 6. Formatting Hooks Setup
-if ! command -v prettier &> /dev/null && [ ! -f "node_modules/.bin/prettier" ]; then
-    echo -e "${YELLOW}ℹ️  Prettier is used by Kira hooks for formatting.${NC}"
-fi
-
-# Cleanup
-rm -rf "$TEMP_DIR"
-
+# 7. Final Checks
 echo ""
-echo -e "${GREEN}✨ Kira Agent has been successfully installed!${NC}"
+echo -e "${GREEN}✨ Kira Agent has been successfully installed into $TARGET_DIR!${NC}"
 echo ""
 echo -e "Next steps:"
-echo -e "1. Update your API keys in ${BLUE}.mcp.json${NC} (if required for MCP servers)"
-echo -e "2. Run ${BLUE}claude${NC} to start the agent"
-echo -e "3. Check ${BLUE}.claude/commands/${NC} for available workflows"
+echo -e "1. Go to your project: ${BLUE}cd $TARGET_DIR${NC}"
+echo -e "2. Update your API keys in ${BLUE}.mcp.json${NC} (if required)"
+echo -e "3. Run ${BLUE}claude${NC} to start the agent"
