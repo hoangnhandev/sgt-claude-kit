@@ -1,8 +1,12 @@
 #!/bin/bash
 
 # Kira Agent Installer
-# Installs Kira Agent configuration from the current directory into a target project directory.
-# Usage: ./install.sh <path_to_target_project>
+# usage: ./install.sh <path_to_your_target_project>
+#
+# Prerequisite:
+# 1. Download kira-agent source code (e.g. Zip file)
+# 2. Extract the Zip file
+# 3. Run this script from the extracted directory
 
 set -e
 
@@ -26,8 +30,25 @@ if [ -z "$TARGET_DIR" ]; then
     exit 1
 fi
 
+# Safety check: User passed a zip file?
+if [[ "$TARGET_DIR" == *.zip ]]; then
+    echo -e "${RED}❌ Error: It looks like you passed a ZIP file.${NC}"
+    echo -e "Please unzip the file first, then run this script pointing to your target project directory."
+    echo -e "Example: ./install.sh ../my-awesome-project"
+    exit 1
+fi
+
 # Resolve absolute path for target
-TARGET_DIR=$(realpath "$TARGET_DIR")
+# Check if readlink -f or realpath exists (for cross-platform strictness), else use simple cd hack
+if command -v realpath &> /dev/null; then
+    TARGET_DIR=$(realpath "$TARGET_DIR")
+else
+    # Fallback if target exists
+    if [ -d "$TARGET_DIR" ]; then
+        TARGET_DIR=$(cd "$TARGET_DIR" && pwd)
+    fi
+fi
+
 echo -e "Source Directory: ${BLUE}$SOURCE_DIR${NC}"
 echo -e "Target Directory: ${GREEN}$TARGET_DIR${NC}"
 echo ""
@@ -51,7 +72,7 @@ fi
 # 3. Check Source Integrity
 if [ ! -d "$SOURCE_DIR/.claude" ]; then
     echo -e "${RED}❌ Error: Source .claude directory not found in $SOURCE_DIR.${NC}"
-    echo -e "Please ensure you are running this script from the Kira Agent repository root."
+    echo -e "Please ensure you are running this script from the UNZIPPED Kira Agent repository root."
     exit 1
 fi
 
