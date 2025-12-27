@@ -37,7 +37,34 @@ Kira Agent là một framework tự động hóa quy trình phát triển tính 
 - Node.js >= 18 (cho hooks formatting)
 - Git
 
-### Thiết Lập
+### Cài đặt tự động (Khuyến nghị)
+
+Sử dụng script cài đặt tự động để set up Kira Agent nhanh chóng vào project hiện tại của bạn:
+
+```bash
+# Trong thư mục gốc của project target:
+curl -fsSL https://raw.githubusercontent.com/your-username/kira-agent/main/install.sh | bash
+```
+
+### Cài đặt thủ công (Hoặc Private Repo)
+
+Nếu dự án của bạn là private hoặc bạn không thể kết nối internet trực tiếp:
+
+1. **Tải mã nguồn (ZIP):**
+
+   - Tải source code của Kira Agent dưới dạng file `.zip`.
+
+2. **Cài đặt bằng script:**
+
+   - Copy file zip và `install.sh` vào thư mục gốc của project target.
+   - Chạy lệnh:
+
+   ```bash
+   chmod +x install.sh
+   ./install.sh kira-agent.zip
+   ```
+
+### Cài đặt thủ công (Không dùng Script)
 
 1. **Clone hoặc copy cấu trúc vào project của bạn:**
 
