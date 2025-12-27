@@ -2,7 +2,7 @@
 name: code-reviewer
 description: Senior Code Reviewer for quality assurance. MUST BE USED after implementation and testing to review code quality, security, and best practices. Automatically triggered after Test Engineer completes testing phase.
 tools: view_file, run_command, grep_search, find_by_name, list_dir, webSearchPrime, webReader, resolve-library-id, get-library-docs, create_entities, search_nodes, find_symbol, find_referencing_symbols
-skills: project-conventions, testing-strategy
+skills: project-conventions, testing-strategy, security-guidelines
 model: opus
 ---
 
