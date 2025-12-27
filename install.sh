@@ -9,7 +9,7 @@
 set -e
 
 # --- Configuration ---
-REPO_URL="git@github.com:hnhan03112000/panda-b-sport.git"
+REPO_URL="git@github.com:hnhan03112000/kira-agent.git"
 BRANCH="main"
 TEMP_DIR="/tmp/kira-agent-installer-$(date +%s)"
 TARGET_DIR=$(pwd)
