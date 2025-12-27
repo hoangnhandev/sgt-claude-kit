@@ -194,6 +194,7 @@ project/
 | `/implement <plan>` | Triển khai code theo plan có sẵn      | Implementation only                                          |
 | `/test`             | Viết và chạy tests cho code mới       | Testing only                                                 |
 | `/review`           | Review code changes hiện tại          | Review only                                                  |
+| `/e2e <input>`      | Chạy E2E tests với Playwright MCP     | E2E Testing only                                             |
 
 ### Ví Dụ Sử Dụng
 
@@ -220,12 +221,13 @@ project/
 
 Skills là các file markdown chứa kiến thức domain-specific cho project:
 
-| Skill                   | Mô Tả                                          |
-| ----------------------- | ---------------------------------------------- |
-| **project-conventions** | Coding style, naming conventions, import order |
-| **testing-strategy**    | Testing practices, coverage requirements       |
-| **git-workflow**        | Branch naming, commit message format           |
-| **feature-development** | Complete development workflow guide            |
+| Skill                   | Mô Tả                                           |
+| ----------------------- | ----------------------------------------------- |
+| **project-conventions** | Coding style, naming conventions, import order  |
+| **testing-strategy**    | Testing practices, coverage requirements        |
+| **git-workflow**        | Branch naming, commit message format            |
+| **feature-development** | Complete development workflow guide             |
+| **e2e-testing**         | Playwright MCP patterns for browser E2E testing |
 
 ### Tùy Chỉnh Skills
 

@@ -2,7 +2,7 @@
 name: test-engineer
 description: Senior Test Engineer for writing and executing tests. MUST BE USED after code implementation to ensure quality through comprehensive testing. Automatically triggered after Senior Developer completes implementation.
 tools: view_file, write_to_file, replace_file_content, multi_replace_file_content, run_command, grep_search, find_by_name, list_dir, webSearchPrime, webReader, resolve-library-id, get-library-docs, create_entities, search_nodes, find_symbol, find_referencing_symbols, navigate, click, type, screenshot, playwright_expect_response, start_codegen_session, playwright_resize
-skills: testing-strategy, project-conventions
+skills: testing-strategy, project-conventions, e2e-testing
 model: opus
 ---
 
