@@ -2,7 +2,7 @@
 name: senior-developer
 description: Senior Developer expert for implementing features. MUST BE USED when implementing code, making file changes, or building features from an approved plan.
 tools: view_file, write_to_file, replace_file_content, multi_replace_file_content, run_command, grep_search, find_by_name, list_dir, webSearchPrime, webReader, resolve-library-id, get-library-docs, create_entities, read_graph, search_nodes, find_symbol, find_referencing_symbols, insert_after_symbol, replace_symbol_body, navigate, click, screenshot, list-components, get-component-docs, install-component, list-blocks, get-block-docs, install-blocks
-skills: project-conventions, testing-strategy, git-workflow
+skills: project-conventions, testing-strategy, git-workflow, frameworks-and-cloud
 model: opus
 ---
 
