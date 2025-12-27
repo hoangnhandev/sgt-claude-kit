@@ -3,7 +3,12 @@
     "context7": {
       "type": "stdio",
       "command": "npx",
-      "args": ["-y", "@upstash/context7-mcp", "--api-key", "YOUR_API_KEY"]
+      "args": [
+        "-y",
+        "@upstash/context7-mcp",
+        "--api-key",
+        "YOUR_CONTEXT7_API_KEY"
+      ]
     },
     "playwright": {
       "type": "stdio",
@@ -33,7 +38,7 @@
       "command": "npx",
       "args": ["-y", "@z_ai/mcp-server"],
       "env": {
-        "Z_AI_API_KEY": "your_api_key",
+        "Z_AI_API_KEY": "YOUR_Z_AI_API_KEY",
         "Z_AI_MODE": "ZAI"
       }
     },
@@ -41,14 +46,14 @@
       "type": "http",
       "url": "https://api.z.ai/api/mcp/web_search_prime/mcp",
       "headers": {
-        "Authorization": "Bearer your_api_key"
+        "Authorization": "Bearer YOUR_Z_AI_API_KEY"
       }
     },
     "web-reader": {
       "type": "http",
       "url": "https://api.z.ai/api/mcp/web_reader/mcp",
       "headers": {
-        "Authorization": "Bearer your_api_key"
+        "Authorization": "Bearer YOUR_Z_AI_API_KEY"
       }
     }
   }
