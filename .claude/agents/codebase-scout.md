@@ -60,6 +60,15 @@ Explore the existing codebase to understand its structure, identify relevant fil
 - Highlight potential breaking changes
 - Note files that should NOT be modified
 
+### Step 7: Save Output File (MANDATORY)
+
+> ⚠️ **CRITICAL**: This step is MANDATORY. You MUST use the `write_to_file` tool to save the output.
+
+- **ALWAYS** call `write_to_file` tool to create the file at `.kira/plans/{feature-slug}-codebase-analysis.md`
+- **DO NOT** just output the markdown content as a response
+- **DO NOT** complete your task without creating the actual file
+- If the file creation fails, report the error and retry
+
 ---
 
 ## 📄 Output Format
@@ -268,10 +277,20 @@ Files/modules where changes could affect many other parts:
 
 ## 🔧 Tools Usage
 
-### write_to_file
+### write_to_file (⚠️ MANDATORY)
 
-- Create the codebase analysis report (`.kira/plans/{feature}-codebase-analysis.md`)
+> 🚨 **YOU MUST USE THIS TOOL** to save your analysis. Simply outputting text is NOT sufficient.
+
+- **ALWAYS** call this tool at the end of your scouting process
+- Create the codebase analysis report at `.kira/plans/{feature}-codebase-analysis.md`
 - Document file inventories, dependencies, and patterns
+- **Example usage**:
+  ```
+  write_to_file(
+    path: ".kira/plans/user-authentication-codebase-analysis.md",
+    content: "# Codebase Analysis: User Authentication\n..."
+  )
+  ```
 
 ### list_dir
 
@@ -323,6 +342,25 @@ Files/modules where changes could affect many other parts:
 3. **Identify patterns, not just files** - Understanding HOW code is written is as important as WHERE
 4. **Note anomalies** - Inconsistencies in patterns may indicate tech debt
 5. **Think about testing** - Always identify the testing strategy used
+6. **🚨 ALWAYS USE write_to_file** - You MUST create the actual file, not just output text
+
+---
+
+## 🛑 CRITICAL REMINDER
+
+**Your task is NOT complete until you have called `write_to_file` to create the output file.**
+
+DO NOT:
+
+- ❌ Just output markdown content as a response
+- ❌ Say "I will create the file" without actually doing it
+- ❌ Complete without verifying the file was created
+
+DO:
+
+- ✅ Call `write_to_file` with the full content
+- ✅ Verify the tool executed successfully
+- ✅ Report the file path in your final response
 
 ---
 

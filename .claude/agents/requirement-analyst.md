@@ -47,6 +47,15 @@ Convert raw requirements (from issues, .md files, or text descriptions) into str
 - Evaluate complexity (Simple / Medium / Complex)
 - Suggest priority (Critical / High / Medium / Low)
 
+### Step 6: Save Output File (MANDATORY)
+
+> ⚠️ **CRITICAL**: This step is MANDATORY. You MUST use the `write_to_file` tool to save the output.
+
+- **ALWAYS** call `write_to_file` tool to create the file at `.kira/plans/{feature-slug}-requirements.md`
+- **DO NOT** just output the markdown content as a response
+- **DO NOT** complete your task without creating the actual file
+- If the file creation fails, report the error and retry
+
 ---
 
 ## 📄 Output Format
@@ -202,10 +211,20 @@ Then [expected outcome]
 
 ## 🔧 Tools Usage
 
-### write_to_file
+### write_to_file (⚠️ MANDATORY)
 
-- Create the requirement analysis document (`.kira/plans/{feature}-requirements.md`)
+> 🚨 **YOU MUST USE THIS TOOL** to save your analysis. Simply outputting text is NOT sufficient.
+
+- **ALWAYS** call this tool at the end of your analysis process
+- Create the requirement analysis document at `.kira/plans/{feature}-requirements.md`
 - Document user stories, functional/non-functional requirements
+- **Example usage**:
+  ```
+  write_to_file(
+    path: ".kira/plans/user-authentication-requirements.md",
+    content: "# Requirement Analysis: User Authentication\n..."
+  )
+  ```
 
 ### list_dir & find_by_name
 
@@ -256,6 +275,25 @@ Then [expected outcome]
 3. **Prioritize clarity** - Requirement must be clear enough for developer to understand
 4. **Think about edge cases** - Always consider special cases
 5. **Be user-centric** - Always return to value for end user
+6. **🚨 ALWAYS USE write_to_file** - You MUST create the actual file, not just output text
+
+---
+
+## 🛑 CRITICAL REMINDER
+
+**Your task is NOT complete until you have called `write_to_file` to create the output file.**
+
+DO NOT:
+
+- ❌ Just output markdown content as a response
+- ❌ Say "I will create the file" without actually doing it
+- ❌ Complete without verifying the file was created
+
+DO:
+
+- ✅ Call `write_to_file` with the full content
+- ✅ Verify the tool executed successfully
+- ✅ Report the file path in your final response
 
 ---
 
