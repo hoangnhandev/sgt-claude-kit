@@ -73,13 +73,10 @@ You MUST use the `Write` tool to create: .kira/plans/{feature-slug}-requirements
 
 📄 INPUT: Read the requirement document from: .kira/plans/{feature-slug}-requirements.md
 
-📚 SKILLS TO APPLY (Quick Reference):
-- Read `.claude/skills/project-conventions/SKILL-SUMMARY.md` - Apply coding conventions
-- Read `.claude/skills/frameworks-and-cloud/SKILL-SUMMARY.md` - Framework patterns
+📚 SKILLS FOR CODEBASE-SCOUT ROLE:
+- Read `.claude/skills/project-conventions/SKILL-SUMMARY.md` - Understand naming/structure conventions
 
-📖 FULL REFERENCE (only if detailed examples needed):
-- `.claude/skills/project-conventions/SKILL.md`
-- `.claude/skills/frameworks-and-cloud/SKILL.md`
+💡 NOTE: This role focuses on exploration, not implementation. Framework details not needed.
 
 📁 OUTPUT FILE (MANDATORY):
 You MUST use the `Write` tool to create: .kira/plans/{feature-slug}-codebase-analysis.md
@@ -119,13 +116,12 @@ You MUST use the `Write` tool to create: .kira/plans/{feature-slug}-codebase-ana
 - Requirements: .kira/plans/{feature-slug}-requirements.md
 - Codebase Analysis: .kira/plans/{feature-slug}-codebase-analysis.md
 
-📚 SKILLS TO APPLY (Quick Reference):
+📚 SKILLS FOR SOLUTION-ARCHITECT ROLE:
 - Read `.claude/skills/project-conventions/SKILL-SUMMARY.md` - Architecture aligns with standards
 - Read `.claude/skills/frameworks-and-cloud/SKILL-SUMMARY.md` - Framework best practices
 
-📖 FULL REFERENCE (only if detailed examples needed):
-- `.claude/skills/project-conventions/SKILL.md`
-- `.claude/skills/frameworks-and-cloud/SKILL.md`
+📖 FULL REFERENCE (read framework section matching your tech stack):
+- `.claude/skills/frameworks-and-cloud/SKILL.md` → Laravel/Java/Next.js/Node.js/AWS section
 
 📁 OUTPUT FILE (MANDATORY):
 You MUST use the `Write` tool to create: .kira/plans/{feature-slug}-architecture.md
@@ -374,17 +370,15 @@ Please ask your question or state your concern.
 - Architecture Plan: .kira/plans/{feature-slug}-architecture.md
 - Codebase Analysis: .kira/plans/{feature-slug}-codebase-analysis.md
 
-📚 SKILLS TO APPLY (Quick Reference):
+📚 SKILLS FOR SENIOR-DEVELOPER ROLE:
 - Read `.claude/skills/project-conventions/SKILL-SUMMARY.md` - Naming, formatting, code patterns
-- Read `.claude/skills/testing-strategy/SKILL-SUMMARY.md` - Test patterns for testable code
-- Read `.claude/skills/git-workflow/SKILL-SUMMARY.md` - Commit message conventions
 - Read `.claude/skills/frameworks-and-cloud/SKILL-SUMMARY.md` - Framework-specific patterns
 
-📖 FULL REFERENCE (only if detailed examples needed):
-- `.claude/skills/project-conventions/SKILL.md`
-- `.claude/skills/testing-strategy/SKILL.md`
-- `.claude/skills/git-workflow/SKILL.md`
-- `.claude/skills/frameworks-and-cloud/SKILL.md`
+📖 FULL REFERENCE (read only the sections you need):
+- `.claude/skills/project-conventions/SKILL.md` → If unclear on TypeScript/React patterns
+- `.claude/skills/frameworks-and-cloud/SKILL.md` → Only your framework section
+
+💡 NOTE: git-workflow and testing-strategy NOT needed for implementation. Focus on CODE.
 
 📁 OUTPUT FILE (MANDATORY):
 You MUST use the `Write` tool to create: .kira/plans/{feature-slug}-implementation-report.md
@@ -527,17 +521,14 @@ When done, type: **"Continue"** or **"Done"**
 - Implementation Report: .kira/plans/{feature-slug}-implementation-report.md
 - Architecture Plan: .kira/plans/{feature-slug}-architecture.md
 
-📚 SKILLS TO APPLY (Quick Reference):
+📚 SKILLS FOR TEST-ENGINEER ROLE:
 - Read `.claude/skills/testing-strategy/SKILL-SUMMARY.md` - AAA pattern, coverage targets, test naming
-- Read `.claude/skills/project-conventions/SKILL-SUMMARY.md` - Naming conventions for test files
-- Read `.claude/skills/e2e-testing/SKILL-SUMMARY.md` - Integration/E2E test patterns
-- Read `.claude/skills/frameworks-and-cloud/SKILL-SUMMARY.md` - Framework-specific testing
 
-📖 FULL REFERENCE (only if detailed examples needed):
-- `.claude/skills/testing-strategy/SKILL.md`
-- `.claude/skills/project-conventions/SKILL.md`
-- `.claude/skills/e2e-testing/SKILL.md`
-- `.claude/skills/frameworks-and-cloud/SKILL.md`
+📖 FULL REFERENCE (read if writing E2E tests):
+- `.claude/skills/testing-strategy/SKILL.md` → Detailed mocking, edge cases
+- `.claude/skills/e2e-testing/SKILL.md` → Only if E2E tests needed
+
+💡 NOTE: project-conventions and frameworks NOT primary focus. Testing patterns are priority.
 
 📁 OUTPUT FILE (MANDATORY):
 You MUST use the `Write` tool to create: .kira/plans/{feature-slug}-test-report.md
@@ -608,17 +599,14 @@ If Quality Gate **FAILED**:
 - Test Report: .kira/plans/{feature-slug}-test-report.md
 - Architecture Plan: .kira/plans/{feature-slug}-architecture.md
 
-📚 SKILLS TO APPLY (Quick Reference):
+📚 SKILLS FOR CODE-REVIEWER ROLE:
+- Read `.claude/skills/security-guidelines/SKILL-SUMMARY.md` - Security best practices (PRIORITY)
 - Read `.claude/skills/project-conventions/SKILL-SUMMARY.md` - Verify code follows conventions
-- Read `.claude/skills/testing-strategy/SKILL-SUMMARY.md` - Verify test quality standards
-- Read `.claude/skills/security-guidelines/SKILL-SUMMARY.md` - Check security best practices
-- Read `.claude/skills/frameworks-and-cloud/SKILL-SUMMARY.md` - Verify framework patterns
 
-📖 FULL REFERENCE (only if detailed examples needed):
-- `.claude/skills/project-conventions/SKILL.md`
-- `.claude/skills/testing-strategy/SKILL.md`
-- `.claude/skills/security-guidelines/SKILL.md`
-- `.claude/skills/frameworks-and-cloud/SKILL.md`
+📖 FULL REFERENCE (for detailed security checks):
+- `.claude/skills/security-guidelines/SKILL.md` → Full security grep patterns
+
+💡 NOTE: Focus on SECURITY first, then conventions. Testing-strategy only if reviewing test quality.
 
 📁 OUTPUT FILE (MANDATORY):
 You MUST use the `Write` tool to create: .kira/reviews/{feature-slug}-review.md
@@ -718,15 +706,13 @@ You MUST use the `Write` tool to create: .kira/reviews/{feature-slug}-review.md
 - Test Report: .kira/plans/{feature-slug}-test-report.md
 - Review Report: .kira/reviews/{feature-slug}-review.md
 
-📚 SKILLS TO APPLY (Quick Reference):
-- Read `.claude/skills/git-workflow/SKILL-SUMMARY.md` - CHANGELOG and commit conventions
-- Read `.claude/skills/project-conventions/SKILL-SUMMARY.md` - Documentation standards
-- Read `.claude/skills/frameworks-and-cloud/SKILL-SUMMARY.md` - Framework-specific docs
+📚 SKILLS FOR DOCUMENTATION-WRITER ROLE:
+- Read `.claude/skills/git-workflow/SKILL-SUMMARY.md` - CHANGELOG and commit conventions (PRIORITY)
 
-📖 FULL REFERENCE (only if detailed examples needed):
-- `.claude/skills/git-workflow/SKILL.md`
-- `.claude/skills/project-conventions/SKILL.md`
-- `.claude/skills/frameworks-and-cloud/SKILL.md`
+📖 FULL REFERENCE (only for commit message examples):
+- `.claude/skills/git-workflow/SKILL.md` → Conventional Commits format
+
+💡 NOTE: Focus on git-workflow for commits. project-conventions NOT needed for documentation.
 
 📁 OUTPUT FILES (MANDATORY):
 1. Update relevant project docs (README.md, CHANGELOG.md, etc.)
