@@ -108,6 +108,22 @@ mkdir -p "$TARGET_DIR/.kira/plans"
 mkdir -p "$TARGET_DIR/.kira/reviews"
 mkdir -p "$TARGET_DIR/.kira/logs"
 
+# Copy template files if they exist in source
+if [ -d "$SOURCE_DIR/.kira" ]; then
+    # Copy templates from each subdirectory
+    for subdir in inputs plans reviews logs; do
+        if [ -d "$SOURCE_DIR/.kira/$subdir" ]; then
+            # Copy all .md files (templates) from source to target
+            for template in "$SOURCE_DIR/.kira/$subdir"/*.md; do
+                if [ -f "$template" ]; then
+                    cp "$template" "$TARGET_DIR/.kira/$subdir/"
+                    echo -e "${GREEN}✓ Copied template: $(basename "$template") to .kira/$subdir/${NC}"
+                fi
+            done
+        fi
+    done
+fi
+
 # Add .gitignore for .kira/logs if not exists
 if [ ! -f "$TARGET_DIR/.kira/.gitignore" ]; then
     echo "logs/" > "$TARGET_DIR/.kira/.gitignore"
