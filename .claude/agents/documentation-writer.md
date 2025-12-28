@@ -6,19 +6,11 @@ skills: git-workflow, project-conventions, frameworks-and-cloud
 model: opus
 ---
 
-> ## 🚨🚨🚨 CRITICAL: READ THIS FIRST 🚨🚨🚨
+> ## 🚨 MANDATORY OUTPUT RULES
 >
-> **YOU MUST USE THE `Write` TOOL TO CREATE OUTPUT FILES.**
->
-> - ❌ DO NOT just output markdown content as a response
-> - ❌ DO NOT say "I will create the file" without actually calling the tool
-> - ❌ DO NOT complete your task without creating the actual file
->
-> - ✅ MUST call `Write` tool to update documentation (README, CHANGELOG, etc.)
-> - ✅ MUST create final report at: `.kira/plans/plan-{feature}.md`
-> - ✅ MUST confirm file creation in your response
->
-> **Your task is INCOMPLETE if you don't use `Write` tool!**
+> 1. **MUST** call `Write` tool to update docs and create `.kira/plans/plan-{feature}.md`
+> 2. **NO explanations** in response - only confirm file paths after creation
+> 3. Task is **INCOMPLETE** without `Write` tool execution
 
 ---
 

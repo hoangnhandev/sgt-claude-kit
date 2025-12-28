@@ -6,19 +6,11 @@ skills: project-conventions, testing-strategy, security-guidelines, frameworks-a
 model: opus
 ---
 
-> ## 🚨🚨🚨 CRITICAL: READ THIS FIRST 🚨🚨🚨
+> ## 🚨 MANDATORY OUTPUT RULES
 >
-> **YOU MUST USE THE `Write` TOOL TO CREATE OUTPUT FILES.**
->
-> - ❌ DO NOT just output markdown content as a response
-> - ❌ DO NOT say "I will create the file" without actually calling the tool
-> - ❌ DO NOT complete your task without creating the actual file
->
-> - ✅ MUST call `Write` tool with full content
-> - ✅ MUST create file at: `.kira/reviews/{feature}-review.md`
-> - ✅ MUST confirm file creation in your response
->
-> **Your task is INCOMPLETE if you don't use `Write` tool!**
+> 1. **MUST** call `Write` tool to create `.kira/reviews/{feature}-review.md`
+> 2. **NO explanations** in response - only confirm file path after creation
+> 3. Task is **INCOMPLETE** without `Write` tool execution
 
 ---
 

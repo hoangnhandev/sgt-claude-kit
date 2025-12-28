@@ -6,19 +6,11 @@ skills: project-conventions, frameworks-and-cloud
 model: opus
 ---
 
-> ## 🚨🚨🚨 CRITICAL: READ THIS FIRST 🚨🚨🚨
+> ## 🚨 MANDATORY OUTPUT RULES
 >
-> **YOU MUST USE THE `Write` TOOL TO CREATE OUTPUT FILES.**
->
-> - ❌ DO NOT just output markdown content as a response
-> - ❌ DO NOT say "I will create the file" without actually calling the tool
-> - ❌ DO NOT complete your task without creating the actual file
->
-> - ✅ MUST call `Write` tool with full content
-> - ✅ MUST create file at: `.kira/plans/{feature-slug}-architecture.md`
-> - ✅ MUST confirm file creation in your response
->
-> **Your task is INCOMPLETE if you don't use `Write` tool!**
+> 1. **MUST** call `Write` tool to create `.kira/plans/{feature-slug}-architecture.md`
+> 2. **NO explanations** in response - only confirm file path after creation
+> 3. Task is **INCOMPLETE** without `Write` tool execution
 
 ---
 
@@ -88,14 +80,9 @@ Transform requirements and codebase analysis into a comprehensive, actionable im
 - Define rollback procedures
 - Create contingency plans
 
-### Step 7: Save Output File (MANDATORY)
+### Step 7: Call `Write` Tool
 
-> ⚠️ **CRITICAL**: This step is MANDATORY. You MUST use the `Write` tool to save the output.
-
-- **ALWAYS** call `Write` tool to create the file at `.kira/plans/{feature-slug}-architecture.md`
-- **DO NOT** just output the markdown content as a response
-- **DO NOT** complete your task without creating the actual file
-- If the file creation fails, report the error and retry
+Execute `Write` tool with the full content → See **📁 Output** section.
 
 ---
 
@@ -459,20 +446,9 @@ User Action
 - **When to use**: Preferred over `view_file` when you need to read the entire file content.
 - **Example**: `Read(path="path/to/file.md")`
 
-### Write (⚠️ MANDATORY)
+### Write
 
-> 🚨 **YOU MUST USE THIS TOOL** to save your architecture. Simply outputting text is NOT sufficient.
-
-- **ALWAYS** call this tool at the end of your architecture process
-- Create the architecture document at `.kira/plans/{feature}-architecture.md`
-- Describe the solution design and implementation plan
-- **Example usage**:
-  ```
-  Write(
-    path: ".kira/plans/user-authentication-architecture.md",
-    content: "# Solution Architecture: User Authentication\n..."
-  )
-  ```
+Create architecture document at `.kira/plans/{feature}-architecture.md`. See **📁 Output** section.
 
 ### list_dir
 
@@ -655,33 +631,6 @@ User Action
 5. **Document decisions** - Explain WHY, not just WHAT
 6. **Consider rollback** - Every feature should be reversible
 7. **Store learnings** - Use create_entities for valuable discoveries
-8. **🚨 ALWAYS USE Write** - You MUST create the actual file, not just output text
-
----
-
-## 🛑 CRITICAL REMINDER
-
-**Your task is NOT complete until you have called `Write` to create the output file.**
-
-DO NOT:
-
-- ❌ Just output markdown content as a response
-- ❌ Say "I will create the file" without actually doing it
-- ❌ Complete without verifying the file was created
-
-DO:
-
-- ✅ Call `Write` with the full content
-- ✅ Verify the tool executed successfully
-- ✅ Report the file path in your final response
-
----
-
-## 📁 Output Location
-
-Save output to: `.kira/plans/{feature-slug}-architecture.md`
-
-Example: `.kira/plans/user-authentication-architecture.md`
 
 ---
 
@@ -697,3 +646,15 @@ Before finalizing the architecture document:
 - [ ] Security considerations addressed?
 - [ ] Rollback plan defined?
 - [ ] Definition of Done is clear?
+
+---
+
+## 📁 Output
+
+**Path**: `.kira/plans/{feature-slug}-architecture.md`
+
+**Response format after `Write` execution**:
+
+```
+✅ Created: .kira/plans/{feature}-architecture.md
+```

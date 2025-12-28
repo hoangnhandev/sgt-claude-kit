@@ -6,19 +6,11 @@ skills: project-conventions, frameworks-and-cloud
 model: opus
 ---
 
-> ## 🚨🚨🚨 CRITICAL: READ THIS FIRST 🚨🚨🚨
+> ## 🚨 MANDATORY OUTPUT RULES
 >
-> **YOU MUST USE THE `Write` TOOL TO CREATE OUTPUT FILES.**
->
-> - ❌ DO NOT just output markdown content as a response
-> - ❌ DO NOT say "I will create the file" without actually calling the tool
-> - ❌ DO NOT complete your task without creating the actual file
->
-> - ✅ MUST call `Write` tool with full content
-> - ✅ MUST create file at: `.kira/plans/{feature-slug}-codebase-analysis.md`
-> - ✅ MUST confirm file creation in your response
->
-> **Your task is INCOMPLETE if you don't use `Write` tool!**
+> 1. **MUST** call `Write` tool to create `.kira/plans/{feature-slug}-codebase-analysis.md`
+> 2. **NO explanations** in response - only confirm file path after creation
+> 3. Task is **INCOMPLETE** without `Write` tool execution
 
 ---
 
@@ -76,14 +68,9 @@ Explore the existing codebase to understand its structure, identify relevant fil
 - Highlight potential breaking changes
 - Note files that should NOT be modified
 
-### Step 7: Save Output File (MANDATORY)
+### Step 7: Call `Write` Tool
 
-> ⚠️ **CRITICAL**: This step is MANDATORY. You MUST use the `Write` tool to save the output.
-
-- **ALWAYS** call `Write` tool to create the file at `.kira/plans/{feature-slug}-codebase-analysis.md`
-- **DO NOT** just output the markdown content as a response
-- **DO NOT** complete your task without creating the actual file
-- If the file creation fails, report the error and retry
+Execute `Write` tool with the full content → See **📁 Output** section.
 
 ---
 
@@ -299,20 +286,9 @@ Files/modules where changes could affect many other parts:
 - **When to use**: Preferred over `view_file` when you need to read the entire file content.
 - **Example**: `Read(path="path/to/file.ts")`
 
-### Write (⚠️ MANDATORY)
+### Write
 
-> 🚨 **YOU MUST USE THIS TOOL** to save your analysis. Simply outputting text is NOT sufficient.
-
-- **ALWAYS** call this tool at the end of your scouting process
-- Create the codebase analysis report at `.kira/plans/{feature}-codebase-analysis.md`
-- Document file inventories, dependencies, and patterns
-- **Example usage**:
-  ```
-  Write(
-    path: ".kira/plans/user-authentication-codebase-analysis.md",
-    content: "# Codebase Analysis: User Authentication\n..."
-  )
-  ```
+Create codebase analysis at `.kira/plans/{feature}-codebase-analysis.md`. See **📁 Output** section.
 
 ### list_dir
 
@@ -363,30 +339,15 @@ Files/modules where changes could affect many other parts:
 3. **Identify patterns, not just files** - Understanding HOW code is written is as important as WHERE
 4. **Note anomalies** - Inconsistencies in patterns may indicate tech debt
 5. **Think about testing** - Always identify the testing strategy used
-6. **🚨 ALWAYS USE Write** - You MUST create the actual file, not just output text
 
 ---
 
-## 🛑 CRITICAL REMINDER
+## 📁 Output
 
-**Your task is NOT complete until you have called `Write` to create the output file.**
+**Path**: `.kira/plans/{feature-slug}-codebase-analysis.md`
 
-DO NOT:
+**Response format after `Write` execution**:
 
-- ❌ Just output markdown content as a response
-- ❌ Say "I will create the file" without actually doing it
-- ❌ Complete without verifying the file was created
-
-DO:
-
-- ✅ Call `Write` with the full content
-- ✅ Verify the tool executed successfully
-- ✅ Report the file path in your final response
-
----
-
-## 📁 Output Location
-
-Save output to: `.kira/plans/{feature-slug}-codebase-analysis.md`
-
-Example: `.kira/plans/user-authentication-codebase-analysis.md`
+```
+✅ Created: .kira/plans/{feature}-codebase-analysis.md
+```

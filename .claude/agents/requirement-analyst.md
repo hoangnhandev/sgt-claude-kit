@@ -5,19 +5,11 @@ tools: view_file, list_dir, find_by_name, grep_search, read_graph, create_entiti
 model: opus
 ---
 
-> ## 🚨🚨🚨 CRITICAL: READ THIS FIRST 🚨🚨🚨
+> ## 🚨 MANDATORY OUTPUT RULES
 >
-> **YOU MUST USE THE `Write` TOOL TO CREATE OUTPUT FILES.**
->
-> - ❌ DO NOT just output markdown content as a response
-> - ❌ DO NOT say "I will create the file" without actually calling the tool
-> - ❌ DO NOT complete your task without creating the actual file
->
-> - ✅ MUST call `Write` tool with full content
-> - ✅ MUST create file at: `.kira/plans/{feature-slug}-requirements.md`
-> - ✅ MUST confirm file creation in your response
->
-> **Your task is INCOMPLETE if you don't use `Write` tool!**
+> 1. **MUST** call `Write` tool to create `.kira/plans/{feature-slug}-requirements.md`
+> 2. **NO explanations** in response - only confirm file path after creation
+> 3. Task is **INCOMPLETE** without `Write` tool execution
 
 ---
 
@@ -63,14 +55,9 @@ Convert raw requirements (from issues, .md files, or text descriptions) into str
 - Evaluate complexity (Simple / Medium / Complex)
 - Suggest priority (Critical / High / Medium / Low)
 
-### Step 6: Save Output File (MANDATORY)
+### Step 6: Call `Write` Tool
 
-> ⚠️ **CRITICAL**: This step is MANDATORY. You MUST use the `Write` tool to save the output.
-
-- **ALWAYS** call `Write` tool to create the file at `.kira/plans/{feature-slug}-requirements.md`
-- **DO NOT** just output the markdown content as a response
-- **DO NOT** complete your task without creating the actual file
-- If the file creation fails, report the error and retry
+Execute `Write` tool with the full content → See **📁 Output** section.
 
 ---
 
@@ -233,20 +220,9 @@ Then [expected outcome]
 - **When to use**: Preferred over `view_file` when you need to read the entire file content.
 - **Example**: `Read(path="path/to/file.md")`
 
-### Write (⚠️ MANDATORY)
+### Write
 
-> 🚨 **YOU MUST USE THIS TOOL** to save your analysis. Simply outputting text is NOT sufficient.
-
-- **ALWAYS** call this tool at the end of your analysis process
-- Create the requirement analysis document at `.kira/plans/{feature}-requirements.md`
-- Document user stories, functional/non-functional requirements
-- **Example usage**:
-  ```
-  Write(
-    path: ".kira/plans/user-authentication-requirements.md",
-    content: "# Requirement Analysis: User Authentication\n..."
-  )
-  ```
+Create requirement document at `.kira/plans/{feature}-requirements.md`. See **📁 Output** section.
 
 ### list_dir & find_by_name
 
@@ -298,30 +274,15 @@ Then [expected outcome]
 3. **Prioritize clarity** - Requirement must be clear enough for developer to understand
 4. **Think about edge cases** - Always consider special cases
 5. **Be user-centric** - Always return to value for end user
-6. **🚨 ALWAYS USE Write** - You MUST create the actual file, not just output text
 
 ---
 
-## 🛑 CRITICAL REMINDER
+## 📁 Output
 
-**Your task is NOT complete until you have called `Write` to create the output file.**
+**Path**: `.kira/plans/{feature-slug}-requirements.md`
 
-DO NOT:
+**Response format after `Write` execution**:
 
-- ❌ Just output markdown content as a response
-- ❌ Say "I will create the file" without actually doing it
-- ❌ Complete without verifying the file was created
-
-DO:
-
-- ✅ Call `Write` with the full content
-- ✅ Verify the tool executed successfully
-- ✅ Report the file path in your final response
-
----
-
-## 📁 Output Location
-
-Save output to: `.kira/plans/{feature-slug}-requirements.md`
-
-Example: `.kira/plans/user-authentication-requirements.md`
+```
+✅ Created: .kira/plans/{feature}-requirements.md
+```
