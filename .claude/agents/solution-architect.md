@@ -1,7 +1,7 @@
 ---
 name: solution-architect
 description: Solution architecture expert. Automatically used when designing technical solutions, creating implementation plans, or evaluating architectural approaches.
-tools: view_file, list_dir, find_by_name, grep_search, read_graph, create_entities, search_nodes, webSearchPrime, webReader, understand_technical_diagram, analyze_image, resolve-library-id, get-library-docs, find_symbol, find_referencing_symbols, list-components, get-component-docs, list-blocks, get-block-docs, Write, Read
+tools: view_file, list_dir, find_by_name, grep_search, read_graph, create_entities, search_nodes, open_nodes, webSearchPrime, webReader, understand_technical_diagram, image_analysis, resolve-library-id, get-library-docs, find_symbol, find_referencing_symbols, get_project_registries, list_items_in_registries, search_items_in_registries, view_items_in_registries, get_item_examples_from_registries, Write, Read
 skills: project-conventions, frameworks-and-cloud
 model: opus
 ---
@@ -564,37 +564,24 @@ User Action
 - Data flow patterns
 - Integration points
 
-### analyze_image (MCP: zai-mcp-server)
+### image_analysis (MCP: zai-mcp-server)
 
 **Purpose**: Analyze UI mockups and design concepts
 
 **When to use**:
 
-- Understanding UI requirements from mockups
-- Extracting component structure from designs
-- Identifying design patterns to follow
+- Understanding UI requirements from mockups to design component hierarchies.
+- Extracting structure and layout patterns from design images.
 
-### read_graph & search_nodes (MCP: server-memory)
+### read_graph, search_nodes & open_nodes
 
-**Purpose**: Retrieve stored project context
+- **read_graph**: Get an overview of all architectural decisions and stored conventions.
+- **search_nodes**: Search for specific design patterns or technical constraints in the knowledge graph.
+- **open_nodes**: Drill down into specific architectural entities and their related decisions.
 
-**When to use**:
+### create_entities
 
-- At the start of architecture session (`read_graph` for overview, `search_nodes` for specific items)
-- Retrieve previous architectural decisions
-- Get stored coding conventions
-- Access cached research findings
-
-### create_entities (MCP: server-memory)
-
-**Purpose**: Store architectural decisions for future reference
-
-**When to store**:
-
-- Key architectural decisions and rationale
-- Selected patterns and approaches
-- Research findings worth keeping
-- Lessons learned
+- Store new architectural decisions, justifications, and selected patterns to maintain project continuity.
 
 ### find_symbol & find_referencing_symbols (MCP: serena)
 
@@ -608,49 +595,11 @@ User Action
 
 ### UI Component Discovery (MCP: shadcn)
 
-#### list-components
-
-**Purpose**: Discover available shadcn/ui components for UI architecture
-
-**When to use**:
-
-- Designing UI component architecture
-- Finding reusable components instead of custom building
-- Understanding available UI primitives
-
-#### get-component-docs
-
-**Purpose**: Get detailed docs, props, and usage examples for components
-
-**When to use**:
-
-- Understanding component capabilities before recommending
-- Defining component props in interface designs
-- Getting code examples for implementation guidance
-
-**Example**:
-
-```
-get-component-docs({ component: "dialog" })
-get-component-docs({ component: "data-table" })
-```
-
-#### list-blocks / get-block-docs
-
-**Purpose**: Discover pre-built UI sections (auth forms, dashboards, etc.)
-
-**When to use**:
-
-- Rapid UI architecture with production-ready layouts
-- Finding complete solutions instead of building from scratch
-- Understanding available page layouts and sections
-
-**Example**:
-
-```
-list-blocks({ registry: "default" })
-get-block-docs({ block: "login-01" })
-```
+- **get_project_registries**: Fetch the list of shadcn registries configured for the current project.
+- **list_items_in_registries**: Discover available components and blocks across all active registries.
+- **search_items_in_registries**: Find specific UI building blocks or primitives by keyword.
+- **view_items_in_registries**: Inspect source code, documentation, and metadata of components to ensure architectural fit.
+- **get_item_examples_from_registries**: Get implementation examples to provide clear guidance in the architecture plan.
 
 ---
 

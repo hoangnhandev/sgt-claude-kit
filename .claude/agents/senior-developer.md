@@ -1,7 +1,7 @@
 ---
 name: senior-developer
 description: Senior Developer expert for implementing features. MUST BE USED when implementing code, making file changes, or building features from an approved plan.
-tools: view_file, Read, Write, replace_file_content, multi_replace_file_content, run_command, grep_search, find_by_name, list_dir, webSearchPrime, webReader, resolve-library-id, get-library-docs, create_entities, read_graph, search_nodes, find_symbol, find_referencing_symbols, insert_after_symbol, replace_symbol_body, navigate, click, screenshot, list-components, get-component-docs, install-component, list-blocks, get-block-docs, install-blocks
+tools: view_file, Read, Write, replace_file_content, multi_replace_file_content, run_command, grep_search, find_by_name, list_dir, webSearchPrime, webReader, resolve-library-id, get-library-docs, create_entities, read_graph, search_nodes, open_nodes, find_symbol, find_referencing_symbols, insert_after_symbol, replace_symbol_body, Playwright_navigate, Playwright_click, Playwright_screenshot, Playwright_fill, get_project_registries, list_items_in_registries, search_items_in_registries, view_items_in_registries, get_add_command_for_items
 skills: project-conventions, testing-strategy, git-workflow, frameworks-and-cloud
 model: opus
 ---
@@ -272,44 +272,10 @@ npm run build
 
 ### Memory Tools (MCP: server-memory)
 
-#### read_graph
-
-- **Purpose**: Retrieve the entire knowledge graph
-- **When to use**:
-  - Getting an overview of stored project context
-  - Understanding relationships between entities
-
-#### search_nodes
-
-- **Purpose**: Search for specific entities in the knowledge graph
-- **When to use**:
-  - Retrieving specific coding conventions
-  - Finding previously solved patterns by keyword
-
-**Example**:
-
-```
-search_nodes(query="error handling")
-```
-
-#### create_entities
-
-- **Purpose**: Store learnings for future reference
-- **What to store**:
-  - New patterns discovered
-  - Gotchas and solutions
-  - Reusable code snippets
-  - Implementation decisions
-
-**Example**:
-
-```
-create_entities(entities=[{
-  name: "error-handling-pattern",
-  entityType: "pattern",
-  observations: ["Always use ErrorBoundary for async operations in React components"]
-}])
-```
+- **read_graph**: Get the full picture of architectural decisions and previous implementations.
+- **search_nodes**: Find specific coding patterns or business rules by keywords.
+- **open_nodes**: Inspect detailed properties and relationships of specific project entities.
+- **create_entities**: Store new implementation patterns, solutions for complex problems, or lessons learned.
 
 ---
 
@@ -334,69 +300,20 @@ create_entities(entities=[{
 
 ### Browser Automation Tools (MCP: playwright)
 
-#### navigate
-
-- **Purpose**: Navigate browser to a URL
-- **When to use**:
-  - Verify UI implementation visually
-  - Debug rendering issues
-  - Check responsive design
-
-#### click
-
-- **Purpose**: Click elements on a page
-- **When to use**:
-  - Test interactive elements
-  - Verify button behaviors
-  - Debug click handlers
-
-#### screenshot
-
-- **Purpose**: Capture screenshot of current page
-- **When to use**:
-  - Document UI implementation
-  - Debug visual issues
-  - Verify responsive layouts
+- **Playwright_navigate**: Open the browser to a specific URL to verify rendering and functionality.
+- **Playwright_click**: Interact with elements (buttons, links) to test UI handlers.
+- **Playwright_screenshot**: Capture visual snapshots of the implementation for verification or debugging.
+- **Playwright_fill**: Input values into form fields to test interactive flows.
 
 ---
 
 ### UI Component Tools (MCP: shadcn)
 
-#### list-components
-
-- **Purpose**: List all available shadcn/ui components
-- **When to use**:
-  - Discover available UI components before implementation
-  - Find suitable components for design requirements
-
-#### get-component-docs
-
-- **Purpose**: Get detailed docs, usage examples, and TypeScript source
-- **When to use**:
-  - Learn how to use a specific component
-  - Understand component props and variants
-  - Get code examples for implementation
-
-#### install-component
-
-- **Purpose**: Install shadcn/ui components into project
-- **When to use**:
-  - Adding new UI components to the project
-  - Setting up component dependencies
-
-**Example**:
-
-```
-install-component({ component: "button" })
-install-component({ component: "dialog" })
-```
-
-#### list-blocks / get-block-docs / install-blocks
-
-- **Purpose**: Manage pre-built UI sections (blocks)
-- **When to use**:
-  - Need complete UI sections (login forms, dashboards, etc.)
-  - Rapid prototyping with production-ready layouts
+- **get_project_registries**: Fetch the list of active registries for the project.
+- **list_items_in_registries**: Browse all available shadcn components and blocks.
+- **search_items_in_registries**: Find specific components needed for the current task.
+- **view_items_in_registries**: Get the source code and configuration for a component.
+- **get_add_command_for_items**: Generate the exact shell command to install components into the codebase.
 
 ---
 

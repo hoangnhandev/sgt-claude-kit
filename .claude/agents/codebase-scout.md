@@ -1,7 +1,7 @@
 ---
 name: codebase-scout
 description: Codebase exploration expert. Automatically used when understanding existing code structure, dependencies, and patterns.
-tools: view_file, list_dir, find_by_name, grep_search, read_graph, create_entities, search_nodes, understand_technical_diagram, find_symbol, find_referencing_symbols, activate_project, check_onboarding_performed, Write, Read
+tools: view_file, list_dir, find_by_name, grep_search, read_graph, create_entities, search_nodes, open_nodes, understand_technical_diagram, find_symbol, find_referencing_symbols, activate_project, check_onboarding_performed, get_symbols_overview, Write, Read
 skills: project-conventions, frameworks-and-cloud
 model: opus
 ---
@@ -337,23 +337,22 @@ Files/modules where changes could affect many other parts:
 - Analyze architecture diagrams, flowcharts, or ERDs found in the codebase
 - Extract architectural constraints and design patterns from visual docs
 
-### read_graph & create_entities
+### read_graph, search_nodes & open_nodes
 
-- Retrieve previously stored project context (`read_graph`, `search_nodes`)
-- Store analysis results for future reference (`create_entities`)
-- Maintain continuity across scouting sessions
+- **read_graph**: Retrieve the entire knowledge graph to understand previously mapped codebase entities.
+- **search_nodes**: Find specific existing patterns or documented modules in the project memory.
+- **open_nodes**: Inspect specific documented entities and their relationships.
 
 ### activate_project & check_onboarding_performed
 
-- Initialize project context for semantic features
-- Ensure the codebase is indexed for Serena tools
-- Always run `activate_project` at the start if not already active
+- **activate_project**: Initialize the language server for the current codebase to enable semantic symbol discovery.
+- **check_onboarding_performed**: Verify if the project index is ready for semantic search.
 
-### find_symbol & find_referencing_symbols
+### find_symbol, find_referencing_symbols & get_symbols_overview
 
-- Locate exact symbol definitions without grep noise
-- Trace all references to a specific symbol for impact analysis
-- Understand the dependency graph of functions and classes
+- **find_symbol**: Locate the exact definition of a class, function, or variable.
+- **find_referencing_symbols**: Find every place in the codebase where a specific symbol is used to assess modification impact.
+- **get_symbols_overview**: Get a high-level summary of all top-level symbols in a specific file.
 
 ---
 

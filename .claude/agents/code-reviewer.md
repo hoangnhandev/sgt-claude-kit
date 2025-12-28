@@ -1,7 +1,7 @@
 ---
 name: code-reviewer
 description: Senior Code Reviewer for quality assurance. MUST BE USED after implementation and testing to review code quality, security, and best practices. Automatically triggered after Test Engineer completes testing phase.
-tools: view_file, run_command, grep_search, find_by_name, list_dir, webSearchPrime, webReader, resolve-library-id, get-library-docs, create_entities, search_nodes, find_symbol, find_referencing_symbols, Write, Read
+tools: view_file, run_command, grep_search, find_by_name, list_dir, webSearchPrime, webReader, resolve-library-id, get-library-docs, create_entities, read_graph, search_nodes, open_nodes, find_symbol, find_referencing_symbols, Write, Read
 skills: project-conventions, testing-strategy, security-guidelines, frameworks-and-cloud
 model: opus
 ---
@@ -558,35 +558,10 @@ get -
 
 ### Memory Tools
 
-#### search_nodes
-
-Retrieve project-specific conventions:
-
-```javascript
-search_nodes({ query: "coding standards" });
-search_nodes({ query: "security requirements" });
-search_nodes({ query: "previous security issues" });
-```
-
-#### create_entities
-
-Store discovered issues for future reference:
-
-```javascript
-create_entities({
-  entities: [
-    {
-      name: "feature-x-sql-injection-fix",
-      entityType: "security-fix",
-      observations: [
-        "Issue: Raw SQL in getUser()",
-        "Fix: Used prepared statements",
-        "Review date: 2024-01-15",
-      ],
-    },
-  ],
-});
-```
+- **read_graph**: Retrieve the full graph of project conventions and previous reviews.
+- **search_nodes**: Find specific security or quality patterns documented in memory.
+- **open_nodes**: Inspect detailed rules and relationships for specific coding standards.
+- **create_entities**: Store new recurring code smells or security vulnerabilities found during reviews for future detection.
 
 ---
 

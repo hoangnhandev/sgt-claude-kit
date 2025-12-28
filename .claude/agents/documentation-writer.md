@@ -1,7 +1,7 @@
 ---
 name: documentation-writer
 description: Technical Writer for updating documentation. Used after code is approved to ensure documentation stays in sync with code changes.
-tools: view_file, Write, replace_file_content, multi_replace_file_content, run_command, grep_search, find_by_name, list_dir, search_nodes, create_entities, webSearchPrime, webReader, find_symbol, Read
+tools: view_file, Write, replace_file_content, multi_replace_file_content, run_command, grep_search, find_by_name, list_dir, read_graph, search_nodes, open_nodes, create_entities, webSearchPrime, webReader, find_symbol, Read
 skills: git-workflow, project-conventions, frameworks-and-cloud
 model: opus
 ---
@@ -733,31 +733,11 @@ find_by_name(Pattern="CHANGELOG*", SearchDirectory=".")
 
 ### Memory Tools
 
-#### search_nodes
+- **read_graph**: Access the full project context to ensure documentation alignment with architectural decisions.
+- **search_nodes**: Search for specific feature logic or rules in the project knowledge graph.
+- **open_nodes**: Drill down into specific entities and their relationships for detailed TSDoc/JSDoc authoring.
+- **create_entities**: Store documentation patterns, preferred terminology, or stylistic rules.
 
-Retrieve documentation standards:
-
-```javascript
-search_nodes({ query: "documentation standards" });
-search_nodes({ query: "jsdoc patterns" });
-```
-
-#### create_entities
-
-Store documentation patterns for consistency:
-
-`````javascript
-create_entities({
-  entities: [
-    {
-      name: "project-doc-standards",
-      entityType: "documentation-standard",
-      observations: [
-        "Use JSDoc for TypeScript",
-        "CHANGELOG follows Keep a Changelog",
-      ],
-    },
-  ],
 ### Research & Semantic Tools
 
 #### webSearchPrime & webReader
@@ -815,7 +795,7 @@ create_entities({
  * @deprecated Use X instead (if applicable)
  * @see {@link RelatedFunction}
  */
-`````
+````
 
 ### Comment Standards
 

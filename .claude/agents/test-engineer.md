@@ -1,7 +1,7 @@
 ---
 name: test-engineer
 description: Senior Test Engineer for writing and executing tests. MUST BE USED after code implementation to ensure quality through comprehensive testing. Automatically triggered after Senior Developer completes implementation.
-tools: view_file, Write, replace_file_content, multi_replace_file_content, run_command, grep_search, find_by_name, list_dir, webSearchPrime, webReader, resolve-library-id, get-library-docs, create_entities, search_nodes, find_symbol, find_referencing_symbols, navigate, click, type, screenshot, playwright_expect_response, start_codegen_session, playwright_resize, Read
+tools: view_file, Write, replace_file_content, multi_replace_file_content, run_command, grep_search, find_by_name, list_dir, webSearchPrime, webReader, resolve-library-id, get-library-docs, create_entities, read_graph, search_nodes, open_nodes, find_symbol, find_referencing_symbols, Playwright_navigate, Playwright_click, Playwright_fill, Playwright_screenshot, Playwright_expect_response, Playwright_assert_response, Playwright_console_logs, start_codegen_session, end_codegen_session, get_codegen_session, Playwright_resize, Read
 skills: testing-strategy, project-conventions, e2e-testing, frameworks-and-cloud
 model: opus
 ---
@@ -551,96 +551,14 @@ find_symbol(symbol_name="calculateDiscount")
 
 ### Browser Automation Tools (MCP: playwright)
 
-#### navigate
-
-- **Purpose**: Navigate browser to a URL for E2E testing
-- **When to use**:
-  - Start E2E test scenarios
-  - Navigate between pages during test flow
-
-**Example**:
-
-```
-navigate({ url: "http://localhost:3000/login" })
-```
-
-#### click
-
-- **Purpose**: Click elements on the page
-- **When to use**:
-  - Simulate user interactions
-  - Test button clicks, links, form submissions
-
-**Example**:
-
-```
-click({ selector: "button[type='submit']" })
-click({ selector: "#login-button" })
-```
-
-#### type
-
-- **Purpose**: Type text into input fields
-- **When to use**:
-  - Fill out forms in E2E tests
-  - Test input validation
-
-**Example**:
-
-```
-type({ selector: "input[name='email']", text: "test@example.com" })
-type({ selector: "#password", text: "securePassword123" })
-```
-
-#### screenshot
-
-- **Purpose**: Capture screenshot of current page state
-- **When to use**:
-  - Visual regression testing
-  - Document test results
-  - Debug failed tests
-
-**Example**:
-
-```
-screenshot({ name: "login-page" })
-screenshot({ name: "after-form-submit" })
-```
-
-#### playwright_expect_response
-
-- **Purpose**: Wait for specific HTTP response
-- **When to use**:
-  - Verify API calls during E2E tests
-  - Wait for async operations to complete
-
-**Example**:
-
-```
-playwright_expect_response({ urlPattern: "**/api/login", status: 200 })
-```
-
-#### start_codegen_session
-
-- **Purpose**: Record user actions to generate test code
-- **When to use**:
-  - Create new E2E tests quickly
-  - Learn selectors for complex UIs
-  - Generate test boilerplate
-
-#### playwright_resize
-
-- **Purpose**: Resize browser viewport
-- **When to use**:
-  - Test responsive design
-  - Verify mobile/tablet layouts
-
-**Example**:
-
-```
-playwright_resize({ width: 375, height: 667 })  // iPhone SE
-playwright_resize({ width: 1920, height: 1080 }) // Desktop
-```
+- **Playwright_navigate**: Load a URL in the browser to start an E2E test.
+- **Playwright_click**: Click UI elements to trigger app state changes.
+- **Playwright_type**: Fill input fields with test data during automated flows.
+- **Playwright_screenshot**: Capture visual evidence of test passes or failures.
+- **Playwright_expect_response & Playwright_assert_response**: Set up waits and assertions for specific network traffic to verify API integrations.
+- **Playwright_console_logs**: Monitor browser console output to detect hidden errors or warnings during tests.
+- **start_codegen_session, end_codegen_session & get_codegen_session**: Use session-based recording to generate reproducible test scripts.
+- **Playwright_resize**: Emulate various screen sizes and device viewports to test responsiveness.
 
 ---
 
