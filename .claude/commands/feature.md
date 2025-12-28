@@ -1,10 +1,10 @@
 ---
-description: Full feature development workflow - from requirement analysis to implementation plan
+description: Full feature development workflow - from requirement analysis to implementation and documentation
 ---
 
 # /feature - Feature Development Workflow
 
-You are the Main Agent coordinating the development workflow for new features.
+You are the Main Agent coordinating the complete development workflow for new features.
 
 ---
 
@@ -23,7 +23,9 @@ Analyze `$ARGUMENTS` to determine input type:
 
 ## 🔄 Execution Flow
 
-### Phase 1: Requirement Analysis
+### Phase 1: Analysis
+
+#### Step 1.1: Requirement Analysis
 
 **Subagent**: `requirement-analyst`
 
@@ -34,7 +36,7 @@ Analyze `$ARGUMENTS` to determine input type:
 3. Identify scope and constraints
 4. **🚨 MUST use `Write` tool** to save output
 
-**Subagent Task** (copy this exact prompt when calling):
+**Subagent Task**:
 
 ```
 🎯 TASK: Analyze the feature requirement and create a requirements document.
@@ -53,7 +55,7 @@ You MUST use the `Write` tool to create: .kira/plans/{feature-slug}-requirements
 
 ---
 
-### Phase 2: Codebase Analysis
+#### Step 1.2: Codebase Analysis
 
 **Subagent**: `codebase-scout`
 
@@ -64,7 +66,7 @@ You MUST use the `Write` tool to create: .kira/plans/{feature-slug}-requirements
 3. Assess impact
 4. **🚨 MUST use `Write` tool** to save output
 
-**Subagent Task** (copy this exact prompt when calling):
+**Subagent Task**:
 
 ```
 🎯 TASK: Analyze the codebase to understand context for the feature implementation.
@@ -81,9 +83,13 @@ You MUST use the `Write` tool to create: .kira/plans/{feature-slug}-codebase-ana
 4. After creating the file, confirm: "✅ File created: [path]"
 ```
 
+**🪝 Hook**: Log checkpoint after Phase 1 completion.
+
 ---
 
-### Phase 3: Solution Architecture
+### Phase 2: Planning
+
+#### Step 2.1: Solution Architecture
 
 **Subagent**: `solution-architect`
 
@@ -95,7 +101,7 @@ You MUST use the `Write` tool to create: .kira/plans/{feature-slug}-codebase-ana
 4. Assess **Complexity**: Simple / Medium / Complex / Critical
 5. **🚨 MUST use `Write` tool** to save output
 
-**Subagent Task** (copy this exact prompt when calling):
+**Subagent Task**:
 
 ```
 🎯 TASK: Design the solution architecture and create an implementation plan.
@@ -111,16 +117,19 @@ You MUST use the `Write` tool to create: .kira/plans/{feature-slug}-architecture
 1. You MUST call `Write` tool to create the output file
 2. DO NOT just output markdown content as a response
 3. Your task is NOT complete until the file is created
-4. After creating the file, confirm: "✅ File created: [path]"
+4. MUST include "Complexity" field: Simple / Medium / Complex / Critical
+5. After creating the file, confirm: "✅ File created: [path]"
 ```
+
+**🪝 Hook**: Notify user about plan completion.
 
 ---
 
-## 🚦 DECISION GATE: Auto-Approve vs User Review
+### 🚦 DECISION GATE: Auto-Approve vs User Review
 
-> ⚠️ **CRITICAL**: This is a mandatory checkpoint after Phase 3.
+> ⚠️ **CRITICAL**: This is a mandatory checkpoint after Phase 2.
 
-### Classification Rules
+#### Classification Rules
 
 After `solution-architect` completes, check the **Complexity** field in the output:
 
@@ -131,7 +140,7 @@ After `solution-architect` completes, check the **Complexity** field in the outp
 | **Complex**  | ⏸️ USER REVIEW + Discussion | Multiple trade-offs, requires discussion  |
 | **Critical** | 🛑 MANDATORY REVIEW         | Core impact, mandatory approval           |
 
-### Complexity Evaluation Criteria
+#### Complexity Evaluation Criteria
 
 **Simple** (Auto-approve):
 
@@ -166,16 +175,15 @@ After `solution-architect` completes, check the **Complexity** field in the outp
 
 ---
 
-## 🔀 Branching Logic
+### 🔀 Branching Logic
 
-### Branch A: AUTO-APPROVE (Complexity = Simple)
+#### Branch A: AUTO-APPROVE (Complexity = Simple)
 
 ```markdown
 ✅ Assessed Complexity: **Simple**
 📝 Reason for auto-approval: [Summary from architecture document]
 
-➡️ Automatically moving to Phase 4: Implementation
-Call subagent: senior-developer
+➡️ Automatically moving to Phase 3: Implementation
 ```
 
 **Action**:
@@ -186,11 +194,11 @@ Call subagent: senior-developer
    [TIMESTAMP] 📋 Reason: {specific reason}
    [TIMESTAMP] ➡️ Proceeding to Implementation Phase
    ```
-2. **CONTINUE** to call `senior-developer` subagent
+2. **CONTINUE** to Phase 3: Implementation
 
 ---
 
-### Branch B: USER REVIEW (Complexity = Medium/Complex/Critical)
+#### Branch B: USER REVIEW (Complexity = Medium/Complex/Critical)
 
 ```markdown
 ⏸️ **CHECKPOINT: Confirmation needed from you**
@@ -245,24 +253,24 @@ Call subagent: senior-developer
 
 ---
 
-## 📝 Handling User Response
+### 📝 Handling User Response
 
-### Response: "Approve" / "Agree" / "OK" / "Continue"
+#### Response: "Approve" / "Agree" / "OK" / "Continue"
 
 ```markdown
 ✅ Approval received.
 📝 Note: User approved plan at [TIMESTAMP]
-➡️ Moving to Phase 4: Implementation
+➡️ Moving to Phase 3: Implementation
 ```
 
 **Action**:
 
 - Log approval
-- Call `senior-developer` subagent
+- Continue to Phase 3: Implementation
 
 ---
 
-### Response: "Modify" / "Adjust" / "Edit"
+#### Response: "Modify" / "Adjust" / "Edit"
 
 ```markdown
 📝 What would you like to adjust in the plan?
@@ -282,7 +290,7 @@ Please describe:
 
 ---
 
-### Response: "Reject" / "Cancel"
+#### Response: "Reject" / "Cancel"
 
 ```markdown
 🛑 Workflow cancelled.
@@ -301,7 +309,7 @@ Do you want to:
 
 ---
 
-### Response: "Discuss" / "Discussion"
+#### Response: "Discuss" / "Discussion"
 
 ```markdown
 💬 What point would you like to discuss?
@@ -324,29 +332,403 @@ Please ask your question or state your concern.
 
 ---
 
-## ⛔ STOP POINT
+## Phase 3: Implementation
 
-> **IMPORTANT**: Workflow STOPS here.
->
-> Phase 4 (Implementation) will be triggered separately when:
->
-> 1. User approves in the Decision Gate, OR
-> 2. User calls the `/implement` command separately
+### Step 3.1: Code Implementation
+
+**Subagent**: `senior-developer`
+
+**Steps**:
+
+1. Read and follow the architecture plan
+2. Implement code changes step by step
+3. Apply project conventions via Skills
+4. Handle errors and edge cases
+5. Run self-validation (lint, type-check, build)
+6. **🚨 MUST use `Write` tool** to save output
+
+**Subagent Task**:
+
+```
+🎯 TASK: Implement the feature according to the architecture plan.
+
+📄 INPUT:
+- Architecture Plan: .kira/plans/{feature-slug}-architecture.md
+- Codebase Analysis: .kira/plans/{feature-slug}-codebase-analysis.md
+
+📁 OUTPUT FILE (MANDATORY):
+You MUST use the `Write` tool to create: .kira/plans/{feature-slug}-implementation-report.md
+
+⚠️ CRITICAL INSTRUCTIONS:
+1. Follow the architecture plan exactly
+2. Apply loaded Skills: project-conventions, testing-strategy, git-workflow
+3. Run validation commands after implementation (lint, type-check, build)
+4. You MUST call `Write` tool to create the output file
+5. After creating the file, confirm: "✅ File created: [path]"
+```
+
+**🪝 Hook**: Auto-format code after each file. Run linter after implementation.
 
 ---
 
-## 📁 Output Files
+### Step 3.2: Testing
 
-After completing Phases 1-3, the following files will be available:
+**Subagent**: `test-engineer`
+
+**Steps**:
+
+1. Analyze implementation changes
+2. Write unit tests for new code
+3. Write integration tests if needed
+4. Run test suite and verify coverage
+5. **🚨 Quality Gate**: Block if tests fail or coverage < 80%
+6. **🚨 MUST use `Write` tool** to save output
+
+**Subagent Task**:
+
+```
+🎯 TASK: Write and execute tests for the implemented feature.
+
+📄 INPUT:
+- Implementation Report: .kira/plans/{feature-slug}-implementation-report.md
+- Architecture Plan: .kira/plans/{feature-slug}-architecture.md
+
+📁 OUTPUT FILE (MANDATORY):
+You MUST use the `Write` tool to create: .kira/plans/{feature-slug}-test-report.md
+
+⚠️ CRITICAL INSTRUCTIONS:
+1. Write comprehensive unit tests for all new code
+2. Achieve minimum 80% code coverage
+3. Test both happy paths and error cases
+4. Run test suite with coverage: npm run test -- --coverage
+5. QUALITY GATE: If tests fail or coverage < 80%, report and BLOCK workflow
+6. You MUST call `Write` tool to create the output file
+7. After creating the file, confirm: "✅ File created: [path]"
+```
+
+**🪝 Hook**: Block workflow if tests fail.
+
+**Quality Gate Check**:
+
+```markdown
+## 🚦 Test Quality Gate
+
+| Check           | Result | Action         |
+| --------------- | ------ | -------------- |
+| All tests pass  | ✅/❌  | Continue/BLOCK |
+| Coverage >= 80% | ✅/❌  | Continue/BLOCK |
+```
+
+If Quality Gate **FAILED**:
+
+```markdown
+🚫 **QUALITY GATE BLOCKED**
+
+**Reason**: [Tests failing / Coverage insufficient]
+
+**Action Required**:
+
+- Senior Developer must fix issues
+- Re-run tests after fixes
+
+**Next Step**: Loop back to Step 3.1 with fix request
+```
+
+---
+
+## Phase 4: Quality Assurance
+
+### Step 4.1: Code Review
+
+**Subagent**: `code-reviewer`
+
+**Steps**:
+
+1. Review all code changes (git diff)
+2. Check security vulnerabilities
+3. Verify best practices compliance
+4. Check performance issues
+5. Classify issues: CRITICAL / WARNING / INFO
+6. **🚨 MUST use `Write` tool** to save output
+
+**Subagent Task**:
+
+```
+🎯 TASK: Review the implemented code for quality, security, and best practices.
+
+📄 INPUT:
+- Implementation Report: .kira/plans/{feature-slug}-implementation-report.md
+- Test Report: .kira/plans/{feature-slug}-test-report.md
+- Architecture Plan: .kira/plans/{feature-slug}-architecture.md
+
+📁 OUTPUT FILE (MANDATORY):
+You MUST use the `Write` tool to create: .kira/reviews/{feature-slug}-review.md
+
+⚠️ CRITICAL INSTRUCTIONS:
+1. Review all code changes using git diff
+2. Check for security vulnerabilities (SQL injection, XSS, hardcoded secrets, etc.)
+3. Verify best practices compliance
+4. Classify issues: 🔴 CRITICAL / 🟡 WARNING / 🔵 INFO
+5. QUALITY GATE: If CRITICAL issues found, report and BLOCK workflow
+6. You MUST call `Write` tool to create the output file
+7. After creating the file, confirm: "✅ File created: [path]"
+```
+
+**🪝 Hook**: Block if CRITICAL issues found.
+
+---
+
+### Step 4.2: Review Loop
+
+**Quality Gate Check**:
+
+```markdown
+## 🚦 Review Quality Gate
+
+| Check               | Result | Action         |
+| ------------------- | ------ | -------------- |
+| No CRITICAL issues  | ✅/❌  | Continue/BLOCK |
+| Security scan clean | ✅/❌  | Continue/BLOCK |
+```
+
+#### Branch: PASS (No CRITICAL Issues)
+
+```markdown
+✅ **CODE REVIEW PASSED**
+
+- Critical Issues: 0
+- Warnings: X (addressed/noted)
+- Suggestions: X
+
+➡️ Moving to Phase 5: Finalization
+```
+
+**Action**: Continue to Phase 5
+
+---
+
+#### Branch: ISSUES FOUND (CRITICAL Issues Exist)
+
+```markdown
+� **CODE REVIEW BLOCKED**
+
+**CRITICAL Issues Found**: X
+
+### Issues to Fix:
+
+1. 🔴 [Issue 1]: [File:Line] - [Description]
+2. 🔴 [Issue 2]: [File:Line] - [Description]
+
+**Action Required**:
+
+- Senior Developer must fix CRITICAL issues
+- Re-request code review after fixes
+```
+
+**Action**:
+
+1. Determine fix type:
+   - **AUTO-FIX** (Minor issues): Call `senior-developer` with fix instructions
+   - **MANUAL FIX** (Major issues): Request user intervention
+2. After fixes, loop back to Step 4.1 for RE-REVIEW
+3. Repeat until all CRITICAL issues resolved
+
+---
+
+## Phase 5: Finalization
+
+### Step 5.1: Documentation
+
+**Subagent**: `documentation-writer`
+
+**Steps**:
+
+1. Update relevant documentation (README, API docs)
+2. Add inline code comments where needed
+3. Update CHANGELOG if applicable
+4. **🚨 MUST use `Write` tool** to save output
+
+**Subagent Task**:
+
+```
+🎯 TASK: Update documentation for the completed feature.
+
+📄 INPUT:
+- Implementation Report: .kira/plans/{feature-slug}-implementation-report.md
+- Test Report: .kira/plans/{feature-slug}-test-report.md
+- Review Report: .kira/reviews/{feature-slug}-review.md
+
+📁 OUTPUT FILES (MANDATORY):
+1. Update relevant project docs (README.md, CHANGELOG.md, etc.)
+2. You MUST use the `Write` tool to create: .kira/plans/plan-{feature-slug}.md
+
+⚠️ CRITICAL INSTRUCTIONS:
+1. Update README if new features/APIs are added
+2. Add CHANGELOG entry following Keep a Changelog format
+3. Add JSDoc/TSDoc for new public APIs
+4. You MUST call `Write` tool to create the plan summary file
+5. After creating files, confirm: "✅ Files created: [paths]"
+```
+
+**🪝 Hook**: Validate markdown syntax.
+
+---
+
+### Step 5.2: Git Operations
+
+**Executed by**: Main Agent
+
+**Steps**:
+
+1. Stage all changes:
+
+   ```bash
+   git add -A
+   ```
+
+2. Create commit with conventional message:
+
+   ```bash
+   git commit -m "feat({scope}): {description}"
+   ```
+
+3. **[GitHub Mode Only]** Create PR with description:
+   ```bash
+   gh pr create --title "feat({scope}): {description}" --body-file .kira/plans/{feature-slug}-pr-description.md
+   ```
+
+**Commit Message Format** (Conventional Commits):
+
+```
+<type>(<scope>): <description>
+
+<body - optional>
+
+Closes #<issue-number>
+```
+
+Types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`
+
+---
+
+### Step 5.3: Output Summary
+
+**Executed by**: Main Agent or `documentation-writer`
+
+Generate comprehensive session summary:
+
+**Files to Create/Update**:
 
 ```
 .kira/
 ├── plans/
-│   ├── {feature-slug}-requirements.md      # Phase 1 output
-│   ├── {feature-slug}-codebase-analysis.md # Phase 2 output
-│   └── {feature-slug}-architecture.md      # Phase 3 output
+│   ├── {feature-slug}-requirements.md      # Phase 1.1 output
+│   ├── {feature-slug}-codebase-analysis.md # Phase 1.2 output
+│   ├── {feature-slug}-architecture.md      # Phase 2 output
+│   ├── {feature-slug}-implementation-report.md # Phase 3.1 output
+│   ├── {feature-slug}-test-report.md       # Phase 3.2 output
+│   └── plan-{feature-slug}.md              # Final plan summary
+├── reviews/
+│   └── {feature-slug}-review.md            # Phase 4 output
 └── logs/
-    └── current-session.log                  # Workflow log
+    └── session-{timestamp}.md              # Session log
+```
+
+**Session Log Template** (.kira/logs/session-{timestamp}.md):
+
+```markdown
+# Development Session: {Feature Name}
+
+**Date**: YYYY-MM-DD HH:MM
+**Status**: ✅ Completed
+
+---
+
+## Workflow Summary
+
+| Phase          | Agent                | Status | Duration |
+| -------------- | -------------------- | ------ | -------- |
+| Analysis       | Requirement Analyst  | ✅     | Xm       |
+| Analysis       | Codebase Scout       | ✅     | Xm       |
+| Planning       | Solution Architect   | ✅     | Xm       |
+| Implementation | Senior Developer     | ✅     | Xm       |
+| Testing        | Test Engineer        | ✅     | Xm       |
+| Review         | Code Reviewer        | ✅     | Xm       |
+| Documentation  | Documentation Writer | ✅     | Xm       |
+
+---
+
+## Artifacts Generated
+
+- `.kira/plans/{feature-slug}-requirements.md`
+- `.kira/plans/{feature-slug}-codebase-analysis.md`
+- `.kira/plans/{feature-slug}-architecture.md`
+- `.kira/plans/{feature-slug}-implementation-report.md`
+- `.kira/plans/{feature-slug}-test-report.md`
+- `.kira/reviews/{feature-slug}-review.md`
+- `.kira/plans/plan-{feature-slug}.md`
+
+---
+
+## Git Summary
+
+**Commit**: `{commit-hash}` - {commit-message}
+**Branch**: feature/{feature-slug}
+
+---
+
+## Quality Metrics
+
+| Metric          | Value | Target | Status |
+| --------------- | ----- | ------ | ------ |
+| Test Coverage   | X%    | 80%    | ✅     |
+| Critical Issues | 0     | 0      | ✅     |
+| Documentation   | Done  | Done   | ✅     |
+
+---
+
+_Session completed at YYYY-MM-DD HH:MM_
+```
+
+**🪝 Hook**: Log completion.
+
+---
+
+## 🎉 Workflow Complete
+
+Display final summary to user:
+
+```markdown
+## ✅ Feature Development Complete!
+
+### 📊 Summary
+
+| Phase          | Status |
+| -------------- | ------ |
+| Analysis       | ✅     |
+| Planning       | ✅     |
+| Implementation | ✅     |
+| Testing        | ✅     |
+| Review         | ✅     |
+| Documentation  | ✅     |
+
+### 📁 Generated Files
+
+- Plan: `.kira/plans/plan-{feature-slug}.md`
+- Review: `.kira/reviews/{feature-slug}-review.md`
+- Session Log: `.kira/logs/session-{timestamp}.md`
+
+### 🔗 Git
+
+- Commit: `{commit-hash}`
+- Branch: `feature/{feature-slug}`
+- [GitHub Mode] PR: #{pr-number}
+
+### 🎯 Next Steps
+
+1. Review the generated documentation
+2. [GitHub Mode] Merge the PR when ready
+3. [Local Mode] Push changes: `git push origin feature/{feature-slug}`
 ```
 
 ---
@@ -358,3 +740,4 @@ Process input: **$ARGUMENTS**
 1. Determine input type
 2. Create feature-slug from input
 3. Start Phase 1 with `requirement-analyst`
+4. Continue through all phases until completion
