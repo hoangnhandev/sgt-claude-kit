@@ -371,7 +371,111 @@ You MUST use the `Write` tool to create: .kira/plans/{feature-slug}-implementati
 
 ---
 
-### Step 3.2: Testing
+### 🚦 CHECKPOINT: Testing Decision
+
+> ⚠️ **CHECKPOINT**: After implementation, ask user about testing.
+
+Display to user:
+
+```markdown
+⏸️ **CHECKPOINT: Testing Phase**
+
+✅ Implementation completed by Senior Developer.
+
+## 🧪 Do you want to run the Testing phase?
+
+The Test Engineer will:
+
+- Write unit tests for new code
+- Write integration tests if needed
+- Verify code coverage >= 80%
+- Report test results
+
+---
+
+## 🎯 Options:
+
+1. **Yes / Run Tests** - Execute Test Engineer (recommended)
+2. **Skip / No** - Skip testing and go directly to Code Review
+3. **Manual** - I will write tests myself, then continue
+
+⏳ _Waiting for your response..._
+```
+
+**Action**:
+
+1. Log to `.kira/logs/current-session.log`:
+   ```
+   [TIMESTAMP] ⏸️ CHECKPOINT: Waiting for testing decision
+   [TIMESTAMP] 📄 Implementation: .kira/plans/{feature-slug}-implementation-report.md
+   ```
+2. **STOP** and display the above message
+3. **WAIT** for user input
+
+---
+
+### 📝 Handling Testing Decision
+
+#### Response: "Yes" / "Run Tests" / "Test" / "OK"
+
+```markdown
+✅ Running Test Engineer...
+➡️ Proceeding to Step 3.2: Testing
+```
+
+**Action**: Continue to Step 3.2 (Test Engineer)
+
+---
+
+#### Response: "Skip" / "No" / "Skip Tests"
+
+```markdown
+⏭️ Skipping Testing phase.
+📝 Note: Tests skipped by user at [TIMESTAMP]
+⚠️ Warning: Code will be reviewed without automated test verification.
+➡️ Moving directly to Phase 4: Code Review
+```
+
+**Action**:
+
+- Log skip decision
+- Create minimal test report noting tests were skipped:
+
+  ```markdown
+  # Test Report: {Feature Name}
+
+  **Status**: ⏭️ SKIPPED BY USER
+  **Date**: [TIMESTAMP]
+  **Reason**: User chose to skip automated testing
+
+  ## Note
+
+  Code review will proceed without automated test verification.
+  ```
+
+- Save to `.kira/plans/{feature-slug}-test-report.md`
+- **SKIP** to Phase 4: Code Review
+
+---
+
+#### Response: "Manual" / "I'll write tests"
+
+```markdown
+📝 Manual testing selected.
+
+Please write your tests and let me know when you're ready to continue.
+
+When done, type: **"Continue"** or **"Done"**
+```
+
+**Action**:
+
+- Wait for user to complete manual testing
+- When user confirms, continue to Phase 4: Code Review
+
+---
+
+### Step 3.2: Testing (If Not Skipped)
 
 **Subagent**: `test-engineer`
 
