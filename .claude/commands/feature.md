@@ -73,14 +73,19 @@ You MUST use the `Write` tool to create: .kira/plans/{feature-slug}-requirements
 
 📄 INPUT: Read the requirement document from: .kira/plans/{feature-slug}-requirements.md
 
+📚 SKILLS TO APPLY (READ THESE FIRST):
+- Read `.claude/skills/project-conventions/SKILL.md` - Apply coding conventions strictly
+- Read `.claude/skills/frameworks-and-cloud/SKILL.md` - Understand framework patterns
+
 📁 OUTPUT FILE (MANDATORY):
 You MUST use the `Write` tool to create: .kira/plans/{feature-slug}-codebase-analysis.md
 
 ⚠️ CRITICAL INSTRUCTIONS:
-1. You MUST call `Write` tool to create the output file
-2. DO NOT just output markdown content as a response
-3. Your task is NOT complete until the file is created
-4. After creating the file, confirm: "✅ File created: [path]"
+1. Read and apply all skills listed above BEFORE analyzing
+2. You MUST call `Write` tool to create the output file
+3. DO NOT just output markdown content as a response
+4. Your task is NOT complete until the file is created
+5. After creating the file, confirm: "✅ File created: [path]"
 ```
 
 **🪝 Hook**: Log checkpoint after Phase 1 completion.
@@ -110,15 +115,20 @@ You MUST use the `Write` tool to create: .kira/plans/{feature-slug}-codebase-ana
 - Requirements: .kira/plans/{feature-slug}-requirements.md
 - Codebase Analysis: .kira/plans/{feature-slug}-codebase-analysis.md
 
+📚 SKILLS TO APPLY (READ THESE FIRST):
+- Read `.claude/skills/project-conventions/SKILL.md` - Ensure architecture aligns with coding standards
+- Read `.claude/skills/frameworks-and-cloud/SKILL.md` - Apply framework best practices
+
 📁 OUTPUT FILE (MANDATORY):
 You MUST use the `Write` tool to create: .kira/plans/{feature-slug}-architecture.md
 
 ⚠️ CRITICAL INSTRUCTIONS:
-1. You MUST call `Write` tool to create the output file
-2. DO NOT just output markdown content as a response
-3. Your task is NOT complete until the file is created
-4. MUST include "Complexity" field: Simple / Medium / Complex / Critical
-5. After creating the file, confirm: "✅ File created: [path]"
+1. Read and apply all skills listed above BEFORE designing
+2. You MUST call `Write` tool to create the output file
+3. DO NOT just output markdown content as a response
+4. Your task is NOT complete until the file is created
+5. MUST include "Complexity" field: Simple / Medium / Complex / Critical
+6. After creating the file, confirm: "✅ File created: [path]"
 ```
 
 **🪝 Hook**: Notify user about plan completion.
@@ -356,12 +366,18 @@ Please ask your question or state your concern.
 - Architecture Plan: .kira/plans/{feature-slug}-architecture.md
 - Codebase Analysis: .kira/plans/{feature-slug}-codebase-analysis.md
 
+📚 SKILLS TO APPLY (READ THESE FIRST):
+- Read `.claude/skills/project-conventions/SKILL.md` - Follow naming, formatting, and code patterns
+- Read `.claude/skills/testing-strategy/SKILL.md` - Understand test patterns for testable code
+- Read `.claude/skills/git-workflow/SKILL.md` - Follow commit message conventions
+- Read `.claude/skills/frameworks-and-cloud/SKILL.md` - Apply framework-specific patterns
+
 📁 OUTPUT FILE (MANDATORY):
 You MUST use the `Write` tool to create: .kira/plans/{feature-slug}-implementation-report.md
 
 ⚠️ CRITICAL INSTRUCTIONS:
-1. Follow the architecture plan exactly
-2. Apply loaded Skills: project-conventions, testing-strategy, git-workflow
+1. Read and apply all skills listed above BEFORE implementing
+2. Follow the architecture plan exactly
 3. Run validation commands after implementation (lint, type-check, build)
 4. You MUST call `Write` tool to create the output file
 5. After creating the file, confirm: "✅ File created: [path]"
@@ -497,17 +513,24 @@ When done, type: **"Continue"** or **"Done"**
 - Implementation Report: .kira/plans/{feature-slug}-implementation-report.md
 - Architecture Plan: .kira/plans/{feature-slug}-architecture.md
 
+📚 SKILLS TO APPLY (READ THESE FIRST):
+- Read `.claude/skills/testing-strategy/SKILL.md` - Follow AAA pattern, coverage targets, test naming
+- Read `.claude/skills/project-conventions/SKILL.md` - Apply naming conventions to test files
+- Read `.claude/skills/e2e-testing/SKILL.md` - For integration/E2E test patterns if needed
+- Read `.claude/skills/frameworks-and-cloud/SKILL.md` - Framework-specific testing approaches
+
 📁 OUTPUT FILE (MANDATORY):
 You MUST use the `Write` tool to create: .kira/plans/{feature-slug}-test-report.md
 
 ⚠️ CRITICAL INSTRUCTIONS:
-1. Write comprehensive unit tests for all new code
-2. Achieve minimum 80% code coverage
-3. Test both happy paths and error cases
-4. Run test suite with coverage: npm run test -- --coverage
-5. QUALITY GATE: If tests fail or coverage < 80%, report and BLOCK workflow
-6. You MUST call `Write` tool to create the output file
-7. After creating the file, confirm: "✅ File created: [path]"
+1. Read and apply all skills listed above BEFORE writing tests
+2. Write comprehensive unit tests for all new code
+3. Achieve minimum 80% code coverage
+4. Test both happy paths and error cases
+5. Run test suite with coverage: npm run test -- --coverage
+6. QUALITY GATE: If tests fail or coverage < 80%, report and BLOCK workflow
+7. You MUST call `Write` tool to create the output file
+8. After creating the file, confirm: "✅ File created: [path]"
 ```
 
 **🪝 Hook**: Block workflow if tests fail.
@@ -565,17 +588,24 @@ If Quality Gate **FAILED**:
 - Test Report: .kira/plans/{feature-slug}-test-report.md
 - Architecture Plan: .kira/plans/{feature-slug}-architecture.md
 
+📚 SKILLS TO APPLY (READ THESE FIRST):
+- Read `.claude/skills/project-conventions/SKILL.md` - Verify code follows conventions
+- Read `.claude/skills/testing-strategy/SKILL.md` - Verify test quality standards
+- Read `.claude/skills/security-guidelines/SKILL.md` - Check security best practices
+- Read `.claude/skills/frameworks-and-cloud/SKILL.md` - Verify framework patterns
+
 📁 OUTPUT FILE (MANDATORY):
 You MUST use the `Write` tool to create: .kira/reviews/{feature-slug}-review.md
 
 ⚠️ CRITICAL INSTRUCTIONS:
-1. Review all code changes using git diff
-2. Check for security vulnerabilities (SQL injection, XSS, hardcoded secrets, etc.)
-3. Verify best practices compliance
-4. Classify issues: 🔴 CRITICAL / 🟡 WARNING / 🔵 INFO
-5. QUALITY GATE: If CRITICAL issues found, report and BLOCK workflow
-6. You MUST call `Write` tool to create the output file
-7. After creating the file, confirm: "✅ File created: [path]"
+1. Read and apply all skills listed above BEFORE reviewing
+2. Review all code changes using git diff
+3. Check for security vulnerabilities (SQL injection, XSS, hardcoded secrets, etc.)
+4. Verify best practices compliance against loaded skills
+5. Classify issues: 🔴 CRITICAL / 🟡 WARNING / 🔵 INFO
+6. QUALITY GATE: If CRITICAL issues found, report and BLOCK workflow
+7. You MUST call `Write` tool to create the output file
+8. After creating the file, confirm: "✅ File created: [path]"
 ```
 
 **🪝 Hook**: Block if CRITICAL issues found.
@@ -662,16 +692,22 @@ You MUST use the `Write` tool to create: .kira/reviews/{feature-slug}-review.md
 - Test Report: .kira/plans/{feature-slug}-test-report.md
 - Review Report: .kira/reviews/{feature-slug}-review.md
 
+📚 SKILLS TO APPLY (READ THESE FIRST):
+- Read `.claude/skills/git-workflow/SKILL.md` - Follow CHANGELOG and commit conventions
+- Read `.claude/skills/project-conventions/SKILL.md` - Apply documentation standards
+- Read `.claude/skills/frameworks-and-cloud/SKILL.md` - Framework-specific documentation patterns
+
 📁 OUTPUT FILES (MANDATORY):
 1. Update relevant project docs (README.md, CHANGELOG.md, etc.)
 2. You MUST use the `Write` tool to create: .kira/plans/plan-{feature-slug}.md
 
 ⚠️ CRITICAL INSTRUCTIONS:
-1. Update README if new features/APIs are added
-2. Add CHANGELOG entry following Keep a Changelog format
-3. Add JSDoc/TSDoc for new public APIs
-4. You MUST call `Write` tool to create the plan summary file
-5. After creating files, confirm: "✅ Files created: [paths]"
+1. Read and apply all skills listed above BEFORE documenting
+2. Update README if new features/APIs are added
+3. Add CHANGELOG entry following Keep a Changelog format
+4. Add JSDoc/TSDoc for new public APIs
+5. You MUST call `Write` tool to create the plan summary file
+6. After creating files, confirm: "✅ Files created: [paths]"
 ```
 
 **🪝 Hook**: Validate markdown syntax.
