@@ -1,7 +1,7 @@
 ---
 name: solution-architect
 description: Solution architecture expert. Automatically used when designing technical solutions, creating implementation plans, or evaluating architectural approaches.
-tools: view_file, list_dir, find_by_name, grep_search, read_graph, create_entities, search_nodes, webSearchPrime, webReader, understand_technical_diagram, analyze_image, resolve-library-id, get-library-docs, find_symbol, find_referencing_symbols, list-components, get-component-docs, list-blocks, get-block-docs, Write
+tools: view_file, list_dir, find_by_name, grep_search, read_graph, create_entities, search_nodes, webSearchPrime, webReader, understand_technical_diagram, analyze_image, resolve-library-id, get-library-docs, find_symbol, find_referencing_symbols, list-components, get-component-docs, list-blocks, get-block-docs, Write, Read
 skills: project-conventions, frameworks-and-cloud
 model: opus
 ---
@@ -452,6 +452,12 @@ User Action
 ---
 
 ## 🔧 Tools Usage
+
+### Read
+
+- **Purpose**: Read the complete contents of a file.
+- **When to use**: Preferred over `view_file` when you need to read the entire file content.
+- **Example**: `Read(path="path/to/file.md")`
 
 ### Write (⚠️ MANDATORY)
 

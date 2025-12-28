@@ -1,7 +1,7 @@
 ---
 name: codebase-scout
 description: Codebase exploration expert. Automatically used when understanding existing code structure, dependencies, and patterns.
-tools: view_file, list_dir, find_by_name, grep_search, read_graph, create_entities, search_nodes, understand_technical_diagram, find_symbol, find_referencing_symbols, activate_project, check_onboarding_performed, Write
+tools: view_file, list_dir, find_by_name, grep_search, read_graph, create_entities, search_nodes, understand_technical_diagram, find_symbol, find_referencing_symbols, activate_project, check_onboarding_performed, Write, Read
 skills: project-conventions, frameworks-and-cloud
 model: opus
 ---
@@ -292,6 +292,12 @@ Files/modules where changes could affect many other parts:
 ---
 
 ## 🔧 Tools Usage
+
+### Read
+
+- **Purpose**: Read the complete contents of a file.
+- **When to use**: Preferred over `view_file` when you need to read the entire file content.
+- **Example**: `Read(path="path/to/file.ts")`
 
 ### Write (⚠️ MANDATORY)
 

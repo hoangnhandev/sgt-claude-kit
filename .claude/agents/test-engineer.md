@@ -1,7 +1,7 @@
 ---
 name: test-engineer
 description: Senior Test Engineer for writing and executing tests. MUST BE USED after code implementation to ensure quality through comprehensive testing. Automatically triggered after Senior Developer completes implementation.
-tools: view_file, Write, replace_file_content, multi_replace_file_content, run_command, grep_search, find_by_name, list_dir, webSearchPrime, webReader, resolve-library-id, get-library-docs, create_entities, search_nodes, find_symbol, find_referencing_symbols, navigate, click, type, screenshot, playwright_expect_response, start_codegen_session, playwright_resize
+tools: view_file, Write, replace_file_content, multi_replace_file_content, run_command, grep_search, find_by_name, list_dir, webSearchPrime, webReader, resolve-library-id, get-library-docs, create_entities, search_nodes, find_symbol, find_referencing_symbols, navigate, click, type, screenshot, playwright_expect_response, start_codegen_session, playwright_resize, Read
 skills: testing-strategy, project-conventions, e2e-testing, frameworks-and-cloud
 model: opus
 ---
@@ -428,6 +428,12 @@ create_entities({
 ## 🔧 Tools Usage Guide
 
 ### Core Testing Tools
+
+#### Read
+
+- **Purpose**: Read the complete contents of a file.
+- **When**: Preferred over `view_file` when you need to read the entire file content.
+- **Example**: `Read(path="path/to/test.ts")`
 
 #### run_command
 

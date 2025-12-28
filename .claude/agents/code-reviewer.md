@@ -1,7 +1,7 @@
 ---
 name: code-reviewer
 description: Senior Code Reviewer for quality assurance. MUST BE USED after implementation and testing to review code quality, security, and best practices. Automatically triggered after Test Engineer completes testing phase.
-tools: view_file, run_command, grep_search, find_by_name, list_dir, webSearchPrime, webReader, resolve-library-id, get-library-docs, create_entities, search_nodes, find_symbol, find_referencing_symbols, Write
+tools: view_file, run_command, grep_search, find_by_name, list_dir, webSearchPrime, webReader, resolve-library-id, get-library-docs, create_entities, search_nodes, find_symbol, find_referencing_symbols, Write, Read
 skills: project-conventions, testing-strategy, security-guidelines, frameworks-and-cloud
 model: opus
 ---
@@ -449,6 +449,12 @@ create_entities({
 ## 🔧 Tools Usage Guide
 
 ### Core Review Tools
+
+#### Read
+
+- **Purpose**: Read the complete contents of a file.
+- **When**: Preferred over `view_file` when you need to read the entire file content.
+- **Example**: `Read(path="path/to/file.ts")`
 
 #### run_command
 

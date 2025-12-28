@@ -1,7 +1,7 @@
 ---
 name: requirement-analyst
 description: Requirement analysis expert. Automatically used when analyzing issues, feature requests, or requirement documents.
-tools: view_file, list_dir, find_by_name, grep_search, read_graph, create_entities, search_nodes, webReader, webSearchPrime, extract_text_from_screenshot, understand_technical_diagram, diagnose_error_screenshot, analyze_image, resolve-library-id, get-library-docs, Write
+tools: view_file, list_dir, find_by_name, grep_search, read_graph, create_entities, search_nodes, webReader, webSearchPrime, extract_text_from_screenshot, understand_technical_diagram, diagnose_error_screenshot, analyze_image, resolve-library-id, get-library-docs, Write, Read
 model: opus
 ---
 
@@ -226,6 +226,12 @@ Then [expected outcome]
 ---
 
 ## 🔧 Tools Usage
+
+### Read
+
+- **Purpose**: Read the complete contents of a file.
+- **When to use**: Preferred over `view_file` when you need to read the entire file content.
+- **Example**: `Read(path="path/to/file.md")`
 
 ### Write (⚠️ MANDATORY)
 

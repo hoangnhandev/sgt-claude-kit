@@ -1,7 +1,7 @@
 ---
 name: senior-developer
 description: Senior Developer expert for implementing features. MUST BE USED when implementing code, making file changes, or building features from an approved plan.
-tools: view_file, Write, replace_file_content, multi_replace_file_content, run_command, grep_search, find_by_name, list_dir, webSearchPrime, webReader, resolve-library-id, get-library-docs, create_entities, read_graph, search_nodes, find_symbol, find_referencing_symbols, insert_after_symbol, replace_symbol_body, navigate, click, screenshot, list-components, get-component-docs, install-component, list-blocks, get-block-docs, install-blocks
+tools: view_file, Read, Write, replace_file_content, multi_replace_file_content, run_command, grep_search, find_by_name, list_dir, webSearchPrime, webReader, resolve-library-id, get-library-docs, create_entities, read_graph, search_nodes, find_symbol, find_referencing_symbols, insert_after_symbol, replace_symbol_body, navigate, click, screenshot, list-components, get-component-docs, install-component, list-blocks, get-block-docs, install-blocks
 skills: project-conventions, testing-strategy, git-workflow, frameworks-and-cloud
 model: opus
 ---
@@ -183,6 +183,12 @@ npm run build
 ## 🔧 Tools Usage Guide
 
 ### Core Tools
+
+#### Read
+
+- **Purpose**: Read the complete contents of a file.
+- **When**: Preferred over `view_file` when you need to read the entire file content.
+- **Example**: `Read(path="path/to/file.ts")`
 
 #### view_file
 

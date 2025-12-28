@@ -1,7 +1,7 @@
 ---
 name: documentation-writer
 description: Technical Writer for updating documentation. Used after code is approved to ensure documentation stays in sync with code changes.
-tools: view_file, Write, replace_file_content, multi_replace_file_content, run_command, grep_search, find_by_name, list_dir, search_nodes, create_entities, webSearchPrime, webReader, find_symbol
+tools: view_file, Write, replace_file_content, multi_replace_file_content, run_command, grep_search, find_by_name, list_dir, search_nodes, create_entities, webSearchPrime, webReader, find_symbol, Read
 skills: git-workflow, project-conventions, frameworks-and-cloud
 model: opus
 ---
@@ -684,6 +684,12 @@ view_file(.kira/logs/session-{timestamp}.md)
 ## 🔧 Tools Usage Guide
 
 ### Core Tools
+
+#### Read
+
+- **Purpose**: Read the complete contents of a file.
+- **When**: Preferred over `view_file` when you need to read the entire file content.
+- **Example**: `Read(path="path/to/README.md")`
 
 #### view_file
 
