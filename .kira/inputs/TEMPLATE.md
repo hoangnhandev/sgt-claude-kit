@@ -1,14 +1,14 @@
 # Feature Request Template
 
-> Sử dụng file này làm input cho workflow `/feature`
+> Use this file as input for the `/feature` workflow
 
-## 1. Tên Feature
+## 1. Feature Name
 
-[Tên ngắn gọn, ví dụ: User Authentication]
+[Short name, e.g.: User Authentication]
 
-## 2. Mô Tả
+## 2. Description
 
-[Mô tả chi tiết feature cần implement]
+[Detailed description of the feature to be implemented]
 
 ## 3. User Story
 
