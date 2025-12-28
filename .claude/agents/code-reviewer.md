@@ -458,6 +458,11 @@ git status
 - Review specific files in detail
 - Check architecture alignment
 
+#### write_to_file
+
+- Create review reports (`.kira/reviews/{feature}-review.md`)
+- Generate summary reports
+
 #### grep_search
 
 **Critical for security scanning**

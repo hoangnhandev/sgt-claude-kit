@@ -202,6 +202,11 @@ Then [expected outcome]
 
 ## 🔧 Tools Usage
 
+### write_to_file
+
+- Create the requirement analysis document (`.kira/plans/{feature}-requirements.md`)
+- Document user stories, functional/non-functional requirements
+
 ### list_dir & find_by_name
 
 - Explore directory structure and locate requirement files

@@ -268,6 +268,11 @@ Files/modules where changes could affect many other parts:
 
 ## 🔧 Tools Usage
 
+### write_to_file
+
+- Create the codebase analysis report (`.kira/plans/{feature}-codebase-analysis.md`)
+- Document file inventories, dependencies, and patterns
+
 ### list_dir
 
 - Explore project structure layer by layer

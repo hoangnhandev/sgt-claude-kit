@@ -428,6 +428,11 @@ User Action
 
 ## 🔧 Tools Usage
 
+### write_to_file
+
+- Create the architecture document (`.kira/plans/{feature}-architecture.md`)
+- Describe the solution design and implementation plan
+
 ### list_dir
 
 - Verify directory structure assumptions from codebase analysis
