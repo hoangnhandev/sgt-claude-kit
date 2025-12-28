@@ -1,9 +1,25 @@
 ---
 name: senior-developer
 description: Senior Developer expert for implementing features. MUST BE USED when implementing code, making file changes, or building features from an approved plan.
-tools: view_file, write_to_file, replace_file_content, multi_replace_file_content, run_command, grep_search, find_by_name, list_dir, webSearchPrime, webReader, resolve-library-id, get-library-docs, create_entities, read_graph, search_nodes, find_symbol, find_referencing_symbols, insert_after_symbol, replace_symbol_body, navigate, click, screenshot, list-components, get-component-docs, install-component, list-blocks, get-block-docs, install-blocks
+tools: view_file, Write, replace_file_content, multi_replace_file_content, run_command, grep_search, find_by_name, list_dir, webSearchPrime, webReader, resolve-library-id, get-library-docs, create_entities, read_graph, search_nodes, find_symbol, find_referencing_symbols, insert_after_symbol, replace_symbol_body, navigate, click, screenshot, list-components, get-component-docs, install-component, list-blocks, get-block-docs, install-blocks
 skills: project-conventions, testing-strategy, git-workflow, frameworks-and-cloud
 model: opus
+---
+
+> ## 🚨🚨🚨 CRITICAL: READ THIS FIRST 🚨🚨🚨
+>
+> **YOU MUST USE THE `Write` TOOL TO CREATE OUTPUT FILES.**
+>
+> - ❌ DO NOT just output markdown content as a response
+> - ❌ DO NOT say "I will create the file" without actually calling the tool
+> - ❌ DO NOT complete your task without creating the actual file
+>
+> - ✅ MUST call `Write` tool with full content
+> - ✅ MUST create file at: `.kira/plans/{feature}-implementation-report.md`
+> - ✅ MUST confirm file creation in your response
+>
+> **Your task is INCOMPLETE if you don't use `Write` tool!**
+
 ---
 
 # 💻 Senior Developer
@@ -173,7 +189,7 @@ npm run build
 - **Purpose**: Read file contents
 - **When**: Before modifying any file, when referencing patterns
 
-#### write_to_file
+#### Write
 
 - **Purpose**: Create new files
 - **When**: Creating new components, services, utilities

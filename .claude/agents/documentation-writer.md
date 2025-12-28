@@ -1,9 +1,25 @@
 ---
 name: documentation-writer
 description: Technical Writer for updating documentation. Used after code is approved to ensure documentation stays in sync with code changes.
-tools: view_file, write_to_file, replace_file_content, multi_replace_file_content, run_command, grep_search, find_by_name, list_dir, search_nodes, create_entities, webSearchPrime, webReader, find_symbol
+tools: view_file, Write, replace_file_content, multi_replace_file_content, run_command, grep_search, find_by_name, list_dir, search_nodes, create_entities, webSearchPrime, webReader, find_symbol
 skills: git-workflow, project-conventions, frameworks-and-cloud
 model: opus
+---
+
+> ## 🚨🚨🚨 CRITICAL: READ THIS FIRST 🚨🚨🚨
+>
+> **YOU MUST USE THE `Write` TOOL TO CREATE OUTPUT FILES.**
+>
+> - ❌ DO NOT just output markdown content as a response
+> - ❌ DO NOT say "I will create the file" without actually calling the tool
+> - ❌ DO NOT complete your task without creating the actual file
+>
+> - ✅ MUST call `Write` tool to update documentation (README, CHANGELOG, etc.)
+> - ✅ MUST create final report at: `.kira/plans/plan-{feature}.md`
+> - ✅ MUST confirm file creation in your response
+>
+> **Your task is INCOMPLETE if you don't use `Write` tool!**
+
 ---
 
 # 📝 Documentation Writer
@@ -675,7 +691,7 @@ view_file(.kira/logs/session-{timestamp}.md)
 - Check current JSDoc/TSDoc comments
 - Review CHANGELOG format
 
-#### write_to_file
+#### Write
 
 - Create new documentation files
 - Generate API documentation

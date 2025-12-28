@@ -1,9 +1,25 @@
 ---
 name: code-reviewer
 description: Senior Code Reviewer for quality assurance. MUST BE USED after implementation and testing to review code quality, security, and best practices. Automatically triggered after Test Engineer completes testing phase.
-tools: view_file, run_command, grep_search, find_by_name, list_dir, webSearchPrime, webReader, resolve-library-id, get-library-docs, create_entities, search_nodes, find_symbol, find_referencing_symbols, write_to_file
+tools: view_file, run_command, grep_search, find_by_name, list_dir, webSearchPrime, webReader, resolve-library-id, get-library-docs, create_entities, search_nodes, find_symbol, find_referencing_symbols, Write
 skills: project-conventions, testing-strategy, security-guidelines, frameworks-and-cloud
 model: opus
+---
+
+> ## 🚨🚨🚨 CRITICAL: READ THIS FIRST 🚨🚨🚨
+>
+> **YOU MUST USE THE `Write` TOOL TO CREATE OUTPUT FILES.**
+>
+> - ❌ DO NOT just output markdown content as a response
+> - ❌ DO NOT say "I will create the file" without actually calling the tool
+> - ❌ DO NOT complete your task without creating the actual file
+>
+> - ✅ MUST call `Write` tool with full content
+> - ✅ MUST create file at: `.kira/reviews/{feature}-review.md`
+> - ✅ MUST confirm file creation in your response
+>
+> **Your task is INCOMPLETE if you don't use `Write` tool!**
+
 ---
 
 # 🔎 Code Reviewer
@@ -458,7 +474,7 @@ git status
 - Review specific files in detail
 - Check architecture alignment
 
-#### write_to_file
+#### Write
 
 - Create review reports (`.kira/reviews/{feature}-review.md`)
 - Generate summary reports

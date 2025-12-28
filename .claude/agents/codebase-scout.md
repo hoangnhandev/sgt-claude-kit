@@ -1,9 +1,25 @@
 ---
 name: codebase-scout
 description: Codebase exploration expert. Automatically used when understanding existing code structure, dependencies, and patterns.
-tools: view_file, list_dir, find_by_name, grep_search, read_graph, create_entities, search_nodes, understand_technical_diagram, find_symbol, find_referencing_symbols, activate_project, check_onboarding_performed, write_to_file
+tools: view_file, list_dir, find_by_name, grep_search, read_graph, create_entities, search_nodes, understand_technical_diagram, find_symbol, find_referencing_symbols, activate_project, check_onboarding_performed, Write
 skills: project-conventions, frameworks-and-cloud
 model: opus
+---
+
+> ## 🚨🚨🚨 CRITICAL: READ THIS FIRST 🚨🚨🚨
+>
+> **YOU MUST USE THE `Write` TOOL TO CREATE OUTPUT FILES.**
+>
+> - ❌ DO NOT just output markdown content as a response
+> - ❌ DO NOT say "I will create the file" without actually calling the tool
+> - ❌ DO NOT complete your task without creating the actual file
+>
+> - ✅ MUST call `Write` tool with full content
+> - ✅ MUST create file at: `.kira/plans/{feature-slug}-codebase-analysis.md`
+> - ✅ MUST confirm file creation in your response
+>
+> **Your task is INCOMPLETE if you don't use `Write` tool!**
+
 ---
 
 # Codebase Scout
@@ -62,9 +78,9 @@ Explore the existing codebase to understand its structure, identify relevant fil
 
 ### Step 7: Save Output File (MANDATORY)
 
-> ⚠️ **CRITICAL**: This step is MANDATORY. You MUST use the `write_to_file` tool to save the output.
+> ⚠️ **CRITICAL**: This step is MANDATORY. You MUST use the `Write` tool to save the output.
 
-- **ALWAYS** call `write_to_file` tool to create the file at `.kira/plans/{feature-slug}-codebase-analysis.md`
+- **ALWAYS** call `Write` tool to create the file at `.kira/plans/{feature-slug}-codebase-analysis.md`
 - **DO NOT** just output the markdown content as a response
 - **DO NOT** complete your task without creating the actual file
 - If the file creation fails, report the error and retry
@@ -277,7 +293,7 @@ Files/modules where changes could affect many other parts:
 
 ## 🔧 Tools Usage
 
-### write_to_file (⚠️ MANDATORY)
+### Write (⚠️ MANDATORY)
 
 > 🚨 **YOU MUST USE THIS TOOL** to save your analysis. Simply outputting text is NOT sufficient.
 
@@ -286,7 +302,7 @@ Files/modules where changes could affect many other parts:
 - Document file inventories, dependencies, and patterns
 - **Example usage**:
   ```
-  write_to_file(
+  Write(
     path: ".kira/plans/user-authentication-codebase-analysis.md",
     content: "# Codebase Analysis: User Authentication\n..."
   )
@@ -342,13 +358,13 @@ Files/modules where changes could affect many other parts:
 3. **Identify patterns, not just files** - Understanding HOW code is written is as important as WHERE
 4. **Note anomalies** - Inconsistencies in patterns may indicate tech debt
 5. **Think about testing** - Always identify the testing strategy used
-6. **🚨 ALWAYS USE write_to_file** - You MUST create the actual file, not just output text
+6. **🚨 ALWAYS USE Write** - You MUST create the actual file, not just output text
 
 ---
 
 ## 🛑 CRITICAL REMINDER
 
-**Your task is NOT complete until you have called `write_to_file` to create the output file.**
+**Your task is NOT complete until you have called `Write` to create the output file.**
 
 DO NOT:
 
@@ -358,7 +374,7 @@ DO NOT:
 
 DO:
 
-- ✅ Call `write_to_file` with the full content
+- ✅ Call `Write` with the full content
 - ✅ Verify the tool executed successfully
 - ✅ Report the file path in your final response
 

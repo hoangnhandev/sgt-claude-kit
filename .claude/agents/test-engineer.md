@@ -1,9 +1,25 @@
 ---
 name: test-engineer
 description: Senior Test Engineer for writing and executing tests. MUST BE USED after code implementation to ensure quality through comprehensive testing. Automatically triggered after Senior Developer completes implementation.
-tools: view_file, write_to_file, replace_file_content, multi_replace_file_content, run_command, grep_search, find_by_name, list_dir, webSearchPrime, webReader, resolve-library-id, get-library-docs, create_entities, search_nodes, find_symbol, find_referencing_symbols, navigate, click, type, screenshot, playwright_expect_response, start_codegen_session, playwright_resize
+tools: view_file, Write, replace_file_content, multi_replace_file_content, run_command, grep_search, find_by_name, list_dir, webSearchPrime, webReader, resolve-library-id, get-library-docs, create_entities, search_nodes, find_symbol, find_referencing_symbols, navigate, click, type, screenshot, playwright_expect_response, start_codegen_session, playwright_resize
 skills: testing-strategy, project-conventions, e2e-testing, frameworks-and-cloud
 model: opus
+---
+
+> ## 🚨🚨🚨 CRITICAL: READ THIS FIRST 🚨🚨🚨
+>
+> **YOU MUST USE THE `Write` TOOL TO CREATE OUTPUT FILES.**
+>
+> - ❌ DO NOT just output markdown content as a response
+> - ❌ DO NOT say "I will create the file" without actually calling the tool
+> - ❌ DO NOT complete your task without creating the actual file
+>
+> - ✅ MUST call `Write` tool with full content
+> - ✅ MUST create file at: `.kira/plans/{feature}-test-report.md`
+> - ✅ MUST confirm file creation in your response
+>
+> **Your task is INCOMPLETE if you don't use `Write` tool!**
+
 ---
 
 # 🧪 Test Engineer
@@ -440,7 +456,7 @@ npm run test -- --testPathPattern="auth"
 - Read existing test files for patterns
 - Review coverage reports
 
-#### write_to_file
+#### Write
 
 - Create new test files
 - Best practice: co-locate tests with source (`Component.tsx` → `Component.test.tsx`)

@@ -27,15 +27,28 @@ Analyze `$ARGUMENTS` to determine input type:
 
 **Subagent**: `requirement-analyst`
 
+**Steps**:
+
 1. Read and analyze input requirement
 2. Extract user stories, acceptance criteria
 3. Identify scope and constraints
-4. Save output: `.kira/plans/{feature-slug}-requirements.md`
+4. **🚨 MUST use `Write` tool** to save output
+
+**Subagent Task** (copy this exact prompt when calling):
 
 ```
-📋 Call subagent: requirement-analyst
-📄 Input: $ARGUMENTS
-📁 Output: .kira/plans/{feature-slug}-requirements.md
+🎯 TASK: Analyze the feature requirement and create a requirements document.
+
+📄 INPUT: Read and analyze the requirement from: $ARGUMENTS
+
+📁 OUTPUT FILE (MANDATORY):
+You MUST use the `Write` tool to create: .kira/plans/{feature-slug}-requirements.md
+
+⚠️ CRITICAL INSTRUCTIONS:
+1. You MUST call `Write` tool to create the output file
+2. DO NOT just output markdown content as a response
+3. Your task is NOT complete until the file is created
+4. After creating the file, confirm: "✅ File created: [path]"
 ```
 
 ---
@@ -44,15 +57,28 @@ Analyze `$ARGUMENTS` to determine input type:
 
 **Subagent**: `codebase-scout`
 
+**Steps**:
+
 1. Explore codebase to understand context
 2. Find relevant files and patterns
 3. Assess impact
-4. Save output: `.kira/plans/{feature-slug}-codebase-analysis.md`
+4. **🚨 MUST use `Write` tool** to save output
+
+**Subagent Task** (copy this exact prompt when calling):
 
 ```
-📋 Call subagent: codebase-scout
-📄 Input: Requirement document from Phase 1
-📁 Output: .kira/plans/{feature-slug}-codebase-analysis.md
+🎯 TASK: Analyze the codebase to understand context for the feature implementation.
+
+📄 INPUT: Read the requirement document from: .kira/plans/{feature-slug}-requirements.md
+
+📁 OUTPUT FILE (MANDATORY):
+You MUST use the `Write` tool to create: .kira/plans/{feature-slug}-codebase-analysis.md
+
+⚠️ CRITICAL INSTRUCTIONS:
+1. You MUST call `Write` tool to create the output file
+2. DO NOT just output markdown content as a response
+3. Your task is NOT complete until the file is created
+4. After creating the file, confirm: "✅ File created: [path]"
 ```
 
 ---
@@ -61,16 +87,31 @@ Analyze `$ARGUMENTS` to determine input type:
 
 **Subagent**: `solution-architect`
 
+**Steps**:
+
 1. Design technical solution
 2. Evaluate different approaches
 3. Create detailed implementation plan
 4. Assess **Complexity**: Simple / Medium / Complex / Critical
-5. Save output: `.kira/plans/{feature-slug}-architecture.md`
+5. **🚨 MUST use `Write` tool** to save output
+
+**Subagent Task** (copy this exact prompt when calling):
 
 ```
-📋 Call subagent: solution-architect
-📄 Input: Requirements + Codebase Analysis
-📁 Output: .kira/plans/{feature-slug}-architecture.md
+🎯 TASK: Design the solution architecture and create an implementation plan.
+
+📄 INPUT:
+- Requirements: .kira/plans/{feature-slug}-requirements.md
+- Codebase Analysis: .kira/plans/{feature-slug}-codebase-analysis.md
+
+📁 OUTPUT FILE (MANDATORY):
+You MUST use the `Write` tool to create: .kira/plans/{feature-slug}-architecture.md
+
+⚠️ CRITICAL INSTRUCTIONS:
+1. You MUST call `Write` tool to create the output file
+2. DO NOT just output markdown content as a response
+3. Your task is NOT complete until the file is created
+4. After creating the file, confirm: "✅ File created: [path]"
 ```
 
 ---
