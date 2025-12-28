@@ -1,7 +1,7 @@
 ---
 name: requirement-analyst
 description: Requirement analysis expert. Automatically used when analyzing issues, feature requests, or requirement documents.
-tools: view_file, list_dir, find_by_name, grep_search, read_graph, create_entities, search_nodes, webReader, webSearchPrime, extract_text_from_screenshot, understand_technical_diagram, diagnose_error_screenshot, analyze_image, resolve-library-id, get-library-docs
+tools: view_file, list_dir, find_by_name, grep_search, read_graph, create_entities, search_nodes, webReader, webSearchPrime, extract_text_from_screenshot, understand_technical_diagram, diagnose_error_screenshot, analyze_image, resolve-library-id, get-library-docs, write_to_file
 model: opus
 ---
 
