@@ -143,7 +143,7 @@ if [ ! -f "$GITIGNORE_FILE" ]; then
 fi
 
 # Helper to safely append to gitignore
-IGNORES=(".claude/" ".kira/" ".mcp.json")
+IGNORES=(".claude/" ".mcp.json")
 HEADER_ADDED=false
 
 # Check if we need to add a header first (only if we are going to add items)
