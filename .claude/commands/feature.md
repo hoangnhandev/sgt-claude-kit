@@ -23,9 +23,23 @@ Analyze `$ARGUMENTS` to determine input type:
 
 ## 🔄 Execution Flow
 
-### Phase 1: Analysis
+### Phase 1: Analysis (⚡ PARALLEL EXECUTION)
 
-#### Step 1.1: Requirement Analysis
+> **🚀 PERFORMANCE OPTIMIZATION**: Phase 1 runs 2 subagents **SIMULTANEOUSLY** to reduce duration by ~30%.
+
+#### Step 1.1: Parallel Analysis (Requirement + Codebase)
+
+**Mode**: ⚡ **PARALLEL EXECUTION**
+
+**Simultaneous Subagents**:
+| Subagent | Task | Output File |
+|----------|------|-------------|
+| `requirement-analyst` | Requirement Analysis | `{feature-slug}-requirements.md` |
+| `codebase-scout` | Codebase Exploration | `{feature-slug}-codebase-analysis.md` |
+
+---
+
+##### 🔀 Subagent A: Requirement Analyst (PARALLEL)
 
 **Subagent**: `requirement-analyst`
 
@@ -41,6 +55,8 @@ Analyze `$ARGUMENTS` to determine input type:
 ```
 🎯 TASK: Analyze the feature requirement and create a requirements document.
 
+⚡ MODE: Running in PARALLEL with codebase-scout
+
 📄 INPUT: Read and analyze the requirement from: $ARGUMENTS
 
 📁 OUTPUT FILE (MANDATORY):
@@ -51,11 +67,12 @@ You MUST use the `Write` tool to create: .kira/plans/{feature-slug}-requirements
 2. DO NOT just output markdown content as a response
 3. Your task is NOT complete until the file is created
 4. After creating the file, confirm: "✅ File created: [path]"
+5. ⚡ NOTE: codebase-scout is running simultaneously - no need to wait
 ```
 
 ---
 
-#### Step 1.2: Codebase Analysis
+##### 🔀 Subagent B: Codebase Scout (PARALLEL)
 
 **Subagent**: `codebase-scout`
 
@@ -71,7 +88,11 @@ You MUST use the `Write` tool to create: .kira/plans/{feature-slug}-requirements
 ```
 🎯 TASK: Analyze the codebase to understand context for the feature implementation.
 
-📄 INPUT: Read the requirement document from: .kira/plans/{feature-slug}-requirements.md
+⚡ MODE: Running in PARALLEL with requirement-analyst
+
+📄 INPUT:
+- Read the requirement from: $ARGUMENTS (same input as requirement-analyst)
+- Focus on: Finding relevant files, patterns, and impact areas
 
 📚 SKILLS FOR CODEBASE-SCOUT ROLE:
 - Read `.claude/skills/project-conventions/SKILL-SUMMARY.md` - Understand naming/structure conventions
@@ -87,6 +108,43 @@ You MUST use the `Write` tool to create: .kira/plans/{feature-slug}-codebase-ana
 3. DO NOT just output markdown content as a response
 4. Your task is NOT complete until the file is created
 5. After creating the file, confirm: "✅ File created: [path]"
+6. ⚡ NOTE: requirement-analyst is running simultaneously - no need to wait
+```
+
+---
+
+#### Step 1.2: Merge & Validate Results
+
+**Executed by**: Main Agent
+
+**Steps**:
+
+1. **Wait for both subagents** to complete
+2. **Validate outputs exist**:
+   - Check: `.kira/plans/{feature-slug}-requirements.md`
+   - Check: `.kira/plans/{feature-slug}-codebase-analysis.md`
+3. **Quick cross-reference**:
+   - Verify scope from requirements aligns with files found by scout
+   - Flag any conflicts or gaps
+4. **Proceed to Phase 2** if both valid
+
+**Validation Check**:
+
+```markdown
+## 🔍 Phase 1 Parallel Execution Summary
+
+| Subagent            | Status | Output File | Duration |
+| ------------------- | ------ | ----------- | -------- |
+| requirement-analyst | ✅/❌  | {path}      | Xm       |
+| codebase-scout      | ✅/❌  | {path}      | Xm       |
+
+**Total Phase 1 Time**: Xm (vs ~2x if sequential)
+
+### Cross-Reference Check:
+
+- [ ] Scope matches relevant files found
+- [ ] No conflicting assumptions
+- [ ] Ready for Phase 2
 ```
 
 **🪝 Hook**: Log checkpoint after Phase 1 completion.
@@ -803,15 +861,15 @@ Generate comprehensive session summary:
 
 ## Workflow Summary
 
-| Phase          | Agent                | Status | Duration |
-| -------------- | -------------------- | ------ | -------- |
-| Analysis       | Requirement Analyst  | ✅     | Xm       |
-| Analysis       | Codebase Scout       | ✅     | Xm       |
-| Planning       | Solution Architect   | ✅     | Xm       |
-| Implementation | Senior Developer     | ✅     | Xm       |
-| Testing        | Test Engineer        | ✅     | Xm       |
-| Review         | Code Reviewer        | ✅     | Xm       |
-| Documentation  | Documentation Writer | ✅     | Xm       |
+| Phase          | Agent                | Status | Duration | Mode        |
+| -------------- | -------------------- | ------ | -------- | ----------- |
+| Analysis       | Requirement Analyst  | ✅     | Xm       | ⚡ PARALLEL |
+| Analysis       | Codebase Scout       | ✅     | Xm       | ⚡ PARALLEL |
+| Planning       | Solution Architect   | ✅     | Xm       | Sequential  |
+| Implementation | Senior Developer     | ✅     | Xm       | Sequential  |
+| Testing        | Test Engineer        | ✅     | Xm       | Sequential  |
+| Review         | Code Reviewer        | ✅     | Xm       | Sequential  |
+| Documentation  | Documentation Writer | ✅     | Xm       | Sequential  |
 
 ---
 
@@ -894,7 +952,11 @@ Display final summary to user:
 
 Process input: **$ARGUMENTS**
 
-1. Determine input type
+1. Determine input type (GitHub Issue / Local File / Inline Text)
 2. Create feature-slug from input
-3. Start Phase 1 with `requirement-analyst`
-4. Continue through all phases until completion
+3. **⚡ Start Phase 1 PARALLEL execution**:
+   - Launch `requirement-analyst` with $ARGUMENTS
+   - Launch `codebase-scout` with $ARGUMENTS (simultaneously)
+4. Wait for both subagents to complete
+5. Validate & merge results (Step 1.2)
+6. Continue through remaining phases until completion

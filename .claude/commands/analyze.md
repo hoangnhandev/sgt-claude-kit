@@ -20,14 +20,28 @@ You are the Main Agent running Phase 1 of the workflow: **Requirement & Codebase
 
 ---
 
-## 🔄 Execution Flow
+## 🔄 Execution Flow (⚡ PARALLEL)
 
-### Step 1: Requirement Analysis
+> **🚀 PERFORMANCE**: Both subagents run **SIMULTANEOUSLY** for ~30% faster analysis.
+
+### Step 1: Parallel Analysis
+
+**Mode**: ⚡ **PARALLEL EXECUTION**
+
+| Subagent              | Task                 | Output File                           |
+| --------------------- | -------------------- | ------------------------------------- |
+| `requirement-analyst` | Requirement Analysis | `{feature-slug}-requirements.md`      |
+| `codebase-scout`      | Codebase Exploration | `{feature-slug}-codebase-analysis.md` |
+
+---
+
+#### 🔀 Subagent A: Requirement Analyst (PARALLEL)
 
 **Subagent**: `requirement-analyst`
 
 ```
 📋 Call subagent: requirement-analyst
+⚡ Mode: PARALLEL (runs simultaneously with codebase-scout)
 📄 Input: $ARGUMENTS
 📁 Output: .kira/plans/{feature-slug}-requirements.md
 ```
@@ -41,13 +55,14 @@ You are the Main Agent running Phase 1 of the workflow: **Requirement & Codebase
 
 ---
 
-### Step 2: Codebase Analysis
+#### 🔀 Subagent B: Codebase Scout (PARALLEL)
 
 **Subagent**: `codebase-scout`
 
 ```
 📋 Call subagent: codebase-scout
-📄 Input: Requirement document from Step 1
+⚡ Mode: PARALLEL (runs simultaneously with requirement-analyst)
+📄 Input: $ARGUMENTS (same input, independent analysis)
 📁 Output: .kira/plans/{feature-slug}-codebase-analysis.md
 ```
 
@@ -57,6 +72,16 @@ You are the Main Agent running Phase 1 of the workflow: **Requirement & Codebase
 2. Find related files and patterns
 3. Identify dependencies and impact areas
 4. Map existing code that needs modification
+
+---
+
+### Step 2: Merge & Validate
+
+**Executed by**: Main Agent
+
+1. Wait for both subagents to complete
+2. Validate both output files exist
+3. Cross-reference results for consistency
 
 ---
 
@@ -111,6 +136,9 @@ Process input: **$ARGUMENTS**
 
 1. Detect input type (GitHub/Local/Inline)
 2. Generate feature-slug from input
-3. Call `requirement-analyst` subagent
-4. Call `codebase-scout` subagent
-5. Display completion summary
+3. **⚡ Launch PARALLEL execution**:
+   - Start `requirement-analyst` subagent with $ARGUMENTS
+   - Start `codebase-scout` subagent with $ARGUMENTS (simultaneously)
+4. Wait for both to complete
+5. Validate & merge results
+6. Display completion summary
