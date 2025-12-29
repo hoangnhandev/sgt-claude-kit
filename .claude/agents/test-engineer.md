@@ -8,9 +8,14 @@ model: opus
 
 > ## 🚨 MANDATORY OUTPUT RULES
 >
-> 1. **MUST** call `Write` tool to create `.kira/plans/{feature}-test-report.md`
-> 2. **NO explanations** in response - only confirm file path after creation
-> 3. Task is **INCOMPLETE** without `Write` tool execution
+> 1. **MUST** run tests using `run_command`: `npm run test:run` or equivalent
+> 2. **MUST** run coverage check: `npm run test:coverage` or equivalent
+> 3. **MUST** include **ACTUAL test results** in report (NOT "To be validated" or "PENDING")
+> 4. **MUST** call `Write` tool to create `.kira/plans/{feature}-test-report.md`
+> 5. **MUST** run E2E tests with Playwright tools if UI components were modified
+> 6. Task is **INCOMPLETE** without test execution AND passing quality gate
+>
+> ⚠️ **VALIDATION**: If tests fail or coverage < 80%, you MUST fix issues before creating report
 
 ---
 
@@ -245,55 +250,118 @@ afterEach(() => {
 
 ---
 
-### Phase 3: Execute Tests
+### Phase 3: Execute Tests (🔴 MANDATORY)
 
-#### Step 3.1: Run Test Suite
+> ⚠️ **CRITICAL**: This phase is REQUIRED. You CANNOT skip test execution.
+> Report with "To be validated" or "PENDING" status is NOT acceptable.
+
+#### Step 3.1: Run Unit/Component Tests (REQUIRED)
+
+Use `run_command` to execute tests:
 
 ```bash
 # Run all tests
-npm run test
+npm run test:run
 
 # Run tests with coverage
-npm run test -- --coverage
+npm run test:coverage
 
 # Run specific test file
 npm run test -- path/to/file.test.ts
-
-# Run tests in watch mode (for development)
-npm run test -- --watch
 ```
 
-#### Step 3.2: Analyze Coverage
+**MUST capture and parse output:**
 
-Coverage targets:
+- Number of tests passed/failed
+- Coverage percentages (statements, branches, functions, lines)
+- Any error messages
 
-- **Minimum**: 80% overall
-- **Critical paths**: 95%+
-- **Utility functions**: 90%+
-- **UI components**: 75%+
+#### Step 3.2: Run E2E Tests with Playwright (CONDITIONAL)
 
-Coverage report interpretation:
+**REQUIRED when:**
+
+- ✅ New/modified `.tsx`, `.vue`, `.html` files
+- ✅ Changes to navigation/routing
+- ✅ Form submissions or user interactions
+- ✅ API integration changes
+
+**OPTIONAL when:**
+
+- Pure utility functions only
+- Type definitions only
+- Backend-only changes
+
+**E2E Test Flow using Playwright tools:**
+
+```typescript
+// 1. Navigate to the page under test
+Playwright_navigate({ url: "http://localhost:3000/page" });
+
+// 2. Interact with UI elements
+Playwright_fill({ selector: "input[name='email']", text: "test@example.com" });
+Playwright_click({ selector: "button[type='submit']" });
+
+// 3. Wait for and verify API responses
+Playwright_expect_response({ urlPattern: "**/api/endpoint", status: 200 });
+Playwright_assert_response({
+  urlPattern: "**/api/endpoint",
+  jsonPath: "$.success",
+  expectedValue: true,
+});
+
+// 4. Capture screenshot as evidence
+Playwright_screenshot({ name: "test-result-evidence" });
+
+// 5. Check for console errors
+Playwright_console_logs({ filterType: "error" });
+```
+
+#### Step 3.3: Analyze Coverage (REQUIRED)
+
+**Coverage Thresholds by Code Type:**
+
+| Code Type                        | Min Coverage | Lý do              |
+| -------------------------------- | ------------ | ------------------ |
+| Critical paths (auth, payment)   | 95%+         | Security-sensitive |
+| Business logic (services, utils) | 90%+         | Core functionality |
+| UI components                    | 75%+         | Visual edge cases  |
+| **Overall minimum**              | **80%**      | Industry standard  |
+
+**Coverage metrics to capture:**
 
 - **Statements**: Mỗi statement đã được execute chưa
 - **Branches**: Tất cả if/else branches được cover chưa
 - **Functions**: Mỗi function đã được gọi chưa
 - **Lines**: Mỗi dòng code đã được execute chưa
 
-#### Step 3.3: Quality Gate Check
+#### Step 3.4: Quality Gate Validation (REQUIRED)
+
+**Execute validation:**
 
 ```bash
 # Check if tests pass
-npm run test -- --passWithNoTests=false
+npm run test:run
 
 # Check coverage thresholds
-npm run test -- --coverage --coverageThreshold='{"global":{"branches":80,"functions":80,"lines":80,"statements":80}}'
+npm run test:coverage
 ```
 
-**⚠️ QUALITY GATE**: If tests fail or coverage is below threshold:
+**Parse results and determine status:**
 
-1. **STOP** the workflow
-2. Report failures to Senior Developer
-3. Wait for fixes before continuing
+| Check             | PASS Condition               | FAIL Action               |
+| ----------------- | ---------------------------- | ------------------------- |
+| All tests pass    | 0 failures                   | STOP - Fix failing tests  |
+| Coverage >= 80%   | All metrics >= 80%           | STOP - Add more tests     |
+| No console errors | No errors in Playwright logs | STOP - Fix runtime errors |
+
+**🚫 QUALITY GATE BLOCKING RULES:**
+
+1. ❌ **ANY test fails** → STOP workflow, report failures
+2. ❌ **Coverage < 80%** → STOP workflow, identify uncovered lines
+3. ❌ **Test command fails** → STOP workflow, fix test setup
+4. ❌ **E2E test fails** (when required) → STOP workflow, fix UI issues
+
+**✅ ONLY proceed to Phase 4 (Reporting) when ALL checks pass**
 
 ---
 
@@ -541,38 +609,85 @@ find_symbol(symbol_name="calculateDiscount")
 
 ---
 
-### Browser Automation Tools (MCP: playwright)
+### Browser Automation Tools (MCP: playwright) - 🔴 USE REQUIRED FOR UI CHANGES
 
-- **Playwright_navigate**: Load a URL in the browser to start an E2E test.
-- **Playwright_click**: Click UI elements to trigger app state changes.
-- **Playwright_type**: Fill input fields with test data during automated flows.
-- **Playwright_screenshot**: Capture visual evidence of test passes or failures.
-- **Playwright_expect_response & Playwright_assert_response**: Set up waits and assertions for specific network traffic to verify API integrations.
-- **Playwright_console_logs**: Monitor browser console output to detect hidden errors or warnings during tests.
-- **start_codegen_session, end_codegen_session & get_codegen_session**: Use session-based recording to generate reproducible test scripts.
-- **Playwright_resize**: Emulate various screen sizes and device viewports to test responsiveness.
+> ⚠️ **IMPORTANT**: These tools MUST be used when testing UI components.
+> Do NOT just write test files - actually EXECUTE E2E tests using these tools.
+
+| Tool                         | Purpose                 | When to Use                   |
+| ---------------------------- | ----------------------- | ----------------------------- |
+| `Playwright_navigate`        | Load URL in browser     | Start every E2E test          |
+| `Playwright_click`           | Click UI elements       | Test button/link interactions |
+| `Playwright_fill`            | Fill input fields       | Test form inputs              |
+| `Playwright_screenshot`      | Capture visual evidence | After each test step          |
+| `Playwright_expect_response` | Wait for API calls      | Before asserting results      |
+| `Playwright_assert_response` | Verify API responses    | Validate data correctness     |
+| `Playwright_console_logs`    | Check for errors        | At end of each test           |
+| `Playwright_resize`          | Test responsive design  | For mobile/tablet views       |
+
+**Session Management:**
+
+- `start_codegen_session`: Begin recording test actions
+- `get_codegen_session`: Get recorded test script
+- `end_codegen_session`: Complete and save recording
 
 ---
 
-### E2E Testing Workflow with Playwright
+### E2E Testing Workflow with Playwright (EXECUTABLE EXAMPLE)
 
-```typescript
-// Example E2E test flow using Playwright MCP
-describe("Login Flow E2E", () => {
-  it("should login successfully with valid credentials", async () => {
-    // 1. Navigate to login page
-    // navigate({ url: "http://localhost:3000/login" })
-    // 2. Fill in form
-    // type({ selector: "input[name='email']", text: "user@example.com" })
-    // type({ selector: "input[name='password']", text: "password123" })
-    // 3. Submit form
-    // click({ selector: "button[type='submit']" })
-    // 4. Wait for API response
-    // playwright_expect_response({ urlPattern: "**/api/auth/login", status: 200 })
-    // 5. Take screenshot for verification
-    // screenshot({ name: "dashboard-after-login" })
-  });
-});
+> 🔴 **NOTE**: The following is NOT just documentation.
+> You MUST actually call these tools during testing.
+
+**Example: Testing Login Flow**
+
+```
+// Step 1: Navigate to login page
+Playwright_navigate({ url: "http://localhost:3000/login" })
+
+// Step 2: Take initial screenshot
+Playwright_screenshot({ name: "login-page-initial" })
+
+// Step 3: Fill in credentials
+Playwright_fill({ selector: "input[name='email']", text: "user@example.com" })
+Playwright_fill({ selector: "input[name='password']", text: "password123" })
+
+// Step 4: Submit form
+Playwright_click({ selector: "button[type='submit']" })
+
+// Step 5: Wait for API response
+Playwright_expect_response({ urlPattern: "**/api/auth/login", status: 200 })
+
+// Step 6: Verify response data
+Playwright_assert_response({
+  urlPattern: "**/api/auth/login",
+  jsonPath: "$.success",
+  expectedValue: true
+})
+
+// Step 7: Take success screenshot
+Playwright_screenshot({ name: "dashboard-after-login" })
+
+// Step 8: Check for console errors
+Playwright_console_logs({ filterType: "error" })
+// If errors found → TEST FAILED
+```
+
+**Responsive Testing Example:**
+
+```
+// Test mobile view
+Playwright_resize({ width: 375, height: 667 })
+Playwright_screenshot({ name: "login-mobile-view" })
+
+// Test tablet view
+Playwright_resize({ width: 768, height: 1024 })
+Playwright_screenshot({ name: "login-tablet-view" })
+
+// Test desktop view
+Playwright_resize({ width: 1920, height: 1080 })
+Playwright_screenshot({ name: "login-desktop-view" })
+```
+
 ```
 
 ## 📝 Test File Naming & Structure
@@ -588,22 +703,24 @@ describe("Login Flow E2E", () => {
 ### Test Organization
 
 ```
+
 src/
 ├── features/
-│   └── user/
-│       ├── UserService.ts
-│       ├── UserService.test.ts      # Unit tests
-│       ├── UserCard.tsx
-│       ├── UserCard.test.tsx        # Component tests
-│       └── __tests__/
-│           └── user.integration.test.ts  # Integration tests
-├── __tests__/                        # Global test utilities
-│   ├── setup.ts
-│   ├── testUtils.tsx
-│   └── mocks/
-│       ├── handlers.ts              # MSW handlers
-│       └── server.ts                # MSW server
-```
+│ └── user/
+│ ├── UserService.ts
+│ ├── UserService.test.ts # Unit tests
+│ ├── UserCard.tsx
+│ ├── UserCard.test.tsx # Component tests
+│ └── **tests**/
+│ └── user.integration.test.ts # Integration tests
+├── **tests**/ # Global test utilities
+│ ├── setup.ts
+│ ├── testUtils.tsx
+│ └── mocks/
+│ ├── handlers.ts # MSW handlers
+│ └── server.ts # MSW server
+
+````
 
 ### Test File Structure
 
@@ -682,7 +799,7 @@ describe("UserService", () => {
     /* ... */
   });
 });
-```
+````
 
 ---
 
