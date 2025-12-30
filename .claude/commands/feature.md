@@ -114,8 +114,8 @@ Key entities: relevant_files, patterns, dependencies, impact_areas
 
 1. **Wait for both subagents** to complete
 2. **Validate memory entities exist**:
-   - Check: requirements analysis stored
-   - Check: codebase analysis stored
+   - Verify Requirement Entity: `{feature-slug}-requirements` (Must contain: `user_stories`, `scope`)
+   - Verify Codebase Entity: `{feature-slug}-codebase` (Must contain: `relevant_files`)
 3. **Quick cross-reference**:
    - Verify scope from requirements aligns with files found by scout
    - Flag any conflicts or gaps
@@ -393,6 +393,13 @@ Please ask your question or state your concern.
 
 ## Phase 3: Implementation
 
+### 🛡️ Pre-flight Check (Memory & Artifacts Validation)
+
+Before starting implementation, verify inputs:
+
+1. **Architecture Plan**: Check `.kira/plans/{feature-slug}-architecture.md` exists.
+2. **Dependencies**: Ensure `{feature-slug}-requirements` and `{feature-slug}-codebase` are still accessible in memory.
+
 ### Step 3.1: Code Implementation
 
 **Subagent**: `senior-developer`
@@ -587,8 +594,13 @@ Key entities: test_count, coverage_percentage, failed_tests, quality_gate_status
 
 If Quality Gate **FAILED**:
 
+1. Increment `test_retry_count` (Max: 3)
+2. Check Retry Limit:
+
+#### Branch: Retry Limit Not Reached (Count < 3)
+
 ```markdown
-🚫 **QUALITY GATE BLOCKED**
+🚫 **QUALITY GATE BLOCKED (Attempt {test_retry_count}/3)**
 
 **Reason**: [Tests failing / Coverage insufficient]
 
@@ -600,9 +612,37 @@ If Quality Gate **FAILED**:
 **Next Step**: Loop back to Step 3.1 with fix request
 ```
 
+#### Branch: Retry Limit Reached (Count >= 3)
+
+```markdown
+🛑 **MAX RETRIES EXCEEDED**
+
+We have tried to fix the tests 3 times but issues persist.
+To avoid an infinite loop, manual intervention is required.
+
+**Options**:
+
+1. **Manual Fix**: You fix the issues manually, then we continue.
+2. **Skip Tests**: Proceed to Code Review with known failures (NOT RECOMMENDED).
+3. **Abort**: Cancel the workflow.
+```
+
+**Action**: Wait for user decision.
+
+- If **Manual Fix**: Wait for "Continue" -> Loop back to Step 3.2
+- If **Skip Tests**: Proceed to Phase 4
+- If **Abort**: Stop workflow
+
 ---
 
 ## Phase 4: Quality Assurance
+
+### 🛡️ Pre-flight Check (Memory Validation)
+
+Before starting QA, verify inputs:
+
+1. **Implementation Context**: Verify `{feature-slug}-implementation` exists in memory.
+2. **Test Results**: Verify `{feature-slug}-test` exists in memory (skip if testing was skipped).
 
 ### Step 4.1: Code Review
 
@@ -677,8 +717,13 @@ You MUST create: .kira/reviews/{feature-slug}-review.md
 
 #### Branch: ISSUES FOUND (CRITICAL Issues Exist)
 
+1. Increment `review_retry_count` (Max: 3)
+2. Check Retry Limit:
+
+##### Sub-branch: Retry Limit Not Reached (Count < 3)
+
 ```markdown
-� **CODE REVIEW BLOCKED**
+🚫 **CODE REVIEW BLOCKED (Attempt {review_retry_count}/3)**
 
 **CRITICAL Issues Found**: X
 
@@ -686,11 +731,6 @@ You MUST create: .kira/reviews/{feature-slug}-review.md
 
 1. 🔴 [Issue 1]: [File:Line] - [Description]
 2. 🔴 [Issue 2]: [File:Line] - [Description]
-
-**Action Required**:
-
-- Senior Developer must fix CRITICAL issues
-- Re-request code review after fixes
 ```
 
 **Action**:
@@ -699,7 +739,25 @@ You MUST create: .kira/reviews/{feature-slug}-review.md
    - **AUTO-FIX** (Minor issues): Call `senior-developer` with fix instructions
    - **MANUAL FIX** (Major issues): Request user intervention
 2. After fixes, loop back to Step 4.1 for RE-REVIEW
-3. Repeat until all CRITICAL issues resolved
+
+##### Sub-branch: Retry Limit Reached (Count >= 3)
+
+```markdown
+🛑 **MAX RETRIES EXCEEDED**
+
+Code review still finding CRITICAL issues after 3 attempts.
+Manual intervention required.
+
+**Options**:
+
+1. **Manual Fix**: You fix the issues manually, then typed "Fixed".
+2. **Abort**: Cancel the workflow.
+```
+
+**Action**: Wait for user decision.
+
+- If **Manual Fix**: Wait for confirmation -> Loop back to Step 4.1
+- If **Abort**: Stop workflow
 
 ---
 

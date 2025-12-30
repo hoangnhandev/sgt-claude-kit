@@ -164,8 +164,8 @@
 
 ## 📋 Action Items
 
-- [ ] Implement max retry limit (3 retries) cho test/review loops
-- [ ] Thêm memory validation step trước Phase 2, 3, 4
+- [x] Implement max retry limit (3 retries) cho test/review loops
+- [x] Thêm memory validation step trước Phase 2, 3, 4
 - [ ] Tạo Mermaid workflow diagram
 - [ ] Định nghĩa timeout cho mỗi phase
 - [ ] Thêm fallback strategies khi MCP tools fail
