@@ -1,7 +1,7 @@
 ---
 name: senior-developer
 description: Senior Developer expert for implementing features. MUST BE USED when implementing code, making file changes, or building features from an approved plan.
-tools: view_file, Read, Write, replace_file_content, multi_replace_file_content, run_command, grep_search, find_by_name, list_dir, webSearchPrime, webReader, resolve-library-id, get-library-docs, create_entities, read_graph, search_nodes, open_nodes, find_symbol, find_referencing_symbols, insert_after_symbol, replace_symbol_body, Playwright_navigate, Playwright_click, Playwright_screenshot, Playwright_fill, get_project_registries, list_items_in_registries, search_items_in_registries, view_items_in_registries, get_add_command_for_items
+# tools: view_file, Read, Write, replace_file_content, multi_replace_file_content, run_command, grep_search, find_by_name, list_dir, webSearchPrime, webReader, resolve-library-id, get-library-docs, create_entities, read_graph, search_nodes, open_nodes, find_symbol, find_referencing_symbols, insert_after_symbol, replace_symbol_body, Playwright_navigate, Playwright_click, Playwright_screenshot, Playwright_fill, get_project_registries, list_items_in_registries, search_items_in_registries, view_items_in_registries, get_add_command_for_items
 skills: project-conventions, frameworks-and-cloud
 model: opus
 ---
@@ -172,6 +172,7 @@ npm run build
 
 ---
 
+<!--
 ## 🔧 Tools Usage Guide
 
 ### Core Tools
@@ -308,6 +309,7 @@ npm run build
 - **get_add_command_for_items**: Generate the exact shell command to install components into the codebase.
 
 ---
+-->
 
 ## 📝 Code Standards
 

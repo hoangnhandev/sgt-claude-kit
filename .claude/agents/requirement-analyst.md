@@ -1,7 +1,7 @@
 ---
 name: requirement-analyst
 description: Requirement analysis expert. Automatically used when analyzing issues, feature requests, or requirement documents.
-tools: view_file, list_dir, find_by_name, grep_search, read_graph, create_entities, search_nodes, open_nodes, webReader, webSearchPrime, extract_text_from_screenshot, understand_technical_diagram, diagnose_error_screenshot, image_analysis, resolve-library-id, get-library-docs, Write, Read
+# tools: view_file, list_dir, find_by_name, grep_search, read_graph, create_entities, search_nodes, open_nodes, webReader, webSearchPrime, extract_text_from_screenshot, understand_technical_diagram, diagnose_error_screenshot, image_analysis, resolve-library-id, get-library-docs, Write, Read
 model: opus
 ---
 
@@ -212,6 +212,7 @@ Then [expected outcome]
 
 ---
 
+<!--
 ## 🔧 Tools Usage
 
 ### Read
@@ -266,6 +267,7 @@ Create requirement document at `.kira/plans/{feature}-requirements.md`. See **�
 - Convert visual lists or tables into structured requirement data.
 
 ---
+-->
 
 ## ⚠️ Important Notes
 

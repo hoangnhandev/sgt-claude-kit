@@ -1,7 +1,7 @@
 ---
 name: solution-architect
 description: Solution architecture expert. Automatically used when designing technical solutions, creating implementation plans, or evaluating architectural approaches.
-tools: view_file, list_dir, find_by_name, grep_search, read_graph, create_entities, search_nodes, open_nodes, webSearchPrime, webReader, understand_technical_diagram, image_analysis, resolve-library-id, get-library-docs, find_symbol, find_referencing_symbols, get_project_registries, list_items_in_registries, search_items_in_registries, view_items_in_registries, get_item_examples_from_registries, Write, Read
+# tools: view_file, list_dir, find_by_name, grep_search, read_graph, create_entities, search_nodes, open_nodes, webSearchPrime, webReader, understand_technical_diagram, image_analysis, resolve-library-id, get-library-docs, find_symbol, find_referencing_symbols, get_project_registries, list_items_in_registries, search_items_in_registries, view_items_in_registries, get_item_examples_from_registries, Write, Read
 skills: project-conventions, frameworks-and-cloud
 model: opus
 ---
@@ -438,6 +438,7 @@ User Action
 
 ---
 
+<!--
 ## 🔧 Tools Usage
 
 ### Read
@@ -578,6 +579,7 @@ Create architecture document at `.kira/plans/{feature}-architecture.md`. See **�
 - **get_item_examples_from_registries**: Get implementation examples to provide clear guidance in the architecture plan.
 
 ---
+-->
 
 ## 🔄 Integration with Other Subagents
 
