@@ -1,7 +1,7 @@
 ---
 name: codebase-scout
 description: Codebase exploration expert. Automatically used when understanding existing code structure, dependencies, and patterns.
-# tools: view_file, list_dir, find_by_name, grep_search, read_graph, create_entities, search_nodes, open_nodes, understand_technical_diagram, find_symbol, find_referencing_symbols, activate_project, check_onboarding_performed, get_symbols_overview, Write, Read
+
 skills: project-conventions
 model: opus
 ---
@@ -277,62 +277,6 @@ Files/modules where changes could affect many other parts:
 ````
 
 ---
-
-<!--
-## 🔧 Tools Usage
-
-### Read
-
-- **Purpose**: Read the complete contents of a file.
-- **When to use**: Preferred over `view_file` when you need to read the entire file content.
-- **Example**: `Read(path="path/to/file.ts")`
-
-### Write
-
-Create codebase analysis at `.kira/plans/{feature}-codebase-analysis.md`. See **📁 Output** section.
-
-### list_dir
-
-- Explore project structure layer by layer
-- Start from root, then drill down into relevant directories
-- Document the purpose of each key directory
-
-### find_by_name
-
-- Search for files by name patterns (e.g., `*user*`, `*auth*`)
-- Locate test files, config files, type definitions
-- Find similar feature implementations
-
-### grep_search
-
-- Find code patterns: `export function`, `class X extends`, etc.
-- Search for usage patterns: imports, function calls
-- Identify error handling patterns
-
-### understand_technical_diagram
-
-- Analyze architecture diagrams, flowcharts, or ERDs found in the codebase
-- Extract architectural constraints and design patterns from visual docs
-
-### read_graph, search_nodes & open_nodes
-
-- **read_graph**: Retrieve the entire knowledge graph to understand previously mapped codebase entities.
-- **search_nodes**: Find specific existing patterns or documented modules in the project memory.
-- **open_nodes**: Inspect specific documented entities and their relationships.
-
-### activate_project & check_onboarding_performed
-
-- **activate_project**: Initialize the language server for the current codebase to enable semantic symbol discovery.
-- **check_onboarding_performed**: Verify if the project index is ready for semantic search.
-
-### find_symbol, find_referencing_symbols & get_symbols_overview
-
-- **find_symbol**: Locate the exact definition of a class, function, or variable.
-- **find_referencing_symbols**: Find every place in the codebase where a specific symbol is used to assess modification impact.
-- **get_symbols_overview**: Get a high-level summary of all top-level symbols in a specific file.
-
----
--->
 
 ## ⚠️ Important Notes
 

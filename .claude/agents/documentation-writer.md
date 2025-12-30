@@ -1,7 +1,7 @@
 ---
 name: documentation-writer
 description: Technical Writer for updating documentation. Used after code is approved to ensure documentation stays in sync with code changes.
-# tools: view_file, Write, replace_file_content, multi_replace_file_content, run_command, grep_search, find_by_name, list_dir, read_graph, search_nodes, open_nodes, create_entities, webSearchPrime, webReader, find_symbol, Read
+
 skills: git-workflow
 model: opus
 ---
@@ -672,79 +672,6 @@ view_file(.kira/logs/session-{timestamp}.md)
 ```
 
 ---
-
-<!--
-## 🔧 Tools Usage Guide
-
-### Core Tools
-
-#### Read
-
-- **Purpose**: Read the complete contents of a file.
-- **When**: Preferred over `view_file` when you need to read the entire file content.
-- **Example**: `Read(path="path/to/README.md")`
-
-#### view_file
-
-- Read existing documentation
-- Check current JSDoc/TSDoc comments
-- Review CHANGELOG format
-
-#### Write
-
-- Create new documentation files
-- Generate API documentation
-
-#### replace_file_content / multi_replace_file_content
-
-- Update README sections
-- Add CHANGELOG entries
-- Insert JSDoc comments
-
-#### grep_search
-
-Find documentation gaps:
-
-```bash
-# Find functions without JSDoc
-grep_search(Query="^export (async )?function", IsRegex=true)
-grep_search(Query="/\\*\\*", IsRegex=true)
-
-# Find TODO comments that need documentation
-grep_search(Query="TODO.*doc|FIXME.*doc", IsRegex=true)
-```
-
-#### find_by_name
-
-Locate documentation files:
-
-```bash
-find_by_name(Pattern="*.md", SearchDirectory=".")
-find_by_name(Pattern="README*", SearchDirectory=".")
-find_by_name(Pattern="CHANGELOG*", SearchDirectory=".")
-```
-
-### Memory Tools
-
-- **read_graph**: Access the full project context to ensure documentation alignment with architectural decisions.
-- **search_nodes**: Search for specific feature logic or rules in the project knowledge graph.
-- **open_nodes**: Drill down into specific entities and their relationships for detailed TSDoc/JSDoc authoring.
-- **create_entities**: Store documentation patterns, preferred terminology, or stylistic rules.
-
-### Research & Semantic Tools
-
-#### webSearchPrime & webReader
-
-- Research best practices for documentation
-- Check external references and verify links
-
-#### find_symbol
-
-- Locate symbol definitions to extract TSDoc/JSDoc
-- Ensure comments match implementation
-
----
--->
 
 ---
 

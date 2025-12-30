@@ -1,7 +1,7 @@
 ---
 name: test-engineer
 description: Senior Test Engineer for writing and executing tests. MUST BE USED after code implementation to ensure quality through comprehensive testing. Automatically triggered after Senior Developer completes implementation.
-# tools: view_file, Write, replace_file_content, multi_replace_file_content, run_command, grep_search, find_by_name, list_dir, webSearchPrime, webReader, resolve-library-id, get-library-docs, create_entities, read_graph, search_nodes, open_nodes, find_symbol, find_referencing_symbols, Playwright_navigate, Playwright_click, Playwright_fill, Playwright_screenshot, Playwright_expect_response, Playwright_assert_response, Playwright_console_logs, start_codegen_session, end_codegen_session, get_codegen_session, Playwright_resize, Read
+
 skills: testing-strategy
 model: opus
 ---
@@ -485,212 +485,6 @@ create_entities({
 
 ---
 
-<!--
-## 🔧 Tools Usage Guide
-
-### Core Testing Tools
-
-#### Read
-
-- **Purpose**: Read the complete contents of a file.
-- **When**: Preferred over `view_file` when you need to read the entire file content.
-- **Example**: `Read(path="path/to/test.ts")`
-
-#### run_command
-
-**Primary tool for test execution**
-
-```bash
-# Jest
-npm run test
-npm run test -- --coverage
-npm run test -- --watch
-npm run test -- --verbose
-
-# Vitest
-npm run test
-npx vitest run --coverage
-npx vitest --ui
-
-# Specific file
-npm run test -- src/features/auth/auth.test.ts
-npm run test -- --testPathPattern="auth"
-```
-
-#### view_file
-
-- Read implementation files to understand what to test
-- Read existing test files for patterns
-- Review coverage reports
-
-#### Write
-
-- Create new test files
-- Best practice: co-locate tests with source (`Component.tsx` → `Component.test.tsx`)
-
-#### grep_search
-
-Find testing patterns and usages:
-
-```bash
-# Find describe blocks
-grep_search(Query="describe\\(", IsRegex=true, Includes=["*.test.*"])
-
-# Find mock patterns
-grep_search(Query="vi.mock|jest.mock", IsRegex=true, Includes=["*.test.*"])
-
-# Find assertion patterns
-grep_search(Query="expect\\(", IsRegex=true, Includes=["*.test.*"])
-```
-
-#### find_by_name
-
-```bash
-# Find all test files
-find_by_name(Pattern="*.test.*", Extensions=["ts", "tsx"])
-
-# Find all mock files
-find_by_name(Pattern="*.mock.*")
-
-# Find test utilities
-find_by_name(Pattern="*testUtils*")
-```
-
-### Research Tools
-
-#### resolve-library-id + get-library-docs
-
-Use for testing library documentation:
-
-```javascript
-// Get testing library docs
-resolve - library - id({ libraryName: "testing-library/react" });
-get -
-  library -
-  docs({
-    context7CompatibleLibraryID: "/testing-library/react",
-    topic: "queries",
-  });
-
-// Get Jest docs
-resolve - library - id({ libraryName: "jest" });
-get -
-  library -
-  docs({
-    context7CompatibleLibraryID: "/facebook/jest",
-    topic: "mock functions",
-  });
-
-// Get Vitest docs
-resolve - library - id({ libraryName: "vitest" });
-get -
-  library -
-  docs({ context7CompatibleLibraryID: "/vitest-dev/vitest", topic: "mocking" });
-```
-
-#### webSearchPrime
-
-For complex testing scenarios:
-
-```javascript
-webSearchPrime({ query: "how to test React custom hooks with async state" });
-webSearchPrime({ query: "vitest mock axios interceptors" });
-webSearchPrime({ query: "testing error boundaries React" });
-```
-
-### Semantic Tools
-
-#### find_symbol
-
-Use to locate function definitions to write tests for:
-
-```bash
-find_symbol(symbol_name="calculateDiscount")
-```
-
----
-
-### Browser Automation Tools (MCP: playwright) - 🔴 USE REQUIRED FOR UI CHANGES
-
-> ⚠️ **IMPORTANT**: These tools MUST be used when testing UI components.
-> Do NOT just write test files - actually EXECUTE E2E tests using these tools.
-
-| Tool                         | Purpose                 | When to Use                   |
-| ---------------------------- | ----------------------- | ----------------------------- |
-| `Playwright_navigate`        | Load URL in browser     | Start every E2E test          |
-| `Playwright_click`           | Click UI elements       | Test button/link interactions |
-| `Playwright_fill`            | Fill input fields       | Test form inputs              |
-| `Playwright_screenshot`      | Capture visual evidence | After each test step          |
-| `Playwright_expect_response` | Wait for API calls      | Before asserting results      |
-| `Playwright_assert_response` | Verify API responses    | Validate data correctness     |
-| `Playwright_console_logs`    | Check for errors        | At end of each test           |
-| `Playwright_resize`          | Test responsive design  | For mobile/tablet views       |
-
-**Session Management:**
-
-- `start_codegen_session`: Begin recording test actions
-- `get_codegen_session`: Get recorded test script
-- `end_codegen_session`: Complete and save recording
-
----
-
-### E2E Testing Workflow with Playwright (EXECUTABLE EXAMPLE)
-
-> 🔴 **NOTE**: The following is NOT just documentation.
-> You MUST actually call these tools during testing.
-
-**Example: Testing Login Flow**
-
-```
-// Step 1: Navigate to login page
-Playwright_navigate({ url: "http://localhost:3000/login" })
-
-// Step 2: Take initial screenshot
-Playwright_screenshot({ name: "login-page-initial" })
-
-// Step 3: Fill in credentials
-Playwright_fill({ selector: "input[name='email']", text: "user@example.com" })
-Playwright_fill({ selector: "input[name='password']", text: "password123" })
-
-// Step 4: Submit form
-Playwright_click({ selector: "button[type='submit']" })
-
-// Step 5: Wait for API response
-Playwright_expect_response({ urlPattern: "**/api/auth/login", status: 200 })
-
-// Step 6: Verify response data
-Playwright_assert_response({
-  urlPattern: "**/api/auth/login",
-  jsonPath: "$.success",
-  expectedValue: true
-})
-
-// Step 7: Take success screenshot
-Playwright_screenshot({ name: "dashboard-after-login" })
-
-// Step 8: Check for console errors
-Playwright_console_logs({ filterType: "error" })
-// If errors found → TEST FAILED
-```
-
-**Responsive Testing Example:**
-
-```
-// Test mobile view
-Playwright_resize({ width: 375, height: 667 })
-Playwright_screenshot({ name: "login-mobile-view" })
-
-// Test tablet view
-Playwright_resize({ width: 768, height: 1024 })
-Playwright_screenshot({ name: "login-tablet-view" })
-
-// Test desktop view
-Playwright_resize({ width: 1920, height: 1080 })
-Playwright_screenshot({ name: "login-desktop-view" })
-```
-
-```
-
 ## 📝 Test File Naming & Structure
 
 ### File Naming Convention
@@ -721,7 +515,7 @@ src/
 │ ├── handlers.ts # MSW handlers
 │ └── server.ts # MSW server
 
-````
+```
 
 ### Test File Structure
 
@@ -800,7 +594,7 @@ describe("UserService", () => {
     /* ... */
   });
 });
-````
+```
 
 ---
 

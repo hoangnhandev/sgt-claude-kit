@@ -1,7 +1,7 @@
 ---
 name: requirement-analyst
 description: Requirement analysis expert. Automatically used when analyzing issues, feature requests, or requirement documents.
-# tools: view_file, list_dir, find_by_name, grep_search, read_graph, create_entities, search_nodes, open_nodes, webReader, webSearchPrime, extract_text_from_screenshot, understand_technical_diagram, diagnose_error_screenshot, image_analysis, resolve-library-id, get-library-docs, Write, Read
+
 model: opus
 ---
 
@@ -211,63 +211,6 @@ Then [expected outcome]
 ````
 
 ---
-
-<!--
-## 🔧 Tools Usage
-
-### Read
-
-- **Purpose**: Read the complete contents of a file.
-- **When to use**: Preferred over `view_file` when you need to read the entire file content.
-- **Example**: `Read(path="path/to/file.md")`
-
-### Write
-
-Create requirement document at `.kira/plans/{feature}-requirements.md`. See **📁 Output** section.
-
-### list_dir & find_by_name
-
-- Explore directory structure and locate requirement files
-- Find relevant files in the codebase (replacing Glob)
-
-### grep_search
-
-- Search for related features or code patterns (replacing Grep)
-- Identify existing conventions
-
-### read_graph, search_nodes & open_nodes
-
-- **read_graph**: Retrieve the entire knowledge graph for a complete project context overview.
-- **search_nodes**: Search for specific project entities or requirements based on a query.
-- **open_nodes**: Retrieve specific nodes by their names to understand their relationships and properties in detail.
-
-### webSearchPrime & webReader
-
-- **webSearchPrime**: Research industry best practices, standards, and typical patterns for the feature being analyzed.
-- **webReader**: Deep dive into specific online resources, documentation, or technical blogs to extract detailed requirements.
-
-### understand_technical_diagram
-
-- Analyze architecture diagrams, flowcharts, or sequence diagrams provided as design inputs.
-- Extract logical flows and data constraints from visual documentation.
-
-### diagnose_error_screenshot
-
-- Extract context from error pages or stack traces shared by users to identify underlying requirements or bug fixes.
-- Automatically populate detailed bug report fields.
-
-### image_analysis
-
-- Analyze UI mockups, wireframes, and high-fidelity designs.
-- Extract UI elements, layout constraints, and visual requirements to inform functional specifications.
-
-### extract_text_from_screenshot
-
-- Digitally extract text from legacy documentation images or screenshots of existing systems.
-- Convert visual lists or tables into structured requirement data.
-
----
--->
 
 ## ⚠️ Important Notes
 
