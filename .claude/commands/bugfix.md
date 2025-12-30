@@ -23,140 +23,110 @@ Analyze `$ARGUMENTS` to determine input type:
 
 ## 🔄 Execution Flow
 
-### Phase 1: Bug Triage & Analysis
+### Phase 1: Bug Analysis & Investigation (Unified)
 
-**Subagent**: `bug-analyst`
+**Subagent**: `bug-handler`
 
 ```
-Task: Analyze bug report and store in memory
+Task: Triage bug. If Simple, prepare Quick Fix. If Complex, investigate Root Cause.
 Input: Read bug from $ARGUMENTS
-Output: Store using create_entities - entities: bug_info, severity, reproduction_steps, affected_components
+Output: Store in memory (bug-analysis OR root-cause-analysis)
 Critical:
-  - Store in memory (NOT file)
-  - MUST include severity classification (P0-P3) with justification
-  - MUST include reproduction steps
-  - Confirm: "✅ Bug analyzed, severity: {level}, stored in memory"
+  - Assess Complexity (Simple/Medium/Complex)
+  - If Simple: Stop and return "Ready for Quick Fix"
+  - If Complex: Investigate Root Cause and return "Root cause identified"
 ```
-
-**Severity Matrix**: 🔴 Critical (P0) | 🟠 High (P1) | 🟡 Medium (P2) | 🟢 Low (P3)
 
 ---
 
-### 🚦 DECISION GATE: Severity Routing
+### 🚦 DECISION GATE: Workflow Routing
 
-Check **Severity** field:
+Check the output from `bug-handler`:
 
-| Severity        | Mode     | Action                                                |
-| --------------- | -------- | ----------------------------------------------------- |
-| 🔴 **Critical** | HOTFIX   | Auto-approve Phase 2, fast-track, skip non-essentials |
-| 🟠 **High**     | PRIORITY | Checkpoint before Phase 2                             |
-| 🟡 **Medium**   | NORMAL   | Standard workflow, option to defer                    |
-| 🟢 **Low**      | BACKLOG  | Batched/deferred fix, valid to stop here              |
+1.  **IF "Ready for Quick Fix" (Simple)**:
 
-**Routing Logic**:
+    - **Route**: 🚀 **QUICK FIX PATH**
+    - **Action**: Jump to **Phase 2 (Fix Implementation)** immediately.
+    - **Note**: Skip deep investigation and review.
 
-1. **Critical**: Log "🔴 HOTFIX MODE ACTIVATED" → Auto-continue to Phase 2
-2. **High/Medium**: Log details → Ask user (Continue / Discuss / Defer)
-3. **Low**: Log details → Ask user (Continue / Defer / Auto-fix Later)
+2.  **IF "Root cause identified" (Medium/Complex)**:
+    - **Route**: 🧪 **STANDARD PATH**
+    - **Action**: Proceed to **Decision Gate: Fix Approval**.
 
 ---
 
-### Phase 2: Root Cause Investigation
+### 🚦 DECISION GATE: Fix Approval (For Standard Path)
 
-**Subagent**: `bug-investigator`
+Check **Complexity** & **Risks**:
 
-```
-Task: Investigate bug, identify root cause and fix options
-Input: Bug Analysis (memory)
-Skills: .claude/skills/project-conventions/SKILL-SUMMARY.md
-Output: Store in memory - entities: root_cause, fix_options, regression_risks, recommended_approach, complexity
-Critical:
-  - Trace execution path
-  - Provide 2+ fix options with trade-offs
-  - Assess complexity: Simple / Medium / Complex
-  - Confirm: "✅ Root cause identified, complexity: {level}, stored in memory"
-```
-
-### 🚦 DECISION GATE: Fix Complexity Review
-
-Check **Complexity** field:
-
-- **Simple**: ✅ AUTO-APPROVE → Phase 3
-- **Medium/Complex**: ⏸️ USER REVIEW → Show Root Cause, Fix Options, Risks
-
-**User Review Options**:
-
-1. **Approve Option X** → Phase 3 with Option X
-2. **Approve Option Y** → Phase 3 with Option Y
-3. **Discuss** → Discuss trade-offs
+- **Medium**: ✅ AUTO-APPROVE → Phase 2
+- **Complex/High Risk**: ⏸️ USER REVIEW → Show Root Cause & Options.
 
 ---
 
-### Phase 3: Fix Implementation
+### Phase 2: Fix Implementation
 
 **Subagent**: `senior-developer`
 
 ```
-Task: Implement bug fix according to root cause analysis
-Mode: 🐛 BUG FIX MODE (Minimal Changes Only, No Refactoring)
-Input: Root cause & Bug info (memory)
+Task: Implement bug fix
+Mode: 🐛 BUG FIX MODE
+Input: Root cause (Standard) OR Analysis (Quick Fix) from memory
 Output: Store fix summary in memory - entities: files_changed, validation_results, fix_description
 Critical:
-  - Follow recommended fix EXACTLY
-  - MINIMAL changes to fix the bug (No scope creep)
-  - Add comment: // Fix for bug {bug-id}: {description}
+  - If Quick Fix: Use analysis findings directly
+  - If Standard: Follow Root Cause fix options
   - Run validation: lint, type-check, build
   - Confirm: "✅ Fix implemented, summary stored in memory"
 ```
 
 ---
 
-### Phase 4: Bug Verification
+### Phase 3: Bug Verification (Optional in QUICK mode)
 
 **Subagent**: `test-engineer`
 
+- **QUICK Mode**: SKIPPED (Senior Developer validation is sufficient)
+- **NORMAL/FULL Mode**: REQUIRED
+
 ```
 Task: Verify bug fix with tests
-Mode: 🧪 BUG VERIFICATION (Reproduction -> Fix Verify -> Regression)
+Mode: 🧪 BUG VERIFICATION
 Input: Fix summary & Root cause (memory)
 Skills: .claude/skills/testing-strategy/SKILL-SUMMARY.md
 Output: Store test results in memory - entities: reproduction_test, regression_results, quality_gate_status
 Critical:
   - Create reproduction test that FAILS without fix
   - Verify test PASSES with fix
-  - Run full test suite for regression check
   - Confirm: "✅ Bug fix verified, results stored in memory"
 ```
 
-**Quality Gate**: Block if Reproduction Test fails OR Regressions found.
-
 ---
 
-### Phase 5: Code Review
+### Phase 4: Code Review (Skipped in QUICK/NORMAL mode)
 
 **Subagent**: `code-reviewer`
 
+- **QUICK/NORMAL Mode**: SKIPPED (Self-review by previous agents + Main Agent)
+- **FULL Mode**: REQUIRED (For complex/risky changes)
+
 ```
 Task: Review bug fix for quality and correctness
-Mode: 🔍 BUG FIX REVIEW (Minimal Diff, Root Cause Fixed)
+Mode: 🔍 BUG FIX REVIEW
 Input: Fix summary, Verification, Root cause (memory)
 Skills: .claude/skills/security-guidelines/SKILL-SUMMARY.md
 Output: MUST create .kira/reviews/{bug-id}-review.md using Write tool
 Critical:
   - Verify minimal diff principle
-  - Verify root cause addressed (not just symptoms)
-  - Check security
   - Verdict: ✅ APPROVED or 🚫 CHANGES REQUESTED
   - Confirm: "✅ Review saved: [path]"
 ```
 
-**Quality Gate**: No CRITICAL issues + Minimal diff verified + Root cause addressed.
-
 ---
 
-### Phase 6: Finalization
+### Phase 5: Finalization
 
-#### Step 6.1: Git Operations
+#### Step 5.1: Git Operations
 
 **Executed by**: Main Agent
 
@@ -167,17 +137,16 @@ Critical:
    git commit -m "fix({scope}): {description}
 
    Fixes #{bug-id}
-   - Root cause: {brief root cause}
-   - Fix: {brief fix description}"
+   [Quick Fix / Validated]"
    ```
 
-#### Step 6.2: Output Summary
+#### Step 5.2: Output Summary
 
 Generate summary:
 
 - **Status**: ✅ Completed
-- **Files**: `.kira/reviews/{bug-id}-review.md`
-- **Git**: Commit `{hash}` (Fixes #{bug-id})
+- **Mode**: {Quick/Normal/Full}
+- **Git**: Commit `{hash}`
 
 ---
 
@@ -185,12 +154,11 @@ Generate summary:
 
 | Phase             | Agent            | Output  | Check             |
 | ----------------- | ---------------- | ------- | ----------------- |
-| 1. Analysis       | bug-analyst      | Memory  | Severity Check    |
-| 2. Investigation  | bug-investigator | Memory  | Complexity Check  |
-| 3. Implementation | senior-developer | Memory  | Lint/Build        |
-| 4. Verification   | test-engineer    | Memory  | Reproduction Test |
-| 5. Review         | code-reviewer    | File ✅ | Minimal Diff      |
-| 6. Finalization   | Main Agent       | Commit  | -                 |
+| 1. Analysis/Inv   | bug-handler      | Memory  | Complexity Check  |
+| 2. Implementation | senior-developer | Memory  | Lint/Build        |
+| 3. Verification   | test-engineer    | Memory  | Reproduction Test |
+| 4. Review         | code-reviewer    | File ✅ | Minimal Diff      |
+| 5. Finalization   | Main Agent       | Commit  | -                 |
 
 **Key Output**: `.kira/reviews/{bug-id}-review.md`
 
