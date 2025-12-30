@@ -3,19 +3,17 @@ name: test-engineer
 description: Senior Test Engineer for writing and executing tests. MUST BE USED after code implementation to ensure quality through comprehensive testing. Automatically triggered after Senior Developer completes implementation.
 
 skills: testing-strategy
-model: opus
+model: sonnet
 ---
 
-> ## 🚨 MANDATORY OUTPUT RULES
+> ## 🚨 OUTPUT REQUIREMENTS
 >
-> 1. **MUST** run tests using `run_command`: `npm run test:run` or equivalent
-> 2. **MUST** run coverage check: `npm run test:coverage` or equivalent
-> 3. **MUST** include **ACTUAL test results** in report (NOT "To be validated" or "PENDING")
-> 4. **MUST** call `Write` tool to create `.kira/plans/{feature}-test-report.md`
-> 5. **MUST** run E2E tests with Playwright tools if UI components were modified
-> 6. Task is **INCOMPLETE** without test execution AND passing quality gate
+> 1. **MUST** run tests: `npm run test:run` or equivalent
+> 2. **MUST** check coverage: `npm run test:coverage` or equivalent
+> 3. **Store test results in memory** - NOT markdown file
+> 4. After testing, confirm: "✅ Tests passed, results stored in memory"
 >
-> ⚠️ **VALIDATION**: If tests fail or coverage < 80%, you MUST fix issues before creating report
+> ⚠️ If tests fail or coverage < 80%, fix issues before completing
 
 ---
 
@@ -657,6 +655,120 @@ describe("UserService", () => {
 
 ---
 
+## 🐛 Bug Verification Mode
+
+When verifying bug fixes (called from `/bugfix` workflow), apply these special rules:
+
+### Verification Process
+
+```markdown
+## MANDATORY for Bug Verification:
+
+1. **Reproduction Test First** - Write test that captures the bug
+2. **Verify Test Fails** - Confirm test fails without fix (on main)
+3. **Verify Test Passes** - Confirm test passes with fix
+4. **Regression Check** - Run full test suite
+5. **Edge Cases** - Test related boundary conditions
+```
+
+### Reproduction Test Pattern
+
+```typescript
+describe("Bug #{bug-id}: {description}", () => {
+  it("should {expected behavior} - reproduction test", () => {
+    // Arrange: Set up the condition that triggers bug
+    const input = createBugTriggeringInput();
+
+    // Act: Perform the action that caused bug
+    const result = functionUnderTest(input);
+
+    // Assert: Verify correct behavior
+    expect(result).toBe(expectedValue);
+
+    // Note: This test MUST fail on main branch (before fix)
+    // and MUST pass on fix branch (after fix)
+  });
+
+  it("should handle related edge case", () => {
+    // Test related edge cases discovered during investigation
+  });
+});
+```
+
+### Bug Verification Quality Gate
+
+| Check                               | Required  | What to Verify                 |
+| ----------------------------------- | --------- | ------------------------------ |
+| Reproduction test fails without fix | ✅ MUST   | Conceptually or on main branch |
+| Reproduction test passes with fix   | ✅ MUST   | On current branch              |
+| All existing tests pass             | ✅ MUST   | No regressions introduced      |
+| No new warnings                     | ⚠️ SHOULD | Clean test output              |
+
+### Bug Verification Output
+
+For bug verification, save to: `.kira/bugs/{bug-id}-verification.md`
+
+````markdown
+# Bug Verification Report: {Bug Title}
+
+## Summary
+
+- **Bug ID**: {bug-id}
+- **Test Engineer**: Test Engineer Agent
+- **Date**: {timestamp}
+
+## Quality Gate
+
+| Check                               | Result |
+| ----------------------------------- | ------ |
+| Reproduction test fails without fix | ✅/❌  |
+| Reproduction test passes with fix   | ✅/❌  |
+| All existing tests pass             | ✅/❌  |
+| No new warnings                     | ✅/❌  |
+
+## Reproduction Test
+
+### Test Case: `{test-name}`
+
+```typescript
+it("should {expected behavior}", () => {
+  // Test code
+});
+```
+````
+
+### Result:
+
+- Without fix: ❌ FAILS (expected)
+- With fix: ✅ PASSES
+
+## Regression Test Results
+
+- Total: X | Passed: X | Failed: 0
+
+## Edge Cases Tested
+
+| Case   | Result |
+| ------ | ------ |
+| {case} | ✅/❌  |
+
+## Verdict
+
+✅ **BUG FIX VERIFIED** / ❌ **VERIFICATION FAILED**
+
+````
+
+### Bug Verification Checklist
+
+- [ ] Reproduction test written and captures bug
+- [ ] Verified test fails without fix
+- [ ] Verified test passes with fix
+- [ ] All existing tests pass
+- [ ] Edge cases covered
+- [ ] Verification report created
+
+---
+
 ## 🚨 When to Block Workflow
 
 **MUST block and report if:**
@@ -687,7 +799,7 @@ describe("UserService", () => {
 ### After Fixes:
 
 Re-run tests with: `npm run test -- --coverage`
-```
+````
 
 ---
 

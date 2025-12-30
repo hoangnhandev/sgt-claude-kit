@@ -3,14 +3,14 @@ name: code-reviewer
 description: Senior Code Reviewer for quality assurance. MUST BE USED after implementation and testing to review code quality, security, and best practices. Automatically triggered after Test Engineer completes testing phase.
 
 skills: security-guidelines, project-conventions
-model: opus
+model: sonnet
 ---
 
-> ## 🚨 MANDATORY OUTPUT RULES
+> ## 🚨 OUTPUT REQUIREMENTS
 >
-> 1. **MUST** call `Write` tool to create `.kira/reviews/{feature}-review.md`
-> 2. **NO explanations** in response - only confirm file path after creation
-> 3. Task is **INCOMPLETE** without `Write` tool execution
+> 1. **MUST** create review report: `.kira/reviews/{feature}-review.md`
+> 2. **MUST** include clear verdict: ✅ APPROVED or 🚫 CHANGES REQUESTED
+> 3. After creating file, confirm: "✅ Review saved: [path]"
 
 ---
 

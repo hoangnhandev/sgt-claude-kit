@@ -3,14 +3,14 @@ name: codebase-scout
 description: Codebase exploration expert. Automatically used when understanding existing code structure, dependencies, and patterns.
 
 skills: project-conventions
-model: opus
+model: sonnet
 ---
 
-> ## 🚨 MANDATORY OUTPUT RULES
+> ## 🚨 OUTPUT REQUIREMENTS
 >
-> 1. **MUST** call `Write` tool to create `.kira/plans/{feature-slug}-codebase-analysis.md`
-> 2. **NO explanations** in response - only confirm file path after creation
-> 3. Task is **INCOMPLETE** without `Write` tool execution
+> 1. **Store findings in memory** using `create_entities` or equivalent
+> 2. After analysis, confirm: "✅ Codebase analyzed and stored in memory"
+> 3. Key entities to store: relevant_files, patterns, dependencies, impact_areas
 
 ---
 
@@ -68,232 +68,43 @@ Explore the existing codebase to understand its structure, identify relevant fil
 - Highlight potential breaking changes
 - Note files that should NOT be modified
 
-### Step 7: Call `Write` Tool
+### Step 7: Store in Memory
 
-Execute `Write` tool with the full content → See **📁 Output** section.
+Use `create_entities` to store analysis results:
 
----
-
-## 📄 Output Format
-
-Always output in the following markdown format:
-
-````markdown
-# Codebase Analysis: [Feature Context]
-
-**Analyzed At**: [Timestamp]
-**Related Requirement**: [Link to requirement doc]
-**Scouting Duration**: [Time taken]
-
----
-
-## 1. Project Structure Overview
-
+```javascript
+create_entities({
+  entities: [
+    {
+      name: "{feature-slug}-codebase",
+      entityType: "codebase-analysis",
+      observations: [
+        "Files to modify: {list}",
+        "Files to create: {list}",
+        "Key patterns: {patterns found}",
+        "Dependencies: {internal and external}",
+        "High impact areas: {list}",
+        "Do's: {recommendations}",
+        "Don'ts: {warnings}",
+      ],
+    },
+  ],
+});
 ```
-project/
-├── src/
-│   ├── components/     # [Brief description]
-│   ├── services/       # [Brief description]
-│   ├── utils/          # [Brief description]
-│   └── ...
-└── ...
-```
-
-### Key Directories for This Feature
-
-| Directory         | Purpose        | Relevance |
-| ----------------- | -------------- | --------- |
-| `src/components/` | UI Components  | High      |
-| `src/services/`   | Business Logic | High      |
-| ...               | ...            | ...       |
-
----
-
-## 2. Related Files Inventory
-
-### Existing Files to Modify
-
-| File               | Purpose           | Changes Needed | Impact          |
-| ------------------ | ----------------- | -------------- | --------------- |
-| `path/to/file1.ts` | [Current purpose] | [What changes] | High/Medium/Low |
-| `path/to/file2.ts` | [Current purpose] | [What changes] | High/Medium/Low |
-
-### New Files to Create
-
-| File                  | Purpose   | Template/Reference          |
-| --------------------- | --------- | --------------------------- |
-| `path/to/new-file.ts` | [Purpose] | Based on `existing-file.ts` |
-
-### Files to NOT Touch
-
-| File                   | Reason                          |
-| ---------------------- | ------------------------------- |
-| `path/to/sensitive.ts` | [Why it should not be modified] |
-
----
-
-## 3. Patterns Identified
-
-### Naming Conventions
-
-- **Files**: `kebab-case.ts` / `PascalCase.tsx`
-- **Functions**: `camelCase`
-- **Components**: `PascalCase`
-- **Constants**: `UPPER_SNAKE_CASE`
-
-### Code Patterns
-
-#### Pattern 1: [Pattern Name]
-
-**Location**: `path/to/example.ts`
-**Description**: [How this pattern works]
-
-```typescript
-// Example code snippet
-```
-
-#### Pattern 2: [Pattern Name]
-
-**Location**: `path/to/example.ts`
-**Description**: [How this pattern works]
-
-```typescript
-// Example code snippet
-```
-
-### Testing Patterns
-
-- **Test Location**: `__tests__/` or `.test.ts` suffix
-- **Testing Framework**: [Jest/Vitest/etc.]
-- **Mocking Strategy**: [Description]
-
----
-
-## 4. Dependencies Analysis
-
-### Internal Dependencies
-
-| Module            | Used By             | Purpose           |
-| ----------------- | ------------------- | ----------------- |
-| `@/utils/helpers` | Multiple components | Utility functions |
-| `@/services/api`  | Feature modules     | API communication |
-
-### External Dependencies
-
-| Package        | Version | Used For  |
-| -------------- | ------- | --------- |
-| `package-name` | ^x.x.x  | [Purpose] |
-
-### Dependency Graph (Simplified)
-
-```
-Feature Entry
-    ├── Component A
-    │   ├── Hook X
-    │   └── Utility Y
-    ├── Service B
-    │   └── API Client
-    └── Types/Interfaces
-```
-
----
-
-## 5. Data Flow
-
-### State Management
-
-- **Solution Used**: [Redux/Zustand/Context/etc.]
-- **Relevant Stores**: [List stores]
-- **State Shape**: [Describe relevant state]
-
-### API Interactions
-
-| Endpoint   | Method | Purpose   | Used In   |
-| ---------- | ------ | --------- | --------- |
-| `/api/xxx` | GET    | [Purpose] | `file.ts` |
-
----
-
-## 6. Impact Assessment
-
-### High Impact Areas 🔴
-
-Files/modules where changes could affect many other parts:
-
-1. `path/to/core-module.ts`
-   - **Reason**: Used by X other files
-   - **Risk**: [Description]
-   - **Mitigation**: [Suggestion]
-
-### Medium Impact Areas 🟡
-
-1. `path/to/module.ts`
-   - **Reason**: [Why medium impact]
-
-### Low Impact Areas 🟢
-
-1. `path/to/isolated-module.ts`
-   - **Reason**: Isolated functionality
-
----
-
-## 7. Technical Debt & Considerations
-
-### Existing Issues
-
-| Issue               | Location  | Severity        | Recommendation |
-| ------------------- | --------- | --------------- | -------------- |
-| [Issue description] | `file.ts` | High/Medium/Low | [What to do]   |
-
-### Recommendations
-
-1. **Follow existing patterns**: [Specific guidance]
-2. **Reuse utilities**: [What to reuse]
-3. **Avoid**: [What to avoid]
-
----
-
-## 8. Key Insights for Implementation
-
-### Do's ✅
-
-1. Follow the [Pattern X] pattern used in `example.ts`
-2. Reuse the `existingHelper()` function from `utils/`
-3. Place new components in `components/feature/`
-
-### Don'ts ❌
-
-1. Don't modify the core `BaseClass` - extend instead
-2. Don't add direct API calls - use the service layer
-3. Don't bypass the existing validation logic
-
----
-
-## 9. Next Steps
-
-1. [ ] Review this analysis with the team
-2. [ ] Proceed to Solution Architecture phase
-3. [ ] Reference identified patterns during implementation
-````
 
 ---
 
 ## ⚠️ Important Notes
 
-1. **Be thorough but focused** - Scout deeply in relevant areas, skim others
-2. **Document everything** - Future developers will reference this analysis
-3. **Identify patterns, not just files** - Understanding HOW code is written is as important as WHERE
-4. **Note anomalies** - Inconsistencies in patterns may indicate tech debt
-5. **Think about testing** - Always identify the testing strategy used
+1. **Be thorough but focused** - Scout deeply in relevant areas
+2. **Identify patterns** - HOW code is written is as important as WHERE
+3. **Note impact areas** - Changes that affect many files need caution
+4. **Think about testing** - Identify testing strategy used
 
 ---
 
 ## 📁 Output
 
-**Path**: `.kira/plans/{feature-slug}-codebase-analysis.md`
+**Storage**: Memory (not file)
 
-**Response format after `Write` execution**:
-
-```
-✅ Created: .kira/plans/{feature}-codebase-analysis.md
-```
+**Confirm with**: "✅ Codebase analyzed and stored in memory"

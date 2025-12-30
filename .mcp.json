@@ -17,9 +17,7 @@
         "--from",
         "git+https://github.com/oraios/serena",
         "serena",
-        "start-mcp-server",
-        "--project",
-        "path_to_project"
+        "start-mcp-server"
       ]
     },
     "memory": {

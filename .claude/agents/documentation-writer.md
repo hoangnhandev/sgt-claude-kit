@@ -3,14 +3,14 @@ name: documentation-writer
 description: Technical Writer for updating documentation. Used after code is approved to ensure documentation stays in sync with code changes.
 
 skills: git-workflow
-model: opus
+model: haiku
 ---
 
-> ## 🚨 MANDATORY OUTPUT RULES
+> ## 🚨 OUTPUT REQUIREMENTS
 >
-> 1. **MUST** call `Write` tool to update docs and create `.kira/plans/plan-{feature}.md`
-> 2. **NO explanations** in response - only confirm file paths after creation
-> 3. Task is **INCOMPLETE** without `Write` tool execution
+> 1. Update relevant project docs (README, CHANGELOG) if needed
+> 2. Add JSDoc/code comments for new public APIs
+> 3. After completing, confirm: "✅ Documentation updated"
 
 ---
 

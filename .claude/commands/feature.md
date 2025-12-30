@@ -32,10 +32,10 @@ Analyze `$ARGUMENTS` to determine input type:
 **Mode**: ⚡ **PARALLEL EXECUTION**
 
 **Simultaneous Subagents**:
-| Subagent | Task | Output File |
-|----------|------|-------------|
-| `requirement-analyst` | Requirement Analysis | `{feature-slug}-requirements.md` |
-| `codebase-scout` | Codebase Exploration | `{feature-slug}-codebase-analysis.md` |
+| Subagent | Task | Output |
+|----------|------|--------|
+| `requirement-analyst` | Requirement Analysis | Memory |
+| `codebase-scout` | Codebase Exploration | Memory |
 
 ---
 
@@ -48,26 +48,24 @@ Analyze `$ARGUMENTS` to determine input type:
 1. Read and analyze input requirement
 2. Extract user stories, acceptance criteria
 3. Identify scope and constraints
-4. **🚨 MUST use `Write` tool** to save output
+4. **Store findings in memory** (not file)
 
 **Subagent Task**:
 
 ```
-🎯 TASK: Analyze the feature requirement and create a requirements document.
+🎯 TASK: Analyze the feature requirement and store analysis in memory.
 
 ⚡ MODE: Running in PARALLEL with codebase-scout
 
 📄 INPUT: Read and analyze the requirement from: $ARGUMENTS
 
-📁 OUTPUT FILE (MANDATORY):
-You MUST use the `Write` tool to create: .kira/plans/{feature-slug}-requirements.md
+📁 OUTPUT: Store in memory using create_entities
+Key entities: user_stories, functional_requirements, acceptance_criteria, scope
 
 ⚠️ CRITICAL INSTRUCTIONS:
-1. You MUST call `Write` tool to create the output file
-2. DO NOT just output markdown content as a response
-3. Your task is NOT complete until the file is created
-4. After creating the file, confirm: "✅ File created: [path]"
-5. ⚡ NOTE: codebase-scout is running simultaneously - no need to wait
+1. Store findings in memory, NOT as markdown file
+2. After storing, confirm: "✅ Requirements analyzed and stored in memory"
+3. ⚡ NOTE: codebase-scout is running simultaneously - no need to wait
 ```
 
 ---
@@ -81,34 +79,29 @@ You MUST use the `Write` tool to create: .kira/plans/{feature-slug}-requirements
 1. Explore codebase to understand context
 2. Find relevant files and patterns
 3. Assess impact
-4. **🚨 MUST use `Write` tool** to save output
+4. **Store findings in memory** (not file)
 
 **Subagent Task**:
 
 ```
-🎯 TASK: Analyze the codebase to understand context for the feature implementation.
+🎯 TASK: Analyze the codebase to understand context for feature implementation.
 
 ⚡ MODE: Running in PARALLEL with requirement-analyst
 
 📄 INPUT:
-- Read the requirement from: $ARGUMENTS (same input as requirement-analyst)
+- Read the requirement from: $ARGUMENTS
 - Focus on: Finding relevant files, patterns, and impact areas
 
-📚 SKILLS FOR CODEBASE-SCOUT ROLE:
-- Read `.claude/skills/project-conventions/SKILL-SUMMARY.md` - Understand naming/structure conventions
+📚 SKILLS:
+- Read `.claude/skills/project-conventions/SKILL-SUMMARY.md`
 
-💡 NOTE: This role focuses on exploration, not implementation. Framework details not needed.
-
-📁 OUTPUT FILE (MANDATORY):
-You MUST use the `Write` tool to create: .kira/plans/{feature-slug}-codebase-analysis.md
+📁 OUTPUT: Store in memory using create_entities
+Key entities: relevant_files, patterns, dependencies, impact_areas
 
 ⚠️ CRITICAL INSTRUCTIONS:
-1. Read and apply all skills listed above BEFORE analyzing
-2. You MUST call `Write` tool to create the output file
-3. DO NOT just output markdown content as a response
-4. Your task is NOT complete until the file is created
-5. After creating the file, confirm: "✅ File created: [path]"
-6. ⚡ NOTE: requirement-analyst is running simultaneously - no need to wait
+1. Store findings in memory, NOT as markdown file
+2. After storing, confirm: "✅ Codebase analyzed and stored in memory"
+3. ⚡ NOTE: requirement-analyst is running simultaneously - no need to wait
 ```
 
 ---
@@ -120,9 +113,9 @@ You MUST use the `Write` tool to create: .kira/plans/{feature-slug}-codebase-ana
 **Steps**:
 
 1. **Wait for both subagents** to complete
-2. **Validate outputs exist**:
-   - Check: `.kira/plans/{feature-slug}-requirements.md`
-   - Check: `.kira/plans/{feature-slug}-codebase-analysis.md`
+2. **Validate memory entities exist**:
+   - Check: requirements analysis stored
+   - Check: codebase analysis stored
 3. **Quick cross-reference**:
    - Verify scope from requirements aligns with files found by scout
    - Flag any conflicts or gaps
@@ -133,10 +126,10 @@ You MUST use the `Write` tool to create: .kira/plans/{feature-slug}-codebase-ana
 ```markdown
 ## 🔍 Phase 1 Parallel Execution Summary
 
-| Subagent            | Status | Output File | Duration |
-| ------------------- | ------ | ----------- | -------- |
-| requirement-analyst | ✅/❌  | {path}      | Xm       |
-| codebase-scout      | ✅/❌  | {path}      | Xm       |
+| Subagent            | Status | Output | Duration |
+| ------------------- | ------ | ------ | -------- |
+| requirement-analyst | ✅/❌  | Memory | Xm       |
+| codebase-scout      | ✅/❌  | Memory | Xm       |
 
 **Total Phase 1 Time**: Xm (vs ~2x if sequential)
 
@@ -170,27 +163,21 @@ You MUST use the `Write` tool to create: .kira/plans/{feature-slug}-codebase-ana
 ```
 🎯 TASK: Design the solution architecture and create an implementation plan.
 
-📄 INPUT:
-- Requirements: .kira/plans/{feature-slug}-requirements.md
-- Codebase Analysis: .kira/plans/{feature-slug}-codebase-analysis.md
+📄 INPUT (from memory):
+- Requirements: search_nodes for "{feature-slug}-requirements"
+- Codebase Analysis: search_nodes for "{feature-slug}-codebase"
 
-📚 SKILLS FOR SOLUTION-ARCHITECT ROLE:
-- Read `.claude/skills/project-conventions/SKILL-SUMMARY.md` - Architecture aligns with standards
-- Read `.claude/skills/frameworks-and-cloud/SKILL-SUMMARY.md` - Framework best practices
+📚 SKILLS:
+- Read `.claude/skills/project-conventions/SKILL-SUMMARY.md`
+- Read `.claude/skills/frameworks-and-cloud/SKILL-SUMMARY.md`
 
-📖 FULL REFERENCE (read framework section matching your tech stack):
-- `.claude/skills/frameworks-and-cloud/SKILL.md` → Laravel/Java/Next.js/Node.js/AWS section
-
-📁 OUTPUT FILE (MANDATORY):
-You MUST use the `Write` tool to create: .kira/plans/{feature-slug}-architecture.md
+📁 OUTPUT FILE (MANDATORY - this is a key deliverable):
+You MUST create: .kira/plans/{feature-slug}-architecture.md
 
 ⚠️ CRITICAL INSTRUCTIONS:
-1. Read and apply all skills listed above BEFORE designing
-2. You MUST call `Write` tool to create the output file
-3. DO NOT just output markdown content as a response
-4. Your task is NOT complete until the file is created
-5. MUST include "Complexity" field: Simple / Medium / Complex / Critical
-6. After creating the file, confirm: "✅ File created: [path]"
+1. Read context from memory first
+2. MUST include "Complexity" field: Simple / Medium / Complex / Critical
+3. After creating the file, confirm: "✅ Architecture saved: [path]"
 ```
 
 **🪝 Hook**: Notify user about plan completion.
@@ -417,7 +404,7 @@ Please ask your question or state your concern.
 3. Apply project conventions via Skills
 4. Handle errors and edge cases
 5. Run self-validation (lint, type-check, build)
-6. **🚨 MUST use `Write` tool** to save output
+6. **Store summary in memory** (not file)
 
 **Subagent Task**:
 
@@ -426,27 +413,19 @@ Please ask your question or state your concern.
 
 📄 INPUT:
 - Architecture Plan: .kira/plans/{feature-slug}-architecture.md
-- Codebase Analysis: .kira/plans/{feature-slug}-codebase-analysis.md
+- Codebase context: search_nodes for "{feature-slug}-codebase"
 
-📚 SKILLS FOR SENIOR-DEVELOPER ROLE:
-- Read `.claude/skills/project-conventions/SKILL-SUMMARY.md` - Naming, formatting, code patterns
-- Read `.claude/skills/frameworks-and-cloud/SKILL-SUMMARY.md` - Framework-specific patterns
+📚 SKILLS:
+- Read `.claude/skills/project-conventions/SKILL-SUMMARY.md`
+- Read `.claude/skills/frameworks-and-cloud/SKILL-SUMMARY.md`
 
-📖 FULL REFERENCE (read only the sections you need):
-- `.claude/skills/project-conventions/SKILL.md` → If unclear on TypeScript/React patterns
-- `.claude/skills/frameworks-and-cloud/SKILL.md` → Only your framework section
-
-💡 NOTE: git-workflow and testing-strategy NOT needed for implementation. Focus on CODE.
-
-📁 OUTPUT FILE (MANDATORY):
-You MUST use the `Write` tool to create: .kira/plans/{feature-slug}-implementation-report.md
+📁 OUTPUT: Store implementation summary in memory
+Key entities: files_changed, validation_results, deviations, known_issues
 
 ⚠️ CRITICAL INSTRUCTIONS:
-1. Read and apply all skills listed above BEFORE implementing
-2. Follow the architecture plan exactly
-3. Run validation commands after implementation (lint, type-check, build)
-4. You MUST call `Write` tool to create the output file
-5. After creating the file, confirm: "✅ File created: [path]"
+1. Follow the architecture plan exactly
+2. Run validation commands after implementation (lint, type-check, build)
+3. Store summary in memory, confirm: "✅ Implementation complete, summary stored in memory"
 ```
 
 **🪝 Hook**: Auto-format code after each file. Run linter after implementation.
@@ -568,7 +547,7 @@ When done, type: **"Continue"** or **"Done"**
 3. Write integration tests if needed
 4. Run test suite and verify coverage
 5. **🚨 Quality Gate**: Block if tests fail or coverage < 80%
-6. **🚨 MUST use `Write` tool** to save output
+6. **Store results in memory** (not file)
 
 **Subagent Task**:
 
@@ -576,30 +555,21 @@ When done, type: **"Continue"** or **"Done"**
 🎯 TASK: Write and execute tests for the implemented feature.
 
 📄 INPUT:
-- Implementation Report: .kira/plans/{feature-slug}-implementation-report.md
 - Architecture Plan: .kira/plans/{feature-slug}-architecture.md
+- Implementation context: search_nodes for "{feature-slug}-implementation"
 
-📚 SKILLS FOR TEST-ENGINEER ROLE:
-- Read `.claude/skills/testing-strategy/SKILL-SUMMARY.md` - AAA pattern, coverage targets, test naming
+📚 SKILLS:
+- Read `.claude/skills/testing-strategy/SKILL-SUMMARY.md`
 
-📖 FULL REFERENCE (read if writing E2E tests):
-- `.claude/skills/testing-strategy/SKILL.md` → Detailed mocking, edge cases
-- `.claude/skills/e2e-testing/SKILL.md` → Only if E2E tests needed
-
-💡 NOTE: project-conventions and frameworks NOT primary focus. Testing patterns are priority.
-
-📁 OUTPUT FILE (MANDATORY):
-You MUST use the `Write` tool to create: .kira/plans/{feature-slug}-test-report.md
+📁 OUTPUT: Store test results in memory
+Key entities: test_count, coverage_percentage, failed_tests, quality_gate_status
 
 ⚠️ CRITICAL INSTRUCTIONS:
-1. Read and apply all skills listed above BEFORE writing tests
-2. Write comprehensive unit tests for all new code
-3. Achieve minimum 80% code coverage
-4. Test both happy paths and error cases
-5. Run test suite with coverage: npm run test -- --coverage
-6. QUALITY GATE: If tests fail or coverage < 80%, report and BLOCK workflow
-7. You MUST call `Write` tool to create the output file
-8. After creating the file, confirm: "✅ File created: [path]"
+1. Write comprehensive unit tests for all new code
+2. Achieve minimum 80% code coverage
+3. Run test suite: npm run test -- --coverage
+4. QUALITY GATE: If tests fail or coverage < 80%, BLOCK workflow
+5. Store results in memory, confirm: "✅ Tests passed, results stored in memory"
 ```
 
 **🪝 Hook**: Block workflow if tests fail.
@@ -645,7 +615,7 @@ If Quality Gate **FAILED**:
 3. Verify best practices compliance
 4. Check performance issues
 5. Classify issues: CRITICAL / WARNING / INFO
-6. **🚨 MUST use `Write` tool** to save output
+6. **Create review report** (this is a key output)
 
 **Subagent Task**:
 
@@ -653,31 +623,23 @@ If Quality Gate **FAILED**:
 🎯 TASK: Review the implemented code for quality, security, and best practices.
 
 📄 INPUT:
-- Implementation Report: .kira/plans/{feature-slug}-implementation-report.md
-- Test Report: .kira/plans/{feature-slug}-test-report.md
 - Architecture Plan: .kira/plans/{feature-slug}-architecture.md
+- Implementation context: search_nodes for "{feature-slug}-implementation"
+- Test results: search_nodes for "{feature-slug}-test"
 
-📚 SKILLS FOR CODE-REVIEWER ROLE:
-- Read `.claude/skills/security-guidelines/SKILL-SUMMARY.md` - Security best practices (PRIORITY)
-- Read `.claude/skills/project-conventions/SKILL-SUMMARY.md` - Verify code follows conventions
+📚 SKILLS:
+- Read `.claude/skills/security-guidelines/SKILL-SUMMARY.md`
+- Read `.claude/skills/project-conventions/SKILL-SUMMARY.md`
 
-📖 FULL REFERENCE (for detailed security checks):
-- `.claude/skills/security-guidelines/SKILL.md` → Full security grep patterns
-
-💡 NOTE: Focus on SECURITY first, then conventions. Testing-strategy only if reviewing test quality.
-
-📁 OUTPUT FILE (MANDATORY):
-You MUST use the `Write` tool to create: .kira/reviews/{feature-slug}-review.md
+📁 OUTPUT FILE (MANDATORY - this is a key deliverable):
+You MUST create: .kira/reviews/{feature-slug}-review.md
 
 ⚠️ CRITICAL INSTRUCTIONS:
-1. Read and apply all skills listed above BEFORE reviewing
-2. Review all code changes using git diff
-3. Check for security vulnerabilities (SQL injection, XSS, hardcoded secrets, etc.)
-4. Verify best practices compliance against loaded skills
-5. Classify issues: 🔴 CRITICAL / 🟡 WARNING / 🔵 INFO
-6. QUALITY GATE: If CRITICAL issues found, report and BLOCK workflow
-7. You MUST call `Write` tool to create the output file
-8. After creating the file, confirm: "✅ File created: [path]"
+1. Review all code changes using git diff
+2. Check for security vulnerabilities (SQL injection, XSS, hardcoded secrets)
+3. QUALITY GATE: If CRITICAL issues found, BLOCK workflow
+4. Include verdict: ✅ APPROVED or 🚫 CHANGES REQUESTED
+5. Confirm: "✅ Review saved: [path]"
 ```
 
 **🪝 Hook**: Block if CRITICAL issues found.

@@ -6,11 +6,11 @@ skills: project-conventions, frameworks-and-cloud
 model: opus
 ---
 
-> ## 🚨 MANDATORY OUTPUT RULES
+> ## 🚨 OUTPUT REQUIREMENTS
 >
-> 1. **MUST** call `Write` tool to create `.kira/plans/{feature}-implementation-report.md`
-> 2. **NO explanations** in response - only confirm file path after creation
-> 3. Task is **INCOMPLETE** without `Write` tool execution
+> 1. **Store implementation summary in memory** using `create_entities`
+> 2. After implementation, confirm: "✅ Implementation complete, summary stored in memory"
+> 3. Key entities: files_changed, validation_results, deviations, known_issues
 
 ---
 
@@ -356,6 +356,96 @@ During implementation, maintain internal progress:
 
 ---
 
+## 🐛 Bug Fix Mode
+
+When working on bug fixes (called from `/bugfix` workflow), apply these special rules:
+
+### Minimal Change Principle
+
+```markdown
+## MANDATORY for Bug Fixes:
+
+1. **Fix ONLY the bug** - No other changes
+2. **No refactoring** - Save improvements for later
+3. **No "while I'm here" changes** - Stay focused
+4. **No feature additions** - Even small ones
+```
+
+### Bug Fix Code Pattern
+
+```typescript
+// ✅ Good: Minimal, targeted fix
+// Fix for bug #123: Handle null user case
+const userName = user?.name ?? "Unknown";
+
+// ❌ Bad: Mixing fix with refactoring
+// Fix for bug #123: Handle null user case
+// Also refactored to use better naming...
+const formattedUserDisplayName = user?.name ?? "Unknown User"; // WRONG!
+```
+
+### Bug Fix Commit Format
+
+```bash
+git commit -m "fix(scope): description
+
+Fixes #bug-id
+
+- Root cause: brief explanation
+- Fix: what was changed"
+```
+
+### Bug Fix Output
+
+For bug fixes, save to: `.kira/bugs/{bug-id}-fix-report.md`
+
+````markdown
+# Bug Fix Report: {Bug Title}
+
+## Summary
+
+- **Bug ID**: {bug-id}
+- **Fix Option Used**: {from root cause analysis}
+- **Developer**: Senior Developer Agent
+- **Date**: {timestamp}
+
+## Changes Made
+
+| File              | Change      | Lines |
+| ----------------- | ----------- | ----- |
+| `path/to/file.ts` | Description | +X/-Y |
+
+## Fix Description
+
+{What was changed and why}
+
+## Inline Comment Added
+
+```typescript
+// Fix for bug {bug-id}: {description}
+```
+````
+
+## Validation Results
+
+- ✅ Lint: Passed
+- ✅ TypeScript: No errors
+- ✅ Build: Successful
+
+````
+
+### Bug Fix Checklist
+
+Before completing bug fix:
+
+- [ ] Only bug-related changes made
+- [ ] Inline comment explains fix
+- [ ] No refactoring mixed in
+- [ ] Validation passes
+- [ ] Ready for verification testing
+
+---
+
 ## 🚨 When to Pause and Ask
 
 Pause implementation and request guidance when:
@@ -425,7 +515,7 @@ After implementation:
 ## Patterns Stored
 
 [New patterns saved to memory]
-```
+````
 
 Save to: `.kira/plans/{feature}-implementation-report.md`
 

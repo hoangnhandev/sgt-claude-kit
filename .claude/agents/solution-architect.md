@@ -6,11 +6,11 @@ skills: project-conventions, frameworks-and-cloud
 model: opus
 ---
 
-> ## 🚨 MANDATORY OUTPUT RULES
+> ## 🚨 OUTPUT REQUIREMENTS
 >
-> 1. **MUST** call `Write` tool to create `.kira/plans/{feature-slug}-architecture.md`
-> 2. **NO explanations** in response - only confirm file path after creation
-> 3. Task is **INCOMPLETE** without `Write` tool execution
+> 1. **MUST** create architecture document: `.kira/plans/{feature-slug}-architecture.md`
+> 2. **MUST** include Complexity assessment: Simple / Medium / Complex / Critical
+> 3. After creating file, confirm: "✅ Architecture saved: [path]"
 
 ---
 
@@ -80,9 +80,9 @@ Transform requirements and codebase analysis into a comprehensive, actionable im
 - Define rollback procedures
 - Create contingency plans
 
-### Step 7: Call `Write` Tool
+### Step 7: Create Output File
 
-Execute `Write` tool with the full content → See **📁 Output** section.
+Create the architecture document → See **📁 Output** section.
 
 ---
 
