@@ -4,25 +4,30 @@ description: Full feature development workflow (Analyze -> Plan -> Implement).
 
 # Feature Workflow
 
-## 🔄 Flow
+## 1. Analysis
 
-1. **Analyze**: `/analyze`
-   - Agent: `requirement-analyst`, `codebase-scout`
-2. **Plan**: `/plan`
-   - Agent: `solution-architect`
-   - **Gate**: User Approval (if Complex)
-3. **Implement**: `/implement`
-   - Agent: `senior-developer`
-   - Agent: `test-engineer` (Gate: Cov > 80%)
-   - Agent: `code-reviewer` (Gate: Approved)
-   - Agent: `documentation-writer`
+**Command**: `/analyze`
+**Agents**: `requirement-analyst`, `codebase-scout`
+**Task**: Analyze requirements and feasibility.
 
-## 🕹️ Variants
+## 2. Planning
 
-- `/feature new-login`: Run full flow.
-- `/feature --quick`: Skip formal planning (for simple features).
+**Command**: `/plan`
+**Agent**: `solution-architect`
+**Gate**: User Approval (Required for Complex features).
 
-## ⚠️ Recovery
+## 3. Implementation & Verification
 
-- If **Test Fails**: Re-run `senior-developer` to fix, then `test-engineer`.
-- If **Review Fails**: Re-run `senior-developer` to fix, then `code-reviewer`.
+**Command**: `/implement`
+**Agents**: `senior-developer`, `test-engineer`, `code-reviewer`, `documentation-writer`
+**Gate**: Test Coverage > 80%, Review Approved.
+
+## 4. Recovery Strategy
+
+**If Test Fails**: Re-run `senior-developer` to fix, then `test-engineer`.
+**If Review Fails**: Re-run `senior-developer` to fix, then `code-reviewer`.
+
+## Variants
+
+- `feature [name]`: Standard flow.
+- `feature --quick`: Skip formal planning (for simple changes).

@@ -4,31 +4,35 @@ description: Fix bugs with efficient routing (Quick Fix vs Deep Investigation).
 
 # Bugfix Workflow
 
-## 1. Triage & Analyze
+## 1. Triage & Analysis
 
 **Agent**: `bug-handler`
-**Task**: Analyze issue. Determine complexity (Simple/Complex).
+**Input**: Issue description / Error log.
+**Task**: Analyze issue severity and determine complexity (Simple/Complex).
 
 ## 2. Decision Gate
 
-- **If Simple (Quick Fix)**:
-  - Skip Investigation. Goto **Step 3**.
-- **If Complex**:
-  - `bug-handler` continues Deep Investigation (Root Cause Analysis).
+**Condition**: Complexity check.
+**If Simple**: Proceed directly to **Implementation**.
+**If Complex**: Continue **Deep Investigation** (Root Cause Analysis).
 
 ## 3. Implementation
 
 **Agent**: `senior-developer`
-**Task**: Apply fix (Minimal changes).
-**Mode**: `Bug Fix` (Strict no refactoring).
+**Input**: Analysis Report.
+**Task**: Apply fix with minimal changes.
+**Mode**: Bug Fix (Strict no refactoring).
 
 ## 4. Verification
 
-**Agent**: `test-engineer`
-**Task**: Verify fix (Reproduction Test).
-**Gate**: Must pass reproduction test & regression suite.
+**Command**: `/test`
+**Gate**: Pass reproduction test & regression suite.
 
-## 5. Finalize
+## 5. Finalization
 
 **Agent**: `documentation-writer`
-**Task**: Commit `fix(...)`.
+**Task**: Create commit with format `fix(...)`.
+
+## 6. Recovery Strategy
+
+**If Verification Fails**: Re-run `senior-developer` with failure context.

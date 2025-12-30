@@ -9,14 +9,8 @@ description: Perform code review.
 **Agent**: `code-reviewer`
 **Input**: Git diff.
 **Task**: Check Security, Logic, Style.
-**Output**: Review Report.
 
-## 2. Approval Gate
+## 2. Output
 
-- **Approved**: Ready to merge.
-- **Changes Requested**: Must fix critical issues.
-
-## 3. Feedback Loop (If Rejected)
-
-**Agent**: `senior-developer`
-**Task**: Fix reported issues.
+**Status**: `Approved` or `Changes Requested`.
+**Artifact**: Review Report.
