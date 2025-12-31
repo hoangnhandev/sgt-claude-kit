@@ -49,6 +49,20 @@ description: Coding conventions and standards for the project.
 - **Rule**: Explain WHY, not WHAT.
 - **JSDoc**: Required for Public APIs (`@param`, `@returns`, `@example`).
 
+## 📦 Package Version Check
+
+**Purpose**: Ensure Context7 documentation queries match the library version used in the project.
+
+**Workflow**:
+
+1. **Check dependency files** before querying Context7:
+   - Node.js: `package.json` → `dependencies` / `devDependencies`
+   - Python: `requirements.txt` / `pyproject.toml`
+2. **Query Context7 with a specific version**:
+   - Use `resolve-library-id` with the package name.
+   - Select results matching the major version (e.g., `v14.x` for Next.js 14.2.3).
+3. **Fallback**: If the exact version is not found, use the closest version available or latest.
+
 ## 🧱 Maintainability
 
 - **No Hardcoding**: Avoid magic strings/numbers. Use `constants` or `config` files.

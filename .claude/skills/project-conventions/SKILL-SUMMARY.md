@@ -13,3 +13,4 @@ Full: `.claude/skills/project-conventions/SKILL.md`
 2. **React**: Hooks -> State -> Effects -> Render.
 3. **Tests**: AAA pattern. `describe` -> `it`.
 4. **Style**: Max 100 chars user line. 2 spaces indent. Imports: Libs -> Internal -> Relative.
+5. **Context7**: Check `package.json`/`requirements.txt` version BEFORE querying docs.
