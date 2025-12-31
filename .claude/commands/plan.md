@@ -4,6 +4,10 @@ description: Create architecture plan for a feature.
 
 # Plan Workflow
 
+## Global Rules
+
+- **Code Convention**: Strictly follow existing project conventions. Do NOT create new styles or conventions.
+
 ## 1. Architecture Design
 
 **Agent**: `solution-architect`

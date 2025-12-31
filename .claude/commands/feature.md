@@ -4,6 +4,10 @@ description: Full feature development workflow (Analyze -> Plan -> Implement).
 
 # Feature Workflow
 
+## Global Rules
+
+- **Code Convention**: Strictly follow existing project conventions. Do NOT create new styles or conventions.
+
 ## 1. Analysis
 
 **Command**: `/analyze`

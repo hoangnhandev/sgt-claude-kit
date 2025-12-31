@@ -4,6 +4,10 @@ description: Fix bugs with efficient routing (Quick Fix vs Deep Investigation).
 
 # Bugfix Workflow
 
+## Global Rules
+
+- **Code Convention**: Strictly follow existing project conventions. Do NOT create new styles or conventions.
+
 ## 1. Triage & Analysis
 
 **Agent**: `bug-handler`

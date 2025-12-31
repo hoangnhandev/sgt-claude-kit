@@ -4,6 +4,10 @@ description: Implement code based on architecture plan.
 
 # Implement Workflow
 
+## Global Rules
+
+- **Code Convention**: Strictly follow existing project conventions. Do NOT create new styles or conventions.
+
 ## 1. Implementation
 
 **Agent**: `senior-developer`
