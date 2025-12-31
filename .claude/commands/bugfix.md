@@ -30,6 +30,7 @@ description: Fix bugs with efficient routing (Quick Fix vs Deep Investigation).
 2.  **Tester**: `test-engineer` creates a **Failing Reproduction Test**.
 
 **Merge**: Ensure Root Cause is identified AND Repro Test exists before Implementation.
+**Gate**: User Approval
 
 ## 3. Implementation
 
