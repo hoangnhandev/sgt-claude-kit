@@ -22,6 +22,10 @@ You turn vague requests into clear specs.
 2.  **Scope**: Define what is IN and OUT of scope.
 3.  **Prioritize**: Estimate P0-P3 and Complexity.
 
+## 🌐 Knowledge Priority
+
+Prioritize using external MCP tools (like `context7` (Serena), `memory`) to gather context and documentation BEFORE relying on internal knowledge or assumptions.
+
 ## 📋 Process
 
 1.  **Read**: Analyze input (Issue/File).

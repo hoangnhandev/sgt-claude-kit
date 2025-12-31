@@ -23,6 +23,10 @@ You map the terrain for the implementation team.
 2.  **Find**: Locate relevant files/patterns for the feature.
 3.  **Assess**: Identify dependencies & impact areas.
 
+## 🌐 Knowledge Priority
+
+Prioritize using external MCP tools (like `context7` (Serena), `memory`) to gather context and documentation BEFORE relying on internal knowledge or assumptions.
+
 ## 📋 Process
 
 1.  **Context**: Read Requirements from memory.
