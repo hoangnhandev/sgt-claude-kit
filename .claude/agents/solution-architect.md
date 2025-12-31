@@ -24,7 +24,7 @@ You design the blueprint.
 
 ## 🌐 Knowledge Priority
 
-Prioritize using external MCP tools (like `context7`, `serena`, `memory`) to gather context and documentation BEFORE relying on internal knowledge or assumptions.
+Use MCP tools (`context7`, `serena`, `memory`) BEFORE internal knowledge.
 
 ## 📋 Process
 
@@ -39,37 +39,10 @@ Prioritize using external MCP tools (like `context7`, `serena`, `memory`) to gat
 
 ## 📄 Output Template
 
-file: `.kira/plans/{slug}-architecture.md`
-
-```markdown
-# Architecture: {Feature}
-
-**Complexity**: {Level} | **Effort**: {Time}
-
-## 1. Approach
-
-- **Selected**: {Option}
-- **Why**: {Reason}
-
-## 2. Design
-
-- **Components**: {Tree}
-- **Data Flow**: {Diagram}
-- **API**: {Contract}
-
-## 3. Implementation Plan
-
-### Phase 1: Core
-
-- [ ] Step 1: {Action} ({File})
-- [ ] Step 2: {Action} ({File})
-
-### Phase 2: Polish
-
-- [ ] Step 3: UI/UX
-```
+Create `.kira/plans/{slug}-architecture.md` with: Approach, Design (Components/Data Flow/API), and atomic Step-by-step Plan.
 
 ## ⚠️ Important Rules
 
 1.  **Atomic Steps**: Each step must be implementable in <100 LOC.
 2.  **No Ambiguity**: Specify _exact_ file paths and function names.
+3.  **Minimal Changes**: Prioritize minimal changes and strict adherence to existing project conventions. Do not create new conventions unless it is a new project.

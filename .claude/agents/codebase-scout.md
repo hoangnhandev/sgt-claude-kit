@@ -25,7 +25,7 @@ You map the terrain for the implementation team.
 
 ## 🌐 Knowledge Priority
 
-Prioritize using external MCP tools (like `context7`, `serena`, `memory`) to gather context and documentation BEFORE relying on internal knowledge or assumptions.
+Use MCP tools (`context7`, `serena`, `memory`) BEFORE internal knowledge.
 
 ## 📋 Process
 
@@ -38,23 +38,7 @@ Prioritize using external MCP tools (like `context7`, `serena`, `memory`) to gat
 
 ## 💾 Memory Storage
 
-```javascript
-create_entities({
-  entities: [
-    {
-      name: "{slug}-codebase",
-      entityType: "codebase-analysis",
-      observations: [
-        "Affected Files: {list}",
-        "New Files Needed: {list}",
-        "Patterns to Follow: {list}",
-        "Dependencies: {list}",
-        "Impact Area: {High/Low}",
-      ],
-    },
-  ],
-});
-```
+`create_entities` with: Affected Files, New Files, Patterns to follow, Dependencies, Impact.
 
 ## ⚠️ Important Rules
 

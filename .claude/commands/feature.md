@@ -1,37 +1,46 @@
 ---
-description: Full feature development workflow (Analyze -> Plan -> Implement).
+description: Full feature development workflow with automatic complexity routing.
 ---
 
 # Feature Workflow
 
-## Global Rules
+## 🧠 Dynamic Execution Logic
 
-- **Code Convention**: Strictly follow existing project conventions. Do NOT create new styles or conventions.
+This workflow automatically adapts to task complexity based on the Analysis phase.
 
-## 1. Analysis
+### Complexity Gate
 
-**Command**: `/analyze`
-**Agents**: `requirement-analyst`, `codebase-scout` (Parallel)
-**Task**: Analyze requirements and feasibility.
+After **Analysis**, the agents will categorize the task in the `requirements` memory:
 
-## 2. Planning
+- **LITE**: (Change < 50 LOC, 1-2 files, no architecture change).
+  - **Path**: Analysis -> Implementation -> Review -> Git.
+  - **Auto-Skip**: `solution-architect`, `test-engineer` (if non-critical), `documentation-writer`.
+- **FULL**: (New features, schema changes, heavy refactor).
+  - **Path**: Analysis -> Planning -> Implementation -> Testing -> Review -> Documentation -> Git.
 
-**Command**: `/plan`
-**Agent**: `solution-architect`
-**Gate**: User Approval (Required for Complex features).
+## 1. Analysis (Required)
+
+- **Command**: `/analyze`
+- **Agents**: `requirement-analyst`, `codebase-scout`
+- **Output**: Specs + **Complexity Verdict (LITE/FULL)**.
+
+## 2. Planning (Conditional)
+
+- **Agent**: `solution-architect`
+- **Action**: **SKIP** if Verdict is **LITE**.
+- **Gate**: User Approval (Required for FULL features).
 
 ## 3. Implementation & Verification
 
-**Command**: `/implement`
-**Agents**: `senior-developer`, `test-engineer`, `code-reviewer`, `documentation-writer`
-**Gate**: Test Coverage > 80%, Review Approved.
+- **Agents**: `senior-developer`
+- **Testing**: `test-engineer` (Mandatory for FULL, Optional for LITE).
+- **Review**: `code-reviewer` (Mandatory for ALL).
 
-## 4. Recovery Strategy
+## 4. Finalization
 
-**If Test Fails**: Re-run `senior-developer` to fix, then `test-engineer`.
-**If Review Fails**: Re-run `senior-developer` to fix, then `code-reviewer`.
+- **Agent**: `documentation-writer` (**SKIP** if LITE).
+- **Git**: Commit & Push (Standardized messages).
 
-## Variants
+## 🔄 Recovery Strategy
 
-- `feature [name]`: Standard flow.
-- `feature --quick`: Skip formal planning (for simple changes).
+If any step (Lint/Build/Test/Review) fails, the flow returns to `senior-developer` for fixing until all quality gates are passed.

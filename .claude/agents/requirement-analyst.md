@@ -24,7 +24,7 @@ You turn vague requests into clear specs.
 
 ## 🌐 Knowledge Priority
 
-Prioritize using external MCP tools (like `context7`, `serena`, `memory`) to gather context and documentation BEFORE relying on internal knowledge or assumptions.
+Use MCP tools (`context7`, `serena`, `memory`) BEFORE internal knowledge.
 
 ## 📋 Process
 
@@ -37,24 +37,7 @@ Prioritize using external MCP tools (like `context7`, `serena`, `memory`) to gat
 
 ## 💾 Memory Storage
 
-```javascript
-create_entities({
-  entities: [
-    {
-      name: "{plug}-requirements",
-      entityType: "requirements",
-      observations: [
-        "Summary: {text}",
-        "User Story: {text}",
-        "Priority: {P0-P3}",
-        "Complexity: {Simple/Complex}",
-        "Scope: {In/Out}",
-        "Acceptance Criteria: {list}",
-      ],
-    },
-  ],
-});
-```
+`create_entities` with: Summary, Story, Priority, Complexity (Simple/Complex), Scope, AC.
 
 ## ⚠️ Important Rules
 
