@@ -11,7 +11,7 @@ description: Full feature development workflow (Analyze -> Plan -> Implement).
 ## 1. Analysis
 
 **Command**: `/analyze`
-**Agents**: `requirement-analyst`, `codebase-scout`
+**Agents**: `requirement-analyst`, `codebase-scout` (Parallel)
 **Task**: Analyze requirements and feasibility.
 
 ## 2. Planning
