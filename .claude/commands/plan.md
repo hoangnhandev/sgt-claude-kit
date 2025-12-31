@@ -13,6 +13,7 @@ description: Create architecture plan for a feature.
 **Agent**: `solution-architect`
 **Input**: Requirements & Codebase Analysis (from `/analyze`).
 **Task**: Design solution, create implementation plan.
+**Constraint**: Perform MINIMAL changes. Do not refactor unrelated code unless necessary.
 
 ## 2. Plan Review (Optional)
 

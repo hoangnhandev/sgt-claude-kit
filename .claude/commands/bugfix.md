@@ -36,7 +36,7 @@ description: Fix bugs with efficient routing (Quick Fix vs Deep Investigation).
 **Agent**: `senior-developer`
 **Input**: Analysis Report.
 **Task**: Apply fix with minimal changes.
-**Mode**: Bug Fix (Strict no refactoring).
+**Constraint**: Perform MINIMAL changes. Strict no refactoring of unrelated code.
 
 ## 4. Verification
 

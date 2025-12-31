@@ -13,6 +13,7 @@ description: Implement code based on architecture plan.
 **Agent**: `senior-developer`
 **Input**: Architecture Plan (from `/plan`) or Specifications.
 **Task**: Write code, strictly following the plan. Output Implementation Report.
+**Constraint**: Perform MINIMAL changes. Do not refactor unrelated code unless necessary.
 
 ## 2. Testing
 
