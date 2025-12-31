@@ -7,20 +7,19 @@ description: Coding conventions and standards for the project.
 
 ## 📁 Structure
 
-- **Src**: `components` (UI), `services` (Logic), `hooks`, `utils`, `types`, `styles`.
+- **Src**: `components` (UI), `services` (Logic), `hooks`, `utils`, `constants`, `config`, `types`, `styles`.
 - **Naming**:
   - Files: `UserCard.tsx` (Pascal), `useAuth.ts` (camel), `date-utils.ts` (kebab).
   - Vars: `userName` (camel), `MAX_RETRIES` (UPPER_SNAKE).
   - Bool: `isLoading`, `hasError` (verify state).
 
+## 🏗️ Architecture
+
+- **Pattern**: MVC (Model-View-Controller) / Layered.
+- **Service Layer**: Contains ALL business logic.
+- **Handlers/Controllers**: Thin layer. Solely responsible for receiving input, delegating to Service, and returning output.
+
 ## 🎨 Code Style
-
-### Imports Order
-
-1. Ext Libs (`react`, `axios`)
-2. Internal (`@/components`)
-3. Relative (`./utils`)
-4. Types (`type/interface`)
 
 ### Formatting
 
@@ -39,12 +38,6 @@ description: Coding conventions and standards for the project.
 - **Pattern**: `try/catch` with specialized naming.
 - **Throw**: `throw new Error("Context: message")` (Descriptive).
 
-## 📊 React
-
-- **Comp**: `export function Name({ prop }: Props)`.
-- **Order**: Hooks -> Derived State -> Effects -> Handlers -> Render.
-- **Props**: Destructure with defaults. Spread rest: `{...props}`.
-
 ## 🧪 Testing
 
 - **Name**: `describe("Service", () => it("should X when Y"))`.
@@ -55,3 +48,10 @@ description: Coding conventions and standards for the project.
 
 - **Rule**: Explain WHY, not WHAT.
 - **JSDoc**: Required for Public APIs (`@param`, `@returns`, `@example`).
+
+## 🧱 Maintainability
+
+- **No Hardcoding**: Avoid magic strings/numbers. Use `constants` or `config` files.
+- **Shared Logic**: Create `utils` or `helpers` or `libs` for logic used across the project.
+- **Centralization**: Centralize global settings/configs/components to facilitate management.
+- **Imports**: Use aliases (`@/`) and `index` files (barrelling) to shorten and clean up imports.

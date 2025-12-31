@@ -20,7 +20,7 @@ description: Best practices for Laravel, Java, Next.js, Node.js, and AWS.
 ## ⚡ Next.js / Node.js
 
 - **Dir**: `app/(group)/page.tsx` (App Router). `services/`.
-- **Best Practices**: Server Components by default. Server Actions for mutations. Zod for validation.
+- **Best Practices**: Server Components by default. Server Actions for mutations. Zod for validation. Use `react-hook-form` for forms.
 - **Node**: Layered Arch (Controller -> Service -> Repo). `try/catch` in async handlers.
 
 ## ☁️ AWS
