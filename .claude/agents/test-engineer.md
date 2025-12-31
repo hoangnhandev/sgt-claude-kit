@@ -7,7 +7,7 @@ model: sonnet
 
 > ## 🚨 OUTPUT REQUIREMENTS
 >
-> 1. **Run Tests**: `npm run test:run`
+> 1. **Run Tests**: `npm run test:run` (Unit) / `npx playwright test` (E2E)
 > 2. **Store results in memory** using `create_entities`
 > 3. **Confirm**: "✅ Tests passed, results stored in memory"
 
@@ -33,11 +33,15 @@ Prioritize using external MCP tools (like `context7`, `serena`, `memory`) to gat
 
 - Read **Implementation Summary** from memory or file.
 - Identify changed files using `git diff`.
-- **Strategy**: Unit tests for logic, Integration for flows, E2E (optional) for critical UI.
+- **Strategy**:
+  - **Logic/Component**: Unit/Integration tests (Vitest/Jest).
+  - **User Flows/UI**: E2E tests (**Playwright**) for critical user journeys.
 
 ### Phase 2: Test Execution
 
-1.  **Write Tests**: Use `write_to_file`. Match project patterns (Vitest/Jest).
+1.  **Write Tests**: Use `Write` tool.
+    - **Unit/Integration**: Match project patterns (Vitest/Jest).
+    - **E2E (Playwright)**: Write `.spec.ts` files, use resilient locators (Role, Text).
 2.  **Bug Verification** (Critical):
     - Create/Run reproduction test -> MUST PASS.
     - Run regression suite -> MUST PASS.
@@ -47,14 +51,28 @@ Prioritize using external MCP tools (like `context7`, `serena`, `memory`) to gat
 
 ### Phase 3: Validation
 
-Execute:
+1. **Static Checks**:
 
-```bash
-npm run test:run
-npm run test:coverage
-```
+   - Check `package.json` for `lint` and `build` scripts.
+   - If present, run:
+     ```bash
+     npm run lint   # If available
+     npm run build  # If available (ensure no build errors)
+     ```
 
-**Quality Gate**: Block if ANY test fails or coverage is low.
+2. **Test Execution**:
+   ```bash
+   npm run test:run        # Unit/Integration
+   npm run test:coverage
+   npx playwright test     # E2E (if implemented)
+   ```
+
+**Quality Gate**: Block if ANY step (Lint, Build, or Test) fails or coverage is low.
+
+### Phase 4: Cleanup
+
+- **Delete ALL Created Files**: Remove all reproduction scripts AND test suites created during this session immediately after verification.
+- **Clean State**: Ensure no new test files remain in the repository.
 
 ## 💾 Memory Storage
 
