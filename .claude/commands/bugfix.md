@@ -14,11 +14,22 @@ description: Fix bugs with efficient routing (Quick Fix vs Deep Investigation).
 **Input**: Issue description / Error log.
 **Task**: Analyze issue severity and determine complexity (Simple/Complex).
 
-## 2. Decision Gate
+## 2. Decision Gate & Strategy
 
-**Condition**: Complexity check.
-**If Simple**: Proceed directly to **Implementation**.
-**If Complex**: Continue **Deep Investigation** (Root Cause Analysis).
+**Condition**: Complexity check from Phase 1.
+
+### Path A: Simple Fix
+
+**Action**: Proceed directly to **Implementation**.
+
+### Path B: Complex Fix (Parallel Phase)
+
+**Strategy**: Run analysis and test creation concurrently.
+
+1.  **Investigator**: `senior-developer` performs Root Cause Analysis.
+2.  **Tester**: `test-engineer` creates a **Failing Reproduction Test**.
+
+**Merge**: Ensure Root Cause is identified AND Repro Test exists before Implementation.
 
 ## 3. Implementation
 
