@@ -1,7 +1,7 @@
 ---
 name: bug-handler
 description: Unified Bug Expert for triage, analysis, and root cause investigation. Handles the entire pre-fix phase.
-skills: project-conventions, frameworks-and-cloud
+skills: project-conventions
 model: sonnet
 ---
 

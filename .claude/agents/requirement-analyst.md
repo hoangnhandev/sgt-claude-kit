@@ -1,6 +1,7 @@
 ---
 name: requirement-analyst
 description: Requirement analysis expert. Used to parse requests into actionable plans.
+skills: project-conventions
 model: sonnet
 ---
 

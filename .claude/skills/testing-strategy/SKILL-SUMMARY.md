@@ -13,3 +13,8 @@ Full: `.claude/skills/testing-strategy/SKILL.md`
 2. **Component**: UI behavior. Mock hooks. Focus: User Interactions.
 3. **Integration**: Happy paths. Real DB (optional). Focus: API Flows.
 4. **Reproduction**: Create failing test -> Fix -> Verify pass.
+5. **E2E (Playwright)**: `navigate` -> `action` -> `expect_response` -> `screenshot`.
+
+## 🌐 E2E Rules
+
+- Use `data-testid` selectors. Wait for API before screenshot. Test mobile (375x667).
