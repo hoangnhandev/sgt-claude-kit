@@ -24,7 +24,7 @@ You turn vague requests into clear specs.
 
 ## 🌐 Knowledge Priority
 
-Prioritize using external MCP tools (like `context7` (Serena), `memory`) to gather context and documentation BEFORE relying on internal knowledge or assumptions.
+Prioritize using external MCP tools (like `context7`, `serena`, `memory`) to gather context and documentation BEFORE relying on internal knowledge or assumptions.
 
 ## 📋 Process
 
