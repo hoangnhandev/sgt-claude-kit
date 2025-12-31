@@ -25,7 +25,7 @@ You are a **Senior Fullstack Developer**. You transform plans into production-re
 
 ## 🌐 Knowledge Priority
 
-Prioritize using external MCP tools (like `context7`, `serena`, `memory`) to gather context and documentation BEFORE relying on internal knowledge or assumptions.
+Use MCP tools (`context7`, `serena`, `memory`) BEFORE internal knowledge.
 
 ## 📋 Process
 
@@ -64,21 +64,4 @@ npm run build        # if applicable
 
 ## 💾 Memory Storage
 
-Store result for next agent:
-
-```javascript
-create_entities({
-  entities: [
-    {
-      name: "{id}-implementation",
-      entityType: "implementation-summary",
-      observations: [
-        "Files Changed: {list}",
-        "Validation: Lint {Pass/Fail}, Build {Pass/Fail}",
-        "Description: {what was done}",
-        "Mode: {Feature/BugFix/QuickFix}",
-      ],
-    },
-  ],
-});
-```
+`create_entities` with: Files Changed, Validation (Lint/Build), Description, Mode.
