@@ -20,8 +20,13 @@ description: Best practices for Laravel, Java, Next.js, Node.js, and AWS.
 ## ⚡ Next.js / Node.js
 
 - **Dir**: `app/(group)/page.tsx` (App Router). `services/`.
-- **Best Practices**: Server Components by default. Server Actions for mutations. Zod for validation. Use `react-hook-form` for forms.
-- **Node**: Layered Arch (Controller -> Service -> Repo). `try/catch` in async handlers.
+- **Rendering Strategy**:
+  - **PPR (Partial Prerendering)**: Enable `ppr: true` in config. Wrap dynamic parts in `<Suspense>`.
+  - **Server Components**: Default. Use for data fetching, sensitive logic, keeping bundle small.
+  - **Client Components**: Only for interactivity (`onClick`, `useState`). Keep at leaf nodes.
+  - **Streaming**: Use `<Suspense fallback={<Skeleton />}>` for slow data fetches to avoid blocking UI.
+- **Validation**: Zod for schemas. `react-hook-form` for inputs.
+- **Node Backend**: Layered Arch (Controller -> Service -> Repo). `try/catch` in async handlers.
 
 ## ☁️ AWS
 

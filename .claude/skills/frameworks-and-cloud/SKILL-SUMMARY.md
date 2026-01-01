@@ -14,8 +14,8 @@ Rule: Interface-based services, Global Exception Handler.
 
 ## ⚡ Next.js/Node
 
-`App Router`, `Server Components`, `Zod`, `Layered Arch`.
-Rule: `use client` sparingly. Validated inputs.
+`App Router`, `Server Components`, `PPR`, `Suspense`.
+Rule: `use client` at leaves. `Suspense` for blocking data. Validated inputs.
 
 ## ☁️ AWS
 
