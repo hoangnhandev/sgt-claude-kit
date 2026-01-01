@@ -1,6 +1,6 @@
 ---
 name: requirement-analyst
-description: Requirement analysis expert. Used to parse requests into actionable plans.
+description: Requirement Analysis Specialist. MUST be called first to parse ALL new feature requests, analyze scope, and determine task complexity (LITE/FULL). Responsible for defining User Stories and Acceptance Criteria.
 skills: project-conventions
 model: sonnet
 ---

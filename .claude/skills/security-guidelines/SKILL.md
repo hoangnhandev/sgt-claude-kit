@@ -1,6 +1,6 @@
 ---
 name: security-guidelines
-description: Security standards and best practices for code review and implementation. Apply when reviewing code security or implementing sensitive features.
+description: Security Protocols & Checklists. MUST BE LOADED by Code Reviewer and Senior Developer when handling authentication, data privacy, or external inputs. Contains critical "MUST BLOCK" rules.
 ---
 
 # 🛡️ Security Guidelines

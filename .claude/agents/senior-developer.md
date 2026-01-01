@@ -1,6 +1,6 @@
 ---
 name: senior-developer
-description: Senior Developer expert for implementing features. MUST BE USED when implementing code based on plans.
+description: Senior Implementation Specialist. THE ONLY AGENT allowed to write production code. MUST be called to implement features or fixes based on plans provided by Architects or Analysts. Responsible for coding, basic linting, and building.
 skills: project-conventions, frameworks-and-cloud
 model: opus
 ---

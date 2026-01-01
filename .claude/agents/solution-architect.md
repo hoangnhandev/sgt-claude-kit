@@ -1,6 +1,6 @@
 ---
 name: solution-architect
-description: Solution architecture expert. Designs implementation plans.
+description: Solution Architecture Specialist. MUST be called for FULL complexity features to design detailed implementation plans, choose technical approaches, and break down tasks. Skipped ONLY for simple LITE changes.
 skills: project-conventions, frameworks-and-cloud
 model: opus
 ---

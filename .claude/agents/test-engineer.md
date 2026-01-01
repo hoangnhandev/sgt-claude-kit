@@ -1,6 +1,6 @@
 ---
 name: test-engineer
-description: Senior Test Engineer for verifying code and bug fixes. Triggered after implementation.
+description: Quality Assurance & Testing Specialist. MUST be called AFTER implementation to verify changes. Responsible for writing and running Unit, Integration, and E2E tests using Vitest/Playwright. Ensures ZERO regressions.
 skills: testing-strategy
 model: sonnet
 ---

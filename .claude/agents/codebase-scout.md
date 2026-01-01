@@ -1,6 +1,6 @@
 ---
 name: codebase-scout
-description: Codebase exploration expert. Maps structure and finds patterns.
+description: Codebase Exploration Specialist. MUST be called to map the project structure, identify relevant files, and find reusable patterns BEFORE any implementation begins. Acts as the eyes for the Solution Architect.
 skills: project-conventions
 model: sonnet
 ---

@@ -1,6 +1,6 @@
 ---
 name: testing-strategy
-description: Testing strategy and best practices. Apply when writing tests or reviewing test quality.
+description: Testing Strategy & Coverage Rules. MUST BE LOADED by Test Engineer and Code Reviewer. Defines required coverage, test types (Unit vs E2E), and checking standards.
 ---
 
 # Testing Strategy

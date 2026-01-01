@@ -1,6 +1,6 @@
 ---
 name: git-workflow
-description: Git workflow and commit conventions.
+description: Git & Commit Standards. LOAD this skill when creating branches, writing commit messages, or managing PRs. Defines the exact formatting rules for version control.
 ---
 
 # Git Workflow

@@ -1,6 +1,6 @@
 ---
 name: documentation-writer
-description: Technical Writer. Updates docs after code is merged.
+description: Documentation Specialist. MUST be called at the END of the workflow to update README, CHANGELOG, and JSDoc. Ensures documentation stays in sync with code changes.
 skills: git-workflow
 model: haiku
 ---

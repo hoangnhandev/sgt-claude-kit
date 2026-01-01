@@ -1,6 +1,6 @@
 ---
 name: code-reviewer
-description: Senior Code Reviewer for quality assurance. Triggered after testing to approve/reject changes.
+description: Code Review & Security Specialist. MUST be called as the FINAL quality gate before merging. Responsible for reviewing diffs, checking security, and enforcing project conventions. Has veto power over changes.
 skills: security-guidelines, project-conventions
 model: sonnet
 ---

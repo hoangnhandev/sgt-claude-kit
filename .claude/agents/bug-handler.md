@@ -1,6 +1,6 @@
 ---
 name: bug-handler
-description: Unified Bug Expert for triage, analysis, and root cause investigation. Handles the entire pre-fix phase.
+description: Bug Triage & Investigation Specialist. MUST be called FIRST for any bug reports. Responsible for analyzing root causes, determining severity, and routing simple vs. complex fixes.
 skills: project-conventions
 model: sonnet
 ---

@@ -1,6 +1,6 @@
 ---
 name: project-conventions
-description: Coding conventions and standards for the project.
+description: Core Coding Standards. MUST BE LOADED by ALL agents before writing or analyzing code. Defines naming conventions, file structure, and architecture patterns that must be strictly followed.
 ---
 
 # Project Conventions

@@ -1,6 +1,6 @@
 ---
 name: frameworks-and-cloud
-description: Best practices for Laravel, Java, Next.js, Node.js, and AWS.
+description: Technology Stack & Best Practices. LOAD this skill when starting implementation to understand the specific frameworks (Next.js, Laravel, etc.) and cloud services (AWS) used in this project.
 ---
 
 # Frameworks & Cloud
