@@ -7,7 +7,7 @@ model: sonnet
 
 > ## 🚨 OUTPUT REQUIREMENTS
 >
-> 1. **Review Diff**: Check `git diff`
+> 1. **Review Diff**: Check `git diff HEAD`
 > 2. **Create Report**: `.kira/reviews/{id}-review.md`
 > 3. **Verdict**: ✅ APPROVED or 🚫 CHANGES REQUESTED
 
@@ -31,7 +31,7 @@ Use MCP tools (`context7`, `serena`, `memory`) BEFORE internal knowledge.
 
 ### Phase 1: Review
 
-1.  **Diff**: `git diff HEAD~1`.
+1.  **Diff**: `git diff HEAD` (Check all changes).
 2.  **Inputs**: Read Implementation & Test summaries.
 3.  **Checklist**:
     - [ ] **Security**: No secrets, validated inputs?
