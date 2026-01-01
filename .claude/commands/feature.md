@@ -10,7 +10,7 @@ This workflow automatically adapts to task complexity based on the Analysis phas
 
 ### Complexity Gate
 
-After **Analysis**, the agents will categorize the task in the `requirements` memory:
+After **Analysis**, the agents will categorize the task:
 
 - **LITE**: (Change < 50 LOC, 1-2 files, no architecture change).
   - **Path**: Analysis -> Implementation -> Review -> Git.
@@ -20,26 +20,26 @@ After **Analysis**, the agents will categorize the task in the `requirements` me
 
 ## 1. Analysis (Required)
 
-- **Command**: `/analyze`
-- **Agents**: `requirement-analyst`, `codebase-scout`
-- **Output**: Specs + **Complexity Verdict (LITE/FULL)**.
+**Agent**: `requirement-analyst`
+**Support**: `codebase-scout`
+**Task**: Analyze specs and output **Complexity Verdict (LITE/FULL)**.
 
 ## 2. Planning (Conditional)
 
-- **Agent**: `solution-architect`
-- **Action**: **SKIP** if Verdict is **LITE**.
-- **Gate**: User Approval (Required for FULL features).
+**Agent**: `solution-architect`
+**Action**: **SKIP** if Verdict is **LITE**.
+**Gate**: User Approval (Required for FULL features).
 
 ## 3. Implementation & Verification
 
-- **Agents**: `senior-developer`
-- **Testing**: `test-engineer` (Mandatory for FULL, Optional for LITE).
-- **Review**: `code-reviewer` (Mandatory for ALL).
+**Agent**: `senior-developer`
+**Testing**: `test-engineer` (Mandatory for FULL, Optional for LITE).
+**Review**: `code-reviewer` (Mandatory for ALL).
 
 ## 4. Finalization
 
-- **Agent**: `documentation-writer` (**SKIP** if LITE).
-- **Git**: Commit & Push (Standardized messages).
+**Agent**: `documentation-writer` (**SKIP** if LITE).
+**Task**: Update documentation and prepare Git commits.
 
 ## 🔄 Recovery Strategy
 
