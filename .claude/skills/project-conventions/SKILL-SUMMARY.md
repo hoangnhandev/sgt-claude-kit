@@ -12,5 +12,6 @@ Full: `.claude/skills/project-conventions/SKILL.md`
 1. **Types**: No `any`. Use `unknown` or specific types.
 2. **React**: Hooks -> State -> Effects -> Render.
 3. **Tests**: AAA pattern. `describe` -> `it`.
-4. **Style**: Max 100 chars user line. 2 spaces indent. Imports: Libs -> Internal -> Relative.
-5. **Context7**: Check `package.json`/`requirements.txt` version BEFORE querying docs.
+4. **Logging**: Use `logger` utility. No `console.log` in production code.
+5. **Style**: Max 100 chars user line. 2 spaces indent. Imports: Libs -> Internal -> Relative.
+6. **Context7**: Check `package.json`/`requirements.txt` version BEFORE querying docs.

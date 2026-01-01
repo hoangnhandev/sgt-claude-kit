@@ -38,7 +38,13 @@ description: Core Coding Standards. MUST BE LOADED by ALL agents before writing 
 - **Pattern**: `try/catch` with specialized naming.
 - **Throw**: `throw new Error("Context: message")` (Descriptive).
 
-## 🧪 Testing
+## � Logging
+
+- **Requirement**: Client-side logging MUST be restricted to `local` and `staging` environments.
+- **Forbidden**: No direct `console.log` in production code.
+- **Helper**: Use a dedicated `logger` utility.
+
+## �🧪 Testing
 
 - **Name**: `describe("Service", () => it("should X when Y"))`.
 - **AAA**: Arrange -> Act -> Assert.

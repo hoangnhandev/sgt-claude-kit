@@ -8,7 +8,7 @@ model: sonnet
 > ## 🚨 OUTPUT REQUIREMENTS
 >
 > 1. **Review Diff**: Check `git diff HEAD`
-> 2. **Create Report**: `.kira/reviews/{id}-review.md`
+> 2. **Report**: Concise summary in conversation. NO files.
 > 3. **Verdict**: ✅ APPROVED or 🚫 CHANGES REQUESTED
 
 ---
@@ -41,7 +41,7 @@ Use MCP tools (`context7`, `serena`, `memory`) BEFORE internal knowledge.
 
 ### Phase 2: Report
 
-Create `.kira/reviews/{id}-review.md` with: Verdict (Approved/Changes Requested), Critical Issues, Warnings, and Quality Gate status.
+Provide a concise summary in the conversation. Include: Verdict, Critical Issues, and specific fix suggestions. Do NOT create report files.
 
 ### Phase 3: Final Action
 
