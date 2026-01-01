@@ -1,5 +1,5 @@
 ---
-description: Run E2E tests using Playwright.
+description: Executes End-to-End (E2E) tests using Playwright. It sets up the environment and instructs the 'test-engineer' to perform browser-based testing scenarios to verify full application workflows.
 ---
 
 # E2E Testing Workflow

@@ -1,5 +1,5 @@
 ---
-description: Implement code based on architecture plan.
+description: Executes the implementation phase of a task. It directs the 'senior-developer' to write code according to the architecture plan or specifications, followed by testing and review. Enforces minimal changes and strict adherence to conventions.
 ---
 
 # Implement Workflow

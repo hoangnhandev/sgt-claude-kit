@@ -1,5 +1,5 @@
 ---
-description: Create architecture plan for a feature.
+description: Generates a detailed architecture and implementation plan. It utilizes the 'solution-architect' to design the solution based on the analysis outputs, ensuring minimal disruption to the existing codebase. Required before complex implementation.
 ---
 
 # Plan Workflow

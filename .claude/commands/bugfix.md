@@ -1,5 +1,5 @@
 ---
-description: Fix bugs with efficient routing (Quick Fix vs Deep Investigation).
+description: Handles bug fixes through an intelligent routing system. It assesses complexity to choose between a direct quick fix path or a deep investigation path (Parallel Phase with 'senior-developer' and 'test-engineer'). Ensures reproduction tests are created for complex bugs before implementation.
 ---
 
 # Bugfix Workflow

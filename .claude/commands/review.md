@@ -1,5 +1,5 @@
 ---
-description: Perform code review.
+description: Conducts a formal code review using the 'code-reviewer' agent. It analyzes git diffs for security, logic, and style issues, producing a report with approval status or requested changes.
 ---
 
 # Review Workflow

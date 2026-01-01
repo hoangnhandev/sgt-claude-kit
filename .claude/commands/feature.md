@@ -1,5 +1,5 @@
 ---
-description: Full feature development workflow with automatic complexity routing.
+description: Manages the end-to-end lifecycle of a new feature. It dynamically routes based on complexity (LITE vs FULL), coordinating analysis, planning, implementation, testing, review, and documentation. Use this for all feature requests.
 ---
 
 # Feature Workflow

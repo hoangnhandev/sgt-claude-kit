@@ -1,5 +1,5 @@
 ---
-description: Run tests and verify quality.
+description: Executes unit and integration tests to verify code quality. It uses the 'test-engineer' to run the test suite, check coverage, and validate fixes (especially for bug reproduction). Returns a Pass/Fail status and a report.
 ---
 
 # Test Workflow

@@ -1,5 +1,5 @@
 ---
-description: Analyze requirements and codebase for a new feature.
+description: Analyzes requirements and the existing codebase for a new feature or request. It uses the 'requirement-analyst' to parse user needs and the 'codebase-scout' to find relevant code and dependencies. Output is a structured analysis ready for the planning phase.
 ---
 
 # Analyze Workflow
