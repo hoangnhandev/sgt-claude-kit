@@ -13,42 +13,35 @@ description: Handles bug fixes through an intelligent routing system. It assesse
 **Agent**: `bug-handler`
 **Input**: Issue description / Error log.
 **Task**: Analyze issue severity and determine complexity (Simple/Complex).
+**Output**: `bug-handler` must clearly state if the bug is **Simple** or **Complex** in its final report.
 
-## 2. Decision Gate & Strategy
+## 2. Strategy Execution
 
-**Condition**: Complexity check from Phase 1.
+Based on the **Complexity** determined in Step 1:
 
-### Path A: Simple Fix
-
-**Action**: Proceed directly to **Implementation**.
-
-### Path B: Complex Fix (Parallel Phase)
-
-**Strategy**: Run analysis and test creation concurrently.
-
-1.  **Investigator**: `senior-developer` performs Root Cause Analysis.
-2.  **Tester**: `test-engineer` creates a **Failing Reproduction Test**.
-
-**Merge**: Ensure Root Cause is identified AND Repro Test exists before Implementation.
-**Gate**: User Approval
+- **IF SIMPLE**: Proceed directly to **Step 3 (Implementation)**.
+- **IF COMPLEX**: execute the following sub-steps (Parallel Execution allowed):
+  - **2a. Root Cause Analysis**: Run `senior-developer` to perform deep analysis.
+  - **2b. Reproduction**: Run `test-engineer` to create a **Failing Reproduction Test**.
+  - **Resume**: Proceed to Step 3 only after the test is created and fails.
 
 ## 3. Implementation
 
 **Agent**: `senior-developer`
-**Input**: Analysis Report.
+**Input**: Analysis Report and (if Complex) the Failing Test.
 **Task**: Apply fix with minimal changes.
 **Constraint**: Perform MINIMAL changes. Strict no refactoring of unrelated code.
 
 ## 4. Verification
 
 **Command**: `/test`
-**Gate**: Pass reproduction test & regression suite.
+**Task**: Verify the fix.
+
+- If **Complex**: The specific reproduction test must PASS.
+- **Global**: The full regression suite must PASS.
+- **Failure Handling**: If tests fail, Return to **Step 3** with the failure log.
 
 ## 5. Finalization
 
 **Agent**: `documentation-writer`
-**Task**: Create commit with format `fix(...)`.
-
-## 6. Recovery Strategy
-
-**If Verification Fails**: Re-run `senior-developer` with failure context.
+**Task**: Create commit with format `fix(...)` and update documentation if necessary.
