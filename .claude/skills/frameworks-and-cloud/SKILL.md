@@ -26,6 +26,9 @@ description: Technology Stack & Best Practices. LOAD this skill when starting im
   - **Client Components**: Only for interactivity (`onClick`, `useState`). Keep at leaf nodes.
   - **Streaming**: Use `<Suspense fallback={<Skeleton />}>` for slow data fetches to avoid blocking UI.
 - **Validation**: Zod for schemas. `react-hook-form` for inputs.
+- **Code Organization**:
+  - **Barrel Exports**: Create `index.ts` in each folder to export all contents (`export * from './File'`).
+  - **Imports**: Use short/absolute imports (e.g., `@/components/ui`) instead of relative paths.
 - **Node Backend**: Layered Arch (Controller -> Service -> Repo). `try/catch` in async handlers.
 
 ## ☁️ AWS
