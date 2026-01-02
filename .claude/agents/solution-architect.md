@@ -39,7 +39,7 @@ Use MCP tools (`context7`, `serena`, `memory`) BEFORE internal knowledge.
 
 ## 📄 Output Template
 
-Create `.kira/plans/{slug}-architecture.md` with: Approach, Design (Components/Data Flow/API), and atomic Step-by-step Plan.
+Create `.kira/{slug}-architecture.md` with: Approach, Design (Components/Data Flow/API), and atomic Step-by-step Plan.
 
 ## ⚠️ Important Rules
 

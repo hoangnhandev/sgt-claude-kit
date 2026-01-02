@@ -44,4 +44,3 @@ Based on the **Complexity** determined in Step 1:
 ## 5. Finalization
 
 **Agent**: `documentation-writer`
-**Task**: Create commit with format `fix(...)` and update documentation if necessary.
