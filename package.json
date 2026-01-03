@@ -1,0 +1,18 @@
+{
+  "name": "kira-claude-kit",
+  "version": "1.0.0",
+  "description": "AI-Powered Feature Development Workflow for Claude Code",
+  "main": "index.js",
+  "bin": {
+    "kira-claude-kit": "bin/install.js"
+  },
+  "files": [
+    ".claude",
+    ".kira",
+    ".mcp.json",
+    "bin"
+  ],
+  "engines": {
+    "node": ">=18"
+  }
+}
