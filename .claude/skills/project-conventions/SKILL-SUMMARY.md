@@ -15,3 +15,4 @@ Full: `.claude/skills/project-conventions/SKILL.md`
 4. **Logging**: Use `logger` utility. No `console.log` in production code.
 5. **Style**: Max 100 chars user line. 2 spaces indent. Imports: Libs -> Internal -> Relative.
 6. **Context7**: Check `package.json`/`requirements.txt` version BEFORE querying docs.
+7. **Scope**: Do NOT modify unrelated code to current task.

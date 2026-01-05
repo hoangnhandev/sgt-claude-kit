@@ -22,10 +22,6 @@ You design the blueprint.
 2.  **Plan**: Break down into atomic implementation steps.
 3.  **Risk**: Identify bottlenecks.
 
-## 🌐 Knowledge Priority
-
-Use MCP tools (`context7`, `serena`, `memory`) BEFORE internal knowledge.
-
 ## 📋 Process
 
 1.  **Review**: Read Requirements & Scout findings.

@@ -1,46 +1,35 @@
 ---
-description: Handles bug fixes through an intelligent routing system. It assesses complexity to choose between a direct quick fix path or a deep investigation path (Parallel Phase with 'senior-developer' and 'test-engineer'). Ensures reproduction tests are created for complex bugs before implementation. Note: You must use the subagents specified in this command.
+description: Orchestrates a robust bug fix pipeline. 'bug-handler' performs deep diagnosis and planning, followed by 'senior-developer' which implements the fix, and 'code-reviewer' validates the changes before final sign-off.
 ---
 
 # Bugfix Workflow
 
-## Global Rules
-
-- **Code Convention**: Strictly follow existing project conventions. Do NOT create new styles or conventions.
-
-## 1. Triage & Analysis
+## 1. Analysis & Diagnose
 
 **Agent**: `bug-handler`
 **Input**: Issue description / Error log.
-**Task**: Analyze issue severity and determine complexity (Simple/Complex).
-**Output**: `bug-handler` must clearly state if the bug is **Simple** or **Complex** in its final report.
+**Task**:
 
-## 2. Strategy Execution
+1.  **Triage**: Assess severity and complexity.
+2.  **Reproduction**: Determine detailed steps or create a reproduction script if possible.
+3.  **Root Cause Analysis**: Identify the specific logic or data causing the issue.
+4.  **Fix Plan**: Propose a concrete solution strategy.
 
-Based on the **Complexity** determined in Step 1:
+**Output**: A memory entity with the Analysis and proposed Fix Plan.
 
-- **IF SIMPLE**: Proceed directly to **Step 3 (Implementation)**.
-- **IF COMPLEX**: execute the following sub-steps (Parallel Execution allowed):
-  - **2a. Root Cause Analysis**: Run `senior-developer` to perform deep analysis.
-  - **2b. Reproduction**: Run `test-engineer` to create a **Failing Reproduction Test**.
-  - **Resume**: Proceed to Step 3 only after the test is created and fails.
-
-## 3. Implementation
+## 2. Implementation & Verification
 
 **Agent**: `senior-developer`
-**Input**: Analysis Report and (if Complex) the Failing Test.
-**Task**: Apply fix with minimal changes.
-**Constraint**: Perform MINIMAL changes. Strict no refactoring of unrelated code.
+**Input**: Retrieves the `bug-analysis` entity from Memory (created in Step 1).
+**Task**: Implement the solution proposed by `bug-handler`.
 
-## 4. Verification
+## 3. Code Review
 
-**Command**: `/test`
-**Task**: Verify the fix.
+**Agent**: `code-reviewer`
+**Input**: Implementation changes.
+**Task**: Validate code quality, security, and logical correctness.
 
-- If **Complex**: The specific reproduction test must PASS.
-- **Global**: The full regression suite must PASS.
-- **Failure Handling**: If tests fail, Return to **Step 3** with the failure log.
+## 4. Final Review
 
-## 5. Finalization
-
-**Agent**: `documentation-writer`
+**Actor**: User
+**Task**: Review the changes and verify the fix manually if needed.

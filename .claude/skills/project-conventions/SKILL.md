@@ -75,3 +75,4 @@ description: Core Coding Standards. MUST BE LOADED by ALL agents before writing 
 - **Shared Logic**: Create `utils` or `helpers` or `libs` for logic used across the project.
 - **Centralization**: Centralize global settings/configs/components to facilitate management.
 - **Imports**: Use aliases (`@/`) and `index` files (barrelling) to shorten and clean up imports.
+- **Scope**: STRICTLY PROHIBITED to modify code unrelated to the current task to avoid regressions.

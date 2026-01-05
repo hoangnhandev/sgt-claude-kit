@@ -1,5 +1,5 @@
 ---
-description: Manages the end-to-end lifecycle of a new feature. It dynamically routes based on complexity (LITE vs FULL), coordinating analysis, planning, implementation, testing, review, and documentation. Use this for all feature requests. Note: You must use the subagents specified in this command.
+description: Orchestrates the complete feature development lifecycle. Automatically routes tasks based on complexity (LITE vs FULL), utilizing requirement-analyst, solution-architect, senior-developer, and code-reviewer agents to deliver high-quality code.
 ---
 
 # Feature Workflow
@@ -13,10 +13,10 @@ This workflow automatically adapts to task complexity based on the Analysis phas
 After **Analysis**, the agents will categorize the task:
 
 - **LITE**: (Change < 50 LOC, 1-2 files, no architecture change).
-  - **Path**: Analysis -> Implementation -> Review -> Git.
-  - **Auto-Skip**: `solution-architect`, `test-engineer` (if non-critical), `documentation-writer`.
+  - **Path**: Analysis -> Implementation -> Review.
+  - **Auto-Skip**: `solution-architect`.
 - **FULL**: (New features, schema changes, heavy refactor).
-  - **Path**: Analysis -> Planning -> Implementation -> Testing -> Review -> Documentation -> Git.
+  - **Path**: Analysis -> Planning -> Implementation -> Review.
 
 ## 1. Analysis (Required)
 
@@ -27,20 +27,20 @@ After **Analysis**, the agents will categorize the task:
 ## 2. Planning (Conditional)
 
 **Agent**: `solution-architect`
+**Input**: Retrieves `feature-requirements` entity from Memory.
 **Action**: **SKIP** if Verdict is **LITE**.
 **Gate**: User Approval (Required for FULL features).
 
 ## 3. Implementation & Verification
 
 **Agent**: `senior-developer`
-**Testing**: `test-engineer` (Mandatory for FULL, Optional for LITE).
-**Review**: `code-reviewer` (Mandatory for ALL).
+**Input**: Retrieves `feature-requirements` (LITE) or Architecture Plan (FULL) from Memory/File.
 
-## 4. Finalization
+## 4. Review
 
-**Agent**: `documentation-writer` (**SKIP** if LITE).
-**Task**: Update documentation and prepare Git commits.
+**Agent**: `code-reviewer`
+**Input**: Implementation changes.
 
 ## 🔄 Recovery Strategy
 
-If any step (Lint/Build/Test/Review) fails, the flow returns to `senior-developer` for fixing until all quality gates are passed.
+If any step (Lint/Build/Review) fails, the flow returns to `senior-developer` for fixing until all quality gates are passed.
