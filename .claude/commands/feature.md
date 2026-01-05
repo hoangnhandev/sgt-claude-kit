@@ -1,5 +1,5 @@
 ---
-description: Manages the end-to-end lifecycle of a new feature. It dynamically routes based on complexity (LITE vs FULL), coordinating analysis, planning, implementation, testing, review, and documentation. Use this for all feature requests.
+description: Manages the end-to-end lifecycle of a new feature. It dynamically routes based on complexity (LITE vs FULL), coordinating analysis, planning, implementation, testing, review, and documentation. Use this for all feature requests. Note: You must use the subagents specified in this command.
 ---
 
 # Feature Workflow

@@ -1,5 +1,5 @@
 ---
-description: Executes unit and integration tests to verify code quality. It uses the 'test-engineer' to run the test suite, check coverage, and validate fixes (especially for bug reproduction). Returns a Pass/Fail status and a report.
+description: Executes unit and integration tests to verify code quality. It uses the 'test-engineer' to run the test suite, check coverage, and validate fixes (especially for bug reproduction). Returns a Pass/Fail status and a report. Note: You must use the subagents specified in this command.
 ---
 
 # Test Workflow

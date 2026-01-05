@@ -1,5 +1,5 @@
 ---
-description: Generates a detailed architecture and implementation plan. It utilizes the 'solution-architect' to design the solution based on the analysis outputs, ensuring minimal disruption to the existing codebase. Required before complex implementation.
+description: Generates a detailed architecture and implementation plan. It utilizes the 'solution-architect' to design the solution based on the analysis outputs, ensuring minimal disruption to the existing codebase. Required before complex implementation. Note: You must use the subagents specified in this command.
 ---
 
 # Plan Workflow

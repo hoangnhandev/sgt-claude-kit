@@ -1,5 +1,5 @@
 ---
-description: Handles bug fixes through an intelligent routing system. It assesses complexity to choose between a direct quick fix path or a deep investigation path (Parallel Phase with 'senior-developer' and 'test-engineer'). Ensures reproduction tests are created for complex bugs before implementation.
+description: Handles bug fixes through an intelligent routing system. It assesses complexity to choose between a direct quick fix path or a deep investigation path (Parallel Phase with 'senior-developer' and 'test-engineer'). Ensures reproduction tests are created for complex bugs before implementation. Note: You must use the subagents specified in this command.
 ---
 
 # Bugfix Workflow
