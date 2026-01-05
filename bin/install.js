@@ -52,6 +52,11 @@ async function install() {
 
   log(colors.blue, "================================");
   log(colors.green, "✅ Installation complete!");
+  console.log("\n⚠️  Important Notes for MCP features:");
+  console.log(
+    "   1. Install \x1b[33muvx\x1b[0m: https://docs.astral.sh/uv/getting-started/installation/"
+  );
+  console.log("   2. Configure the project path for \x1b[33mSerena\x1b[0m.");
   console.log("\n👉 Run \x1b[32mclaude\x1b[0m to start using SGT!\n");
 }
 

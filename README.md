@@ -19,6 +19,11 @@ npx sgt-claude-kit
 
 This command will copy the necessary configuration files (`.claude`, `.temp`, `.mcp.json`) into your current directory.
 
+> **Notes**:
+>
+> 1. To use MCP features, you must install [`uvx`](https://docs.astral.sh/uv/getting-started/installation/).
+> 2. You must configure the project path for Serena.
+
 ## 🛠 Usage
 
 Once installed, simply start Claude Code as usual:
