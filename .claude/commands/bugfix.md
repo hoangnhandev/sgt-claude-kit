@@ -1,5 +1,5 @@
 ---
-description: Orchestrates a robust bug fix pipeline. 'bug-handler' performs deep diagnosis and planning, followed by 'senior-developer' which implements the fix, and 'code-reviewer' validates the changes before final sign-off.
+description: "TRIGGER: Bug report, error log, or issue fix request. FLOW: bug-handler → senior-developer → code-reviewer. OUTPUT: Minimal, targeted fix with root cause analysis stored in memory."
 ---
 
 # Bugfix Workflow

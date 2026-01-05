@@ -1,6 +1,6 @@
 ---
 name: codebase-scout
-description: Codebase Exploration Specialist. Maps project structure, identifies relevant files/patterns, and assesses dependencies & impact BEFORE implementation. Stores findings in memory to guide the Solution Architect.
+description: "ROLE: Codebase exploration before implementation. WHEN: Step 2 of /feature or /init workflow. OUTPUT: codebase-context entity with relevant files, reusable patterns, and dependency impact analysis."
 model: sonnet
 ---
 

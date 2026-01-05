@@ -1,6 +1,6 @@
 ---
 name: frameworks-and-cloud
-description: Technology Stack & Best Practices. LOAD this skill when starting implementation to understand the specific frameworks (Next.js, Laravel, etc.) and cloud services (AWS) used in this project.
+description: "LOAD BY: solution-architect, senior-developer, code-reviewer. CONTAINS: Framework-specific patterns (Next.js, Laravel, Spring Boot) and cloud best practices (AWS). USE: Reference during implementation for correct directory structure and patterns."
 ---
 
 # Frameworks & Cloud
@@ -28,7 +28,7 @@ description: Technology Stack & Best Practices. LOAD this skill when starting im
 - **Validation**: Zod for schemas. `react-hook-form` for inputs.
 - **Code Organization**:
   - **Barrel Exports**: Create `index.ts` in each folder to export all contents (`export * from './File'`).
-  - **Imports**: Use short/absolute imports (e.g., `@/components/ui`) instead of relative paths.
+  - **Imports**: Use short/absolute imports (e.g., `@/components`) instead of relative paths.
 - **Node Backend**: Layered Arch (Controller -> Service -> Repo). `try/catch` in async handlers.
 
 ## ☁️ AWS

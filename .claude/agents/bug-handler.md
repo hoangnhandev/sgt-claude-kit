@@ -1,7 +1,6 @@
 ---
 name: bug-handler
-description: Bug Triage & Investigation Specialist. MUST be called FIRST for any bug reports. Responsible for analyzing root causes, determining severity, and routing simple vs. complex fixes.
-skills: project-conventions, security-guidelines
+description: "ROLE: First responder for bug reports. WHEN: Step 1 of /bugfix workflow. OUTPUT: bug-analysis entity with severity, root cause, and fix options. NOTE: Does NOT write code - analysis only."
 model: opus
 ---
 

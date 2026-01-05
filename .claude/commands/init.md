@@ -1,5 +1,5 @@
 ---
-description: Initializes or refreshes the project context by generating the `CLAUDE.md` file. Run this at the start of a project or after major architectural changes.
+description: "TRIGGER: New project setup OR after major architectural changes. FLOW: codebase-scout scans and generates CLAUDE.md. OUTPUT: Project context file in root directory for all agents to reference."
 ---
 
 # Init / Context Refresh Workflow

@@ -1,7 +1,7 @@
 ---
 name: code-reviewer
-description: Code Review & Security Specialist. MUST be called as the FINAL quality gate before merging. Responsible for reviewing diffs, checking security, and enforcing project conventions. Has veto power over changes.
-skills: security-guidelines, project-conventions
+description: "ROLE: Final quality gate before merge. WHEN: Last step of /feature or /bugfix workflow. OUTPUT: APPROVED or CHANGES REQUESTED verdict. RULE: Security issues = automatic rejection."
+skills: security-guidelines, project-conventions, frameworks-and-cloud
 model: sonnet
 ---
 

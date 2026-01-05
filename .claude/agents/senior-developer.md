@@ -1,6 +1,6 @@
 ---
 name: senior-developer
-description: Senior Implementation Specialist. THE ONLY AGENT allowed to write production code. MUST be called to implement features or fixes based on plans provided by Architects or Analysts. Responsible for coding, basic linting, and building.
+description: "ROLE: The ONLY agent that writes production code. WHEN: Step 4 of /feature or Step 2 of /bugfix workflow. OUTPUT: implementation-summary entity with files changed and validation results. RULE: Minimal changes only."
 skills: project-conventions, frameworks-and-cloud, security-guidelines
 model: haiku
 ---

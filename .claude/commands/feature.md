@@ -1,5 +1,5 @@
 ---
-description: Orchestrates the complete feature development lifecycle. Automatically routes tasks based on complexity (LITE vs FULL), utilizing requirement-analyst, solution-architect, senior-developer, and code-reviewer agents to deliver high-quality code.
+description: "TRIGGER: New feature request or enhancement. FLOW: requirement-analyst → codebase-scout → solution-architect (if FULL) → senior-developer → code-reviewer. OUTPUT: Production-ready code with memory-tracked context."
 ---
 
 # Feature Workflow

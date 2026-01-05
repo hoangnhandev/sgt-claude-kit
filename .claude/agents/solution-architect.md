@@ -1,7 +1,7 @@
 ---
 name: solution-architect
-description: Solution Architecture Specialist. MUST be called for FULL complexity features to design detailed implementation plans, choose technical approaches, and break down tasks. Skipped ONLY for simple LITE changes.
-skills: project-conventions, frameworks-and-cloud
+description: "ROLE: Technical design for complex features. WHEN: Step 3 of /feature workflow (FULL complexity only). OUTPUT: implementation-plan.md with atomic steps, data flow, and API contracts."
+skills: project-conventions, frameworks-and-cloud, security-guidelines
 model: opus
 ---
 

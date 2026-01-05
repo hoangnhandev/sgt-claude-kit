@@ -1,6 +1,6 @@
 ---
 name: security-guidelines
-description: Security Protocols & Checklists. MUST BE LOADED by Code Reviewer and Senior Developer when handling authentication, data privacy, or external inputs. Contains critical "MUST BLOCK" rules.
+description: "LOAD BY: code-reviewer, senior-developer, solution-architect. CONTAINS: OWASP Top 10 prevention, auth/session rules, injection prevention, and MUST BLOCK checklist. PRIORITY: Critical - security issues = automatic rejection."
 ---
 
 # 🛡️ Security Guidelines

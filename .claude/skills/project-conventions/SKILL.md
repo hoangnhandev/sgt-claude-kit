@@ -1,6 +1,6 @@
 ---
 name: project-conventions
-description: Core Coding Standards. MUST BE LOADED by ALL agents before writing or analyzing code. Defines naming conventions, file structure, and architecture patterns that must be strictly followed.
+description: "LOAD BY: ALL agents before writing/analyzing code. CONTAINS: Naming conventions, file structure, error handling, logging, and maintainability rules. PRIORITY: High - violations should be flagged."
 ---
 
 # Project Conventions

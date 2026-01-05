@@ -1,7 +1,6 @@
 ---
 name: requirement-analyst
-description: Requirement Analysis Specialist. MUST be called first to parse ALL new feature requests, analyze scope, and determine task complexity (LITE/FULL). Responsible for defining User Stories and Acceptance Criteria.
-skills: project-conventions
+description: "ROLE: First responder for feature requests. WHEN: Called at Step 1 of /feature workflow. OUTPUT: feature-requirements entity with User Story, Acceptance Criteria, and LITE/FULL complexity verdict."
 model: sonnet
 ---
 
