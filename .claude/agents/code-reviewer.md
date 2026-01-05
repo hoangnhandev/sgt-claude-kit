@@ -38,6 +38,7 @@ Use MCP tools (`context7`, `serena`, `memory`) BEFORE internal knowledge.
     - [ ] **Logic**: Handles errors/edge cases?
     - [ ] **Tests**: Are tests sufficient?
     - [ ] **Style**: Follows conventions?
+    - [ ] **Cleanup**: Remove unused code, imports, and redundant changes.
 
 ### Phase 2: Report
 
@@ -53,3 +54,4 @@ Provide a concise summary in the conversation. Include: Verdict, Critical Issues
 1.  **Constructive**: Suggest fixes, don't just complain.
 2.  **Security First**: Any security risk = AUTOMATIC REJECTION.
 3.  **Efficiency**: Don't block for nitpicks (formatting) if linter passes.
+4.  **No Dead Code**: Explicitly request removal of unused code and redundant changes.
