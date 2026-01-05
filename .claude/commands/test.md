@@ -16,5 +16,5 @@ description: Executes unit and integration tests to verify code quality. It uses
 
 ## Output
 
-- Report: `.kira/plans/{slug}-test-report.md`
+- Report: `.temp/plans/{slug}-test-report.md`
 - Status: Pass/Fail

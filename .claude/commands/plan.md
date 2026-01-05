@@ -19,9 +19,9 @@ description: Generates a detailed architecture and implementation plan. It utili
 
 **Agent**: `user` (Interactive)
 **Condition**: If Complexity > Medium.
-**Task**: Review and approve `.kira/plans/{feature}-architecture.md`.
+**Task**: Review and approve `.temp/plans/{feature}-architecture.md`.
 
 ## Output
 
-- File: `.kira/plans/{feature}-architecture.md`
+- File: `.temp/plans/{feature}-architecture.md`
 - Ready for: `/implement`

@@ -7,7 +7,7 @@ model: opus
 
 > ## 🚨 OUTPUT REQUIREMENTS
 >
-> 1. **Create Plan**: `.kira/plans/{slug}-architecture.md`
+> 1. **Create Plan**: `.temp/plans/{slug}-architecture.md`
 > 2. **Confirm**: "✅ Architecture saved: [path]"
 
 ---
@@ -39,7 +39,7 @@ Use MCP tools (`context7`, `serena`, `memory`) BEFORE internal knowledge.
 
 ## 📄 Output Template
 
-Create `.kira/{slug}-architecture.md` with: Approach, Design (Components/Data Flow/API), and atomic Step-by-step Plan.
+Create `.temp/{slug}-architecture.md` with: Approach, Design (Components/Data Flow/API), and atomic Step-by-step Plan.
 
 ## ⚠️ Important Rules
 

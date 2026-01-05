@@ -6,7 +6,7 @@ SGT Claude Kit transforms your Claude Code experience by injecting specialized A
 
 - **Structured Workflows**: Pre-defined workflows for common tasks (`/feature`, `/bugfix`, `/plan`).
 - **Specialized Agents**: Custom agents configured for specific roles (Implementation, Review, QA).
-- **Automated Setup**: Instantly scaffolds your project with the necessary `.claude` and `.kira` configurations.
+- **Automated Setup**: Instantly scaffolds your project with the necessary `.claude` and `.temp` configurations.
 - **Tools Integration**: Comes with pre-configured MCP tool definitions.
 
 ## 📦 Installation
@@ -17,7 +17,7 @@ Run the following command in your project root:
 npx sgt-claude-kit
 ```
 
-This command will copy the necessary configuration files (`.claude`, `.kira`, `.mcp.json`) into your current directory.
+This command will copy the necessary configuration files (`.claude`, `.temp`, `.mcp.json`) into your current directory.
 
 ## 🛠 Usage
 
@@ -44,7 +44,7 @@ You will now have access to new slash commands and workflows.
 The installer adds the following to your project:
 
 - **.claude/**: Contains the agent definitions (`agents/`), slash command workflows (`commands/`), and settings.
-- **.kira/**: Stores Kira-specific templates and configurations (e.g., `PRD_TEMPLATE.md`).
+- **.temp/**: Stores Kira-specific templates and configurations (e.g., `PRD_TEMPLATE.md`).
 - **.mcp.json**: Configuration for Model Context Protocol (MCP) servers.
 
 ## 🤝 Contributing

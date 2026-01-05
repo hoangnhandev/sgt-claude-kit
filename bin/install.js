@@ -18,7 +18,7 @@ function log(color, message) {
 const sourceDir = path.join(__dirname, "..");
 const targetDir = process.cwd();
 
-const itemsToCopy = [".claude", ".kira", ".mcp.json"];
+const itemsToCopy = [".claude", ".temp", ".mcp.json"];
 
 async function install() {
   log(colors.blue, "🚀 SGT Claude Kit Installer");

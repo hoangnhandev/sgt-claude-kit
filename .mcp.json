@@ -5,12 +5,6 @@
       "command": "npx",
       "args": ["-y", "@upstash/context7-mcp", "--api-key", "YOUR_API_KEY"]
     },
-    "playwright": {
-      "type": "stdio",
-      "command": "npx",
-      "args": ["-y", "@playwright/mcp@latest"],
-      "env": {}
-    },
     "serena": {
       "command": "uvx",
       "args": [
@@ -25,33 +19,6 @@
     "memory": {
       "command": "npx",
       "args": ["-y", "@modelcontextprotocol/server-memory"]
-    },
-    "shadcn": {
-      "command": "npx",
-      "args": ["shadcn@latest", "mcp"]
-    },
-    "zai-mcp-server": {
-      "type": "stdio",
-      "command": "npx",
-      "args": ["-y", "@z_ai/mcp-server"],
-      "env": {
-        "Z_AI_API_KEY": "your_api_key",
-        "Z_AI_MODE": "ZAI"
-      }
-    },
-    "web-search-prime": {
-      "type": "http",
-      "url": "https://api.z.ai/api/mcp/web_search_prime/mcp",
-      "headers": {
-        "Authorization": "Bearer your_api_key"
-      }
-    },
-    "web-reader": {
-      "type": "http",
-      "url": "https://api.z.ai/api/mcp/web_reader/mcp",
-      "headers": {
-        "Authorization": "Bearer your_api_key"
-      }
     }
   }
 }

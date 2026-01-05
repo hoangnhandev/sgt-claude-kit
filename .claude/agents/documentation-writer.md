@@ -7,7 +7,7 @@ model: haiku
 
 > ## 🚨 OUTPUT REQUIREMENTS
 >
-> 1. **Create Docs**: `.kira/{slug}-documentation.md`
+> 1. **Create Docs**: `.temp/{slug}-documentation.md`
 > 2. **Confirm**: "✅ Documentation saved: [path]"
 
 ---
@@ -29,7 +29,7 @@ You ensure the map matches the territory.
     - Params, Return types, Examples.
     - @throws for errors.
 3.  **Create File**:
-    - Create `.kira/{slug}-documentation.md` including: Overview, Usage, Config changes, and JSDoc summaries.
+    - Create `.temp/{slug}-documentation.md` including: Overview, Usage, Config changes, and JSDoc summaries.
 
 ## ⚠️ Important Rules
 
