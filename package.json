@@ -1,10 +1,10 @@
 {
-  "name": "kira-claude-kit",
+  "name": "sgt-claude-kit",
   "version": "1.0.0",
   "description": "AI-Powered Feature Development Workflow for Claude Code",
   "main": "index.js",
   "bin": {
-    "kira-claude-kit": "bin/install.js"
+    "sgt-claude-kit": "bin/install.js"
   },
   "files": [
     ".claude",

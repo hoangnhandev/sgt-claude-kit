@@ -21,7 +21,7 @@ const targetDir = process.cwd();
 const itemsToCopy = [".claude", ".kira", ".mcp.json"];
 
 async function install() {
-  log(colors.blue, "🚀 Kira Claude Kit Installer");
+  log(colors.blue, "🚀 SGT Claude Kit Installer");
   log(colors.blue, "================================");
 
   for (const item of itemsToCopy) {
@@ -52,7 +52,7 @@ async function install() {
 
   log(colors.blue, "================================");
   log(colors.green, "✅ Installation complete!");
-  console.log("\n👉 Run \x1b[32mclaude\x1b[0m to start using Kira!\n");
+  console.log("\n👉 Run \x1b[32mclaude\x1b[0m to start using SGT!\n");
 }
 
 install().catch((err) => {

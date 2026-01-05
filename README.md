@@ -1,6 +1,6 @@
-# Kira Claude Kit
+# SGT Claude Kit
 
-Kira Claude Kit transforms your Claude Code experience by injecting specialized AI agents and structured workflows directly into your project. It acts as a plugin for Claude Code, setting up a defined process for feature development, bug fixing, and code quality assurance.
+SGT Claude Kit transforms your Claude Code experience by injecting specialized AI agents and structured workflows directly into your project. It acts as a plugin for Claude Code, setting up a defined process for feature development, bug fixing, and code quality assurance.
 
 ## 🚀 Features
 
@@ -14,7 +14,7 @@ Kira Claude Kit transforms your Claude Code experience by injecting specialized 
 Run the following command in your project root:
 
 ```bash
-npx kira-claude-kit
+npx sgt-claude-kit
 ```
 
 This command will copy the necessary configuration files (`.claude`, `.kira`, `.mcp.json`) into your current directory.
