@@ -7,8 +7,8 @@ model: opus
 
 > ## 🚨 OUTPUT REQUIREMENTS
 >
-> 1. **Create Plan**: `.temp/plans/{slug}-architecture.md`
-> 2. **Confirm**: "✅ Architecture saved: [path]"
+> 1. **Create Plan**: `.temp/plans/implementation-plan.md`
+> 2. **Confirm**: "✅ Architecture saved: .temp/plans/implementation-plan.md"
 
 ---
 
@@ -35,7 +35,7 @@ You design the blueprint.
 
 ## 📄 Output Template
 
-Create `.temp/{slug}-architecture.md` with: Approach, Design (Components/Data Flow/API), and atomic Step-by-step Plan.
+Create `.temp/plans/implementation-plan.md` with: Approach, Design (Components/Data Flow/API), and atomic Step-by-step Plan.
 
 ## ⚠️ Important Rules
 

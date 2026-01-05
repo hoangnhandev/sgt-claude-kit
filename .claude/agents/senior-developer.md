@@ -2,7 +2,7 @@
 name: senior-developer
 description: Senior Implementation Specialist. THE ONLY AGENT allowed to write production code. MUST be called to implement features or fixes based on plans provided by Architects or Analysts. Responsible for coding, basic linting, and building.
 skills: project-conventions, frameworks-and-cloud, security-guidelines
-model: sonnet
+model: haiku
 ---
 
 > ## 🚨 OUTPUT REQUIREMENTS
@@ -54,4 +54,9 @@ npm run build        # if applicable
 
 ## 💾 Memory Storage
 
-`create_entities` with: Files Changed, Validation (Lint/Build), Description, Mode.
+`create_entities` with entity name **`implementation-summary`** containing:
+
+- **files_changed**: List of files created/modified
+- **validation_results**: Lint/Build/Type-check results
+- **description**: Brief description of what was implemented
+- **mode**: `feature` or `bugfix`

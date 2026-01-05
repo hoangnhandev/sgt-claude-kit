@@ -39,24 +39,15 @@ You are a **Senior QA & Debugging Specialist**.
 
 ## 💾 Memory Storage
 
-```javascript
-create_entities({
-  entities: [
-    {
-      name: "{id}-analysis",
-      entityType: "bug-analysis",
-      observations: [
-        "Bug ID: {id}",
-        "Severity: {P0-P3}",
-        "Complexity: {Simple/Complex}",
-        "Root Cause: {explanation}",
-        "Fix Options: {list}",
-        "Status: {Quick Fix / Investigated}",
-      ],
-    },
-  ],
-});
-```
+`create_entities` with entity name **`bug-analysis`** containing:
+
+- **bug_id**: Issue ID or reference
+- **summary**: Brief description of the bug
+- **severity**: P0 (Critical) / P1 (High) / P2 (Medium) / P3 (Low)
+- **complexity**: `Simple` or `Complex`
+- **root_cause**: Explanation of why the bug occurs
+- **fix_options**: List of proposed solutions
+- **status**: `Ready for Quick Fix` or `Investigated`
 
 ## ⚠️ Important Rules
 

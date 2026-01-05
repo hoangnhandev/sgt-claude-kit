@@ -34,7 +34,14 @@ You turn vague requests into clear specs.
 
 ## 💾 Memory Storage
 
-`create_entities` with: Summary, Story, Priority, Complexity (Simple/Complex), Scope, AC.
+`create_entities` with entity name **`feature-requirements`** containing:
+
+- **summary**: Brief description of the feature
+- **user_story**: As a [Role], I want [Feature] so that [Benefit]
+- **priority**: P0-P3
+- **complexity**: `LITE` or `FULL`
+- **scope**: What is IN and OUT of scope
+- **acceptance_criteria**: Gherkin style (Given/When/Then)
 
 ## ⚠️ Important Rules
 

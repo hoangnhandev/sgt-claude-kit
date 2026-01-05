@@ -4,43 +4,80 @@ description: Orchestrates the complete feature development lifecycle. Automatica
 
 # Feature Workflow
 
-## 🧠 Dynamic Execution Logic
+## � Complexity Criteria
 
-This workflow automatically adapts to task complexity based on the Analysis phase.
+| Criteria                   | LITE          | FULL                      |
+| -------------------------- | ------------- | ------------------------- |
+| **Files Affected**         | ≤ 3 files     | > 3 files                 |
+| **Lines of Code**          | < 100 LOC     | ≥ 100 LOC                 |
+| **API/DB Changes**         | None          | Schema/Endpoint changes   |
+| **New Dependencies**       | None          | New libraries required    |
+| **Cross-cutting Concerns** | Single module | Multiple modules/services |
 
-### Complexity Gate
+> **Note**: If ANY criteria qualifies as FULL, the entire task is classified as **FULL**.
 
-After **Analysis**, the agents will categorize the task:
+## �🔄 Execution Flow
 
-- **LITE**: (Change < 50 LOC, 1-2 files, no architecture change).
-  - **Path**: Analysis -> Implementation -> Review.
-  - **Auto-Skip**: `solution-architect`.
-- **FULL**: (New features, schema changes, heavy refactor).
-  - **Path**: Analysis -> Planning -> Implementation -> Review.
+**Step 1: Requirement Analysis**
 
-## 1. Analysis (Required)
+- **Agent**: `requirement-analyst`
+- **Action**: Analyze the user request to define scope and complexity.
+- **Memory Output**: Create/Update `feature-requirements` entity containing:
+  - User Goals & Core Logic
+  - Complexity Verdict (**LITE** vs **FULL**)
 
-**Agent**: `requirement-analyst`
-**Support**: `codebase-scout`
-**Task**: Analyze specs and output **Complexity Verdict (LITE/FULL)**.
+**Step 2: Codebase Exploration**
 
-## 2. Planning (Conditional)
+- **Agent**: `codebase-scout`
+- **Memory Input**: Read `feature-requirements` from Memory.
+- **Action**: Map the project structure and find reusable patterns.
+- **Memory Output**: Create/Update `codebase-context` entity containing:
+  - Relevant Files List
+  - Existing Patterns to Reuse
+  - Dependency Impact Analysis
 
-**Agent**: `solution-architect`
-**Input**: Retrieves `feature-requirements` entity from Memory.
-**Action**: **SKIP** if Verdict is **LITE**.
-**Gate**: User Approval (Required for FULL features).
+**Step 3: Planning (Conditional)**
 
-## 3. Implementation & Verification
+- **Rule**: Execute ONLY if Complexity Verdict is **FULL**.
+- **Agent**: `solution-architect`
+- **Memory Input**: Read `feature-requirements` and `codebase-context` from Memory.
+- **Action**: Design the technical solution.
+- **Artifact**: Produce `.temp/plans/implementation-plan.md`.
 
-**Agent**: `senior-developer`
-**Input**: Retrieves `feature-requirements` (LITE) or Architecture Plan (FULL) from Memory/File.
+**Step 4: Implementation**
 
-## 4. Review
+- **Agent**: `senior-developer`
+- **Memory Input**: Read `feature-requirements`, `codebase-context`, and `.temp/plans/implementation-plan.md` (if exists).
+- **Action**: Implement the feature and verify functionality.
+- **Memory Output**: Create/Update `implementation-summary` entity containing:
+  - Files Changed
+  - Validation Results (Lint/Build)
+  - Implementation Description
 
-**Agent**: `code-reviewer`
-**Input**: Implementation changes.
+**Step 5: Review**
 
-## 🔄 Recovery Strategy
+- **Agent**: `code-reviewer`
+- **Memory Input**: Read `feature-requirements` and `implementation-summary` from Memory.
+- **Action**: Review the implementation against the requirements and conventions.
 
-If any step (Lint/Build/Review) fails, the flow returns to `senior-developer` for fixing until all quality gates are passed.
+## Memory Consistency Rules
+
+- **Source of Truth**: The Memory Graph is the primary context carrier.
+- **Mandatory Read**: Every agent MUST call `read_graph` or `search_nodes` at the start of their turn.
+- **Structured Handoff**: Agents pass information via specific Entities (`feature-requirements`, `codebase-context`) rather than just chat history.
+
+## ⚠️ Error Handling
+
+| Failure Point                | Action                                                                                          | Responsible Agent  |
+| ---------------------------- | ----------------------------------------------------------------------------------------------- | ------------------ |
+| **Step 4 - Build/Lint Fail** | Fix errors and re-validate. Max 3 retry attempts.                                               | `senior-developer` |
+| **Step 5 - Review Rejected** | Return to Step 4 with reviewer feedback. Update `implementation-summary` with rejection reason. | `senior-developer` |
+| **Missing Context**          | If required Memory entities are missing, STOP and notify user.                                  | Any agent          |
+
+### Rollback Procedure
+
+If implementation causes critical issues:
+
+1. **Revert**: `git checkout -- .` to discard uncommitted changes
+2. **Log**: Store failure reason in Memory entity `failure-log`
+3. **Notify**: Report to user with clear explanation of what went wrong
