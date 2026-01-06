@@ -38,14 +38,6 @@
         "FASTMCP_LOG_LEVEL": "ERROR",
         "AWS_DOCUMENTATION_PARTITION": "aws"
       }
-    },
-    "cloudflare-observability": {
-      "command": "npx",
-      "args": ["mcp-remote", "https://observability.mcp.cloudflare.com/mcp"]
-    },
-    "cloudflare-bindings": {
-      "command": "npx",
-      "args": ["mcp-remote", "https://bindings.mcp.cloudflare.com/mcp"]
     }
   }
 }
