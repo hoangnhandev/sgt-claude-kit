@@ -44,4 +44,4 @@ description: "TRIGGER: New project setup OR after major architectural changes. F
 
 ## 2. Confirmation
 
-**System**: Notify user that context is ready in `CLAUDE.md`.
+**System**: Notify user that `CLAUDE.md` has been created successfully. Do not show the content of the file.
