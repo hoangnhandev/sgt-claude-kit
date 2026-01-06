@@ -57,6 +57,9 @@ async function install() {
     "   1. Install \x1b[33muvx\x1b[0m: https://docs.astral.sh/uv/getting-started/installation/"
   );
   console.log("   2. Configure the project path for \x1b[33mSerena\x1b[0m.");
+  console.log(
+    "   3. Get \x1b[33mContext7\x1b[0m API Key: https://context7.com/docs/howto/api-keys#creating-api-keys"
+  );
   console.log("\n👉 Run \x1b[32mclaude\x1b[0m to start using SGT!\n");
 }
 

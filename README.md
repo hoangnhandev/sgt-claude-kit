@@ -23,6 +23,7 @@ This command will copy the necessary configuration files (`.claude`, `.temp`, `.
 >
 > 1. To use MCP features, you must install [`uvx`](https://docs.astral.sh/uv/getting-started/installation/).
 > 2. You must configure the project path for Serena.
+> 3. To search documentation effectively with Context7, get an API key [here](https://context7.com/docs/howto/api-keys#creating-api-keys).
 
 ## 🛠 Usage
 

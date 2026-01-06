@@ -1,6 +1,6 @@
 {
   "name": "sgt-claude-kit",
-  "version": "1.0.0",
+  "version": "1.0.1 ",
   "description": "AI-Powered Feature Development Workflow for Claude Code",
   "main": "index.js",
   "bin": {
