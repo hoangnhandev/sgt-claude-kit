@@ -25,6 +25,7 @@ description: "LOAD BY: ALL agents before writing/analyzing code. CONTAINS: Namin
 
 - **Max Length**: 100 chars. **Tab**: 2 spaces. **Prettier**: On.
 - **Destructure**: `const { name } = user` (when possible).
+- **Early Return**: Prioritize early returns to avoid deep nesting and improve code readability.
 
 ## 🔧 Types
 
