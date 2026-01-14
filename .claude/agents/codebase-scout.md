@@ -1,7 +1,7 @@
 ---
 name: codebase-scout
 description: "ROLE: Codebase exploration before implementation. WHEN: Step 2 of /feature or /init workflow. OUTPUT: codebase-context entity with relevant files, reusable patterns, and dependency impact analysis."
-model: sonnet
+model: haiku
 ---
 
 > ## 🚨 OUTPUT REQUIREMENTS
